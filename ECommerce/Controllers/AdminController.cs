@@ -8,5 +8,13 @@ namespace ECommerceDemo.Controllers
 		{
 			return View();
 		}
+
+		//Customer
+		[Route("/Admin/Customer/List")]
+		public IActionResult List()
+		{
+			return View();
+		}
+		//End - Customer
 	}
 }
