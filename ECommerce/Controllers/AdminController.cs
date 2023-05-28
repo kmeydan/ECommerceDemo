@@ -8,9 +8,24 @@ namespace ECommerceDemo.Controllers
 		{
 			return View();
 		}
+		//Katalog
+		[Route("/Admin/Product/List")]
+		[HttpGet]
+		public IActionResult ProductList()
+		{
+			return View();
+		}
+		//Orders
+		[Route("/Admin/Order/List")]
+		[HttpGet]
+		public IActionResult OrderList()
+		{
+			return View();
+		}
 
 		//Customer
 		[Route("/Admin/Customer/List")]
+		[HttpGet]
 		public IActionResult List()
 		{
 			return View();
