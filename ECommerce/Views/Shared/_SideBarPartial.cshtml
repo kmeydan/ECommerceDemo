@@ -36,7 +36,7 @@
 					 with font-awesome or any other icon font library -->
 				<!--Kontrol Paneli-->
 				<li class="nav-item">
-					<a href="#" class="nav-link active">
+					<a asp-action="Index" asp-controller="Admin" class="nav-link">
 						<i class="nav-icon fas fa-tachometer-alt"></i>
 						<p>
 							Kontrol Paneli
@@ -44,7 +44,6 @@
 					</a>
 				</li>
 				<!--Kontrol Paneli-->
-
 				<!--Katalog-->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -61,10 +60,21 @@
 								<p>Ürünler</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a asp-action="Category" asp-controller="Admin" class="nav-link">
+								<i class="nav-icon far fa-circle "></i>
+								<p>Kategoriler</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a asp-action="Brands" asp-controller="Admin" class="nav-link">
+								<i class="nav-icon far fa-circle "></i>
+								<p>Marka</p>
+							</a>
+						</li>
 					</ul>
 				</li>
 				<!--Katalog-->
-
 				<!--Siparişler-->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -72,20 +82,35 @@
 						<p>
 							Siparişler
 							<i class="fas fa-angle-left right"></i>
-							<span class="badge badge-danger right">6</span>
+							<span class="badge badge-info right mr-3">2</span>
+							<span class="badge badge-danger right mr-3">6</span>
 						</p>
+
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a asp-action="OrderList" asp-controller="Admin" class="nav-link">
 								<i class="nav-icon far fa-circle "></i>
 								<p>Siparişler</p>
+								<span class="badge badge-danger right mr-3">6</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a asp-action="ReturnRequestList" asp-controller="Admin" class="nav-link">
+								<i class="nav-icon far fa-circle "></i>
+								<span class="badge badge-info right">2</span>
+								<p>İade Talepleri</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a asp-action="Shipment" asp-controller="Admin" class="nav-link">
+								<i class="nav-icon far fa-circle "></i>
+								<p>Nakliyeler</p>
 							</a>
 						</li>
 					</ul>
 				</li>
 				<!--Siparişler-->
-
 				<!--Müşteriler-->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -97,7 +122,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a asp-controller="Admin" asp-action="List" class="nav-link">
+							<a asp-controller="Admin" asp-action="CustomerList" class="nav-link">
 								<i class="nav-icon far fa-circle "></i>
 								<p>Müşteri Listesi</p>
 							</a>
@@ -105,7 +130,6 @@
 					</ul>
 				</li>
 				<!--Müşteriler-->
-
 				<!--İçerik Yönetimi-->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -125,7 +149,6 @@
 					</ul>
 				</li>
 				<!--İçerik Yönetimi-->
-
 				<!--Yapılandırma-->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -145,7 +168,6 @@
 					</ul>
 				</li>
 				<!--Yapılandırma-->
-
 				<!--Sistem-->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -165,7 +187,6 @@
 					</ul>
 				</li>
 				<!--Sistem-->
-
 				<!--Raporlar-->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
@@ -203,3 +224,4 @@
 	</div>
 	<!-- /.sidebar -->
 </aside>
+

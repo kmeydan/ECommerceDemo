@@ -11,22 +11,38 @@ namespace ECommerce.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
-
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
 
 		public IActionResult Index()
 		{
 			return View();
 		}
-
-		public IActionResult Privacy()
+		[HttpGet]
+		[Route("/Sepet")]
+		public IActionResult ShoppingCart()
 		{
 			return View();
 		}
+		[HttpGet]
+		[Route("/Detay")]
+		public IActionResult ProductDetail()
+		{
+			return View();
+		}
+		[HttpGet]
+		[Route("/Urunler")]
+		public IActionResult Products()
+		{
+			return View();
+		}
+		[HttpGet]
+		[Route("/Iletisim")]
+		public IActionResult Contact()
+		{
+			return View();
+		}
+
+
+
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
