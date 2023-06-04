@@ -1,6 +1,10 @@
+using DataAccess.Abstract;
+using DataAccess.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +28,18 @@ namespace ECommerce
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
-		}
+			services.AddRazorPages();
+			//Bu bölge Scoped bölgesi 
+			services.AddScoped<ICategoryDal, EfCategoryDal>();
+			services.AddScoped<ICustomerDal, EfCustomorDal>();
+			services.AddScoped<IOrderDal, EfOrderDal>();
+			services.AddScoped<IOrderDetailDal, EfOrderDetailDal>();
+			services.AddScoped<IProductDal, EfProductDal>();
+			services.AddScoped<ISupplierDal, EfSupplierDal>();
+            services.AddDbContext<EfNorthwindContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //--Scoped
+        }
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
