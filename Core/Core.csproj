@@ -112,7 +112,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\EntityFramework\EfEntityRepositoryBase.cs" />
+    <Compile Include="DataAccess\EntityFramework\EntityRepositoryBase.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="DataAccess\IEntityRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

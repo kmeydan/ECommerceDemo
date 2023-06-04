@@ -1,0 +1,220 @@
+﻿@{
+	ViewData["Title"] = "ReturnRequestList";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">İade Talepleri</h1>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- Search Customer -->
+	<section class="content">
+
+		<!-- Default box -->
+
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">İade Arama</h3>
+			</div>
+			<div class="card-body row">
+				<div class="col-lg-4">
+					<!-- Date -->
+					<div class="form-group">
+						<label>Başlangıç Tarihi</label>
+						<div class="input-group date" id="reservationdates" data-target-input="nearest">
+							<input type="text" class="form-control datetimepicker-input" data-target="#reservationdates" />
+							<div class="input-group-append" data-target="#reservationdates" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+						</div>
+					</div>
+					<!-- Date dd/mm/yyyy -->
+					<div class="form-group">
+						<label>Bitiş Tarihi</label>
+						<div class="input-group date" id="reservationdate" data-target-input="nearest">
+							<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+							<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<!--ReturnRequest-->
+					<div class="form-group">
+						<div class="form-group">
+							<label>İade Durumları</label>
+							<select class="form-control">
+								<option>Seçiniz</option>
+								<option>Bekliyor</option>
+								<option>Teslim Alındı</option>
+							</select>
+						</div>
+						<!-- /.input group -->
+					</div>
+					<!-- Orders -->
+					<!-- /.form group -->
+					<!--Ödeme Tipi-->
+					<div class="form-group">
+						<div class="form-group">
+							<label>Ödeme Tipi</label>
+							<select class="form-control">
+								<option>Seçiniz</option>
+								<option>Kapıda Ödeme</option>
+								<option>Online Ödeme</option>
+							</select>
+						</div>
+						<!-- /.input group -->
+					</div>
+
+				</div>
+				<div class="col-lg-4">
+					<!-- Sipariş numarası -->
+					<div class="form-group">
+						<label>Sipariş Numarası</label>
+						<div class="input-group">
+							<input type="text" class="form-control">
+						</div>
+						<!-- /.input group -->
+					</div>
+
+					<!-- /.form group -->
+
+				</div>
+				<!-- /.card-body -->
+				<div class="col-lg-12">
+					<a class="btn btn-info btn-sm col-12" href="#">
+						<i class="fas fa-search">
+						</i> Arama
+					</a>
+				</div>
+
+			</div>
+
+			<!-- /.card -->
+		</div><!-- /.row -->
+
+
+	</section>
+	<!-- Search Customer -->
+	<!-- Main content -->
+	<section class="content">
+		<!-- Default box -->
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Siparişler</h3>
+			</div>
+			<div class="card-body p-0">
+				<table class="table table-striped projects">
+					<thead>
+						<tr>
+							<th style="width: 6%">
+								Id
+							</th>
+							<th style="width: 20%">
+								Ürün
+							</th>
+							<th style="width: 6%">
+								Miktar
+							</th>
+							<th style="width: 13%">
+								Müşteri
+							</th>
+							<th style="width:13%">
+								Sipariş Numarası
+							</th>
+							<th style="width:13%">
+								İade Durumu
+							</th>
+							<th style="width:17%">
+								Oluşturulma Tarihi
+							</th>
+							<th>
+								Göster
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								123
+							</td>
+							<td>
+								<a>
+									Elma
+								</a>
+							</td>
+							<td>
+								<a>
+									2
+								</a>
+							</td>
+							<td>
+								asdaadsa@hotmail.com
+							</td>
+							<td>
+								<a>
+									131323
+								</a>
+							</td>
+							<td>
+								<a>
+									Tamamlandı
+								</a>
+							</td>
+							<td>
+								<a>
+									22/05/23 12:32:21
+								</a>
+							</td>
+							<td>
+								<a class="btn btn-info btn-sm" href="#">
+									<i class="fa fa-eye"></i>
+									 Göster
+								</a>
+							</td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.card-body -->
+		</div>
+		<!-- /.card -->
+
+
+	</section>
+	<!-- /.content -->
+</div>
+
+@section Scripts{
+	<script>
+		$(function () {
+			//Date picker
+			$('#reservationdate').datetimepicker({
+				format: 'L'
+			});
+
+			//Date and time picker
+			$('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+			//Date picker
+			$('#reservationdates').datetimepicker({
+				format: 'L'
+			});
+
+			//Date and time picker
+			$('#reservationdatetimes').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+		})
+	</script>
+
+}
+

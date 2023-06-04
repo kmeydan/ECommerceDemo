@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewData["Title"] = "Shipment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">Nakliyeler</h1>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- Search Customer -->
+	<section class="content">
+
+		<!-- Default box -->
+
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Nakliye Ara</h3>
+			</div>
+			<div class="card-body row">
+				<div class="col-lg-4">
+					
+					<!-- Date -->
+					<div class="form-group">
+						<label>Başlangıç Tarihi</label>
+						<div class="input-group date" id="reservationdates" data-target-input="nearest">
+							<input type="text" class="form-control datetimepicker-input" data-target="#reservationdates" />
+							<div class="input-group-append" data-target="#reservationdates" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+						</div>
+					</div>
+					<!-- Date dd/mm/yyyy -->
+					<div class="form-group">
+						<label>Bitiş Tarihi</label>
+						<div class="input-group date" id="reservationdate" data-target-input="nearest">
+							<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+							<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<!-- Category-->
+					<div class="form-group">
+						<div class="form-group">
+							<label>Şehir</label>
+							<select class="form-control">
+								<option>Seçiniz</option>
+								<option>S şehri</option>
+								<option>Y şehri</option>
+								<option>A şehri</option>
+								<option>T şehri</option>
+							</select>
+						</div>
+						<!-- /.input group -->
+					</div>
+					<!-- Category -->
+					<!-- /.form group -->
+					<!-- Görselli/Görselsiz-->
+					<div class="form-group">
+						<div class="form-group">
+							<label>Mahalle</label>
+							<select class="form-control">
+								<option>Seçiniz</option>
+								<option>X Mahallesi</option>
+								<option>Y Mahallesi</option>
+							</select>
+						</div>
+						<!-- /.input group -->
+					</div>
+					<!-- /.form group -->
+
+				</div>
+				<div class="col-lg-4">
+					<!-- Teslimat-->
+					<div class="form-group">
+						<div class="form-group">
+							<label>Teslimat Durumu</label>
+							<select class="form-control">
+								<option>Seçiniz</option>
+								<option>Teslim Edildi</option>
+								<option>Teslim Edilmedi</option>
+							</select>
+						</div>
+						<!-- /.input group -->
+					</div>
+					<!-- Yayınlandı -->
+					<!-- /.form group -->
+
+				</div>
+				<!-- /.card-body -->
+				<div class="col-lg-12">
+					<a class="btn btn-info btn-sm col-12" href="#">
+						<i class="fas fa-search">
+						</i> Arama
+					</a>
+				</div>
+
+			</div>
+
+			<!-- /.card -->
+		</div><!-- /.row -->
+
+
+	</section>
+	<!-- Search Customer -->
+	<!-- Main content -->
+	<section class="content">
+		<!-- Default box -->
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Ürünler</h3>
+			</div>
+			<div class="card-body p-0">
+				<table class="table table-striped projects">
+					<thead>
+						<tr>
+							<th style="width: 15%">
+								Nakliye Numarası
+							</th>
+							<th style="width: 35%">
+								Müşteri
+							</th>
+							<th style="width: 10%">
+								Sipariş
+							</th>
+							<th style="width: 15%">
+								Sevk Tarihi
+							</th>
+							<th style="width:15%">
+								Teslim Tarihi
+							</th>
+							<th class="width:14%">
+								Göster
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<a>
+									1212313
+								</a>
+							</td>
+							<td>
+								<a>
+									Test Müşterisi
+								</a>
+							</td>
+							<td>
+								<a>
+									213123
+								</a>
+							</td>
+							
+							<td>
+								<a>
+									29/05/23 10:32:21
+								</a>
+							</td>
+							<td>
+								<a>
+									22/05/23 12:32:21
+								</a>
+							</td>
+							<td>
+								<a class="btn btn-info btn-sm" href="#">
+									<i class="fa fa-eye"></i>
+									Göster
+								</a>
+							</td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.card-body -->
+		</div>
+		<!-- /.card -->
+
+
+	</section>
+	<!-- /.content -->
+</div>
+
+@section Scripts{
+		<script>
+			$(function () {
+				//Date picker
+				$('#reservationdate').datetimepicker({
+					format: 'L'
+				});
+
+				//Date and time picker
+				$('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+				//Date picker
+				$('#reservationdates').datetimepicker({
+					format: 'L'
+				});
+
+				//Date and time picker
+				$('#reservationdatetimes').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+			})
+		</script>
+
+}
