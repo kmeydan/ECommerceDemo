@@ -112,19 +112,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IRepository\ClassRepository\ICategoryDal.cs" />
+    <Compile Include="Abstract\IRepository\IRepository.cs" />
+    <Compile Include="Concrete\Repository\BaseRepository.cs" />
+    <Compile Include="Concrete\Repository\ClassRepository\CategoryDal.cs" />
     <Compile Include="EfNorthwindContext.cs" />
     <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Nwind\Category.cs" />
-    <Compile Include="Nwind\Customer.cs" />
-    <Compile Include="Nwind\Order.cs" />
-    <Compile Include="Nwind\OrderDetail.cs" />
-    <Compile Include="Nwind\Product.cs" />
-    <Compile Include="Nwind\Supplier.cs" />
+    <Compile Include="Entities\Nwind\Kategori.cs" />
+    <Compile Include="Entities\Nwind\Musteri.cs" />
+    <Compile Include="Entities\Nwind\Satis.cs" />
+    <Compile Include="Entities\Nwind\Urunler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\BaseClasses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

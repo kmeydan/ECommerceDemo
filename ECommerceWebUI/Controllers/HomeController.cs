@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Abstract.IServices;
+using ECommerceWebUI.Models.ViewModels.HomeViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,14 @@ namespace ECommerce.Controllers
 {
 	public class HomeController : Controller
 	{
+		private readonly ICategoryServices _categoryServices;
 
-		public IActionResult Index()
+        public HomeController(ICategoryServices categoryServices)
+        {
+            _categoryServices = categoryServices;
+        }
+
+        public IActionResult Index()
 		{
 			return View();
 		}

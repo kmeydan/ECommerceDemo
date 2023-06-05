@@ -1,5 +1,4 @@
-﻿using Entities;
-using Entities.Nwind;
+﻿using DataAccess.Entities.Nwind;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,12 +16,10 @@ namespace DataAccess.Concrete.EntityFramework
 
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Product> Products{ get; set; }
-        public DbSet<Supplier> Supplier{ get; set; }
+        public DbSet<Kategori> Kategoriler { get; set; }
+        public DbSet<Musteri> Musteriler { get; set; }
+        public DbSet<Satis> Satıslar { get; set; }
+        public DbSet<Urunler> Urunler{ get; set; }
         
 
     }

@@ -1,6 +1,12 @@
+using Business.Abstract.IServices;
+using Business.Concrete.Services;
+using DataAccess.Abstract.Repository.ClassRepository;
+using DataAccess.Concrete.EntityFramework;
+using DataAccess.Concrete.Repository.ClassRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +31,12 @@ namespace ECommerce
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            
+            //Scoped
+            services.AddScoped<ICategoryDal, CategoryDal>();
+            services.AddScoped<ICategoryServices, CategoryServices>();
+            services.AddDbContext<EfNorthwindContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+
+
 
         }
 
