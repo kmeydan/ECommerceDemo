@@ -1,6 +1,3 @@
-
-using DataAccess.Abstract;
-using DataAccess.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,14 +25,7 @@ namespace ECommerce
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            //--Scoped
-            services.AddScoped<ICategory, EfCategoryDal>();
-            services.AddScoped<ICustomer, EfCustomorDal>();
-            services.AddScoped<IOrder, EfOrderDal>();
-            services.AddScoped<IOrderDetail, EfOrderDetailDal>();
-            services.AddScoped<IProduct, EfProductDal>();
-            services.AddScoped<ISupplier, EfSupplierDal>();
-            //--Scoped
+            
 
         }
 
