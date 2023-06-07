@@ -112,10 +112,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IRepository\ClassRepository\ICategoryDal.cs" />
-    <Compile Include="Abstract\IRepository\IRepository.cs" />
-    <Compile Include="Concrete\Repository\BaseRepository.cs" />
-    <Compile Include="Concrete\Repository\ClassRepository\CategoryDal.cs" />
+    <Compile Include="Abstract\IDal\ClassIDal\ICategoryDal.cs" />
+    <Compile Include="Abstract\IDal\ClassIDal\IMusteriDal.cs" />
+    <Compile Include="Abstract\IDal\ClassIDal\ISatısDal.cs" />
+    <Compile Include="Abstract\IDal\ClassIDal\IUrunDal.cs" />
+    <Compile Include="Abstract\IDal\IRepository.cs" />
+    <Compile Include="Concrete\Dal\BaseRepository.cs" />
+    <Compile Include="Concrete\Dal\ClassDal\CategoryDal.cs" />
+    <Compile Include="Concrete\Dal\ClassDal\MusteriDal.cs" />
+    <Compile Include="Concrete\Dal\ClassDal\SatısDal.cs" />
+    <Compile Include="Concrete\Dal\ClassDal\UrunDal.cs" />
     <Compile Include="EfNorthwindContext.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Nwind\Kategori.cs" />

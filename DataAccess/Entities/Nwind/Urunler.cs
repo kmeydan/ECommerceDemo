@@ -16,7 +16,7 @@ namespace DataAccess.Entities.Nwind
         public int TedarikciID { get; set; }
         public int KategoriID { get; set; }
         public string BirimdekiMiktar { get; set; }
-        public double BirimFiyati { get; set; }
+        public decimal BirimFiyati { get; set; }
         public short HedefStokDuzeyi { get; set; }
         public short YeniSatis { get; set; }
         public short EnAzYenidenSatisMikatari { get; set; }

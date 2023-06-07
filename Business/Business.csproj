@@ -112,9 +112,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IServicesClass\ICategoryServices.cs" />
-    <Compile Include="Abstract\IServices\IServices.cs" />
+    <Compile Include="Abstract\IServices\ICategoryServices.cs" />
+    <Compile Include="Abstract\BaseServices\IServices.cs" />
+    <Compile Include="Abstract\IServices\IMusteriServices.cs" />
+    <Compile Include="Abstract\IServices\ISatısServices.cs" />
+    <Compile Include="Abstract\IServices\IUrunlerServices.cs" />
     <Compile Include="Concrete\Services\CategoryServices.cs" />
+    <Compile Include="Concrete\Services\MusteriServices.cs" />
+    <Compile Include="Concrete\Services\SatısServices.cs" />
+    <Compile Include="Concrete\Services\UrunlerServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

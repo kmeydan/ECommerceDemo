@@ -1,6 +1,8 @@
 using Business.Abstract.IServices;
 using Business.Concrete.Services;
+using DataAccess.Abstract.IDal.ClassIDal;
 using DataAccess.Abstract.Repository.ClassRepository;
+using DataAccess.Concrete.Dal.ClassDal;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.Repository.ClassRepository;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +34,13 @@ namespace ECommerce
             services.AddControllersWithViews();
             services.AddRazorPages();
             //Scoped
+            services.AddScoped<IUrunDal, UrunDal>();
+            services.AddScoped<IMusteriDal, MusteriDal>();
+            services.AddScoped<ISatýsDal, SatýsDal>();
             services.AddScoped<ICategoryDal, CategoryDal>();
+            services.AddScoped<IUrunlerServices, UrunlerServices>();
+            services.AddScoped<IMusteriServices, MusteriServices>();
+            services.AddScoped<ISatýsServices, SatýsServices>();
             services.AddScoped<ICategoryServices, CategoryServices>();
             services.AddDbContext<EfNorthwindContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
 

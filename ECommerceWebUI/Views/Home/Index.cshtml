@@ -35,9 +35,10 @@
         </div>
     </div>
     <!-- Featured End -->
-    @Html.Partial("_HomeCategoriesPartial")
-    <!-- Products Start -->
-    @Html.Partial("_HomeProductsPartial")
+    @await Component.InvokeAsync("CategoryList")
+
+    <!-- BestSelling Products Start -->
+    @await Component.InvokeAsync("BestSellingProducts")
     <!-- Products End -->
     <!-- Offer Start -->
     @Html.Partial("_HomeOfferBannerPartial")

@@ -28,9 +28,9 @@ namespace Business.Concrete.Services
             categoryDal.Delete(entity);
         }
 
-        public Kategori Get(Kategori entity)
+        public Kategori Get(int id)
         {
-            return categoryDal.Get(entity.KategoriID);
+            return categoryDal.Get(id);
         }
 
         public List<Kategori> GetAll()
@@ -38,7 +38,7 @@ namespace Business.Concrete.Services
             return categoryDal.GetAll();
         }
 
-        public void Update(Kategori entity)
+		public void Update(Kategori entity)
         {
             categoryDal.Update(entity);
         }
