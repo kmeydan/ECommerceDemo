@@ -1,5 +1,4 @@
 ﻿using DataAccess.Abstract.Repository;
-using DataAccess.Concrete.Dal.ClassDal;
 using DataAccess.Entities.Nwind;
 using System;
 using System.Collections.Generic;
@@ -9,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract.IDal.ClassIDal
 {
-	public interface IUrunDal:IRepository<Urunler>
+	public interface ITedarikciDal :IRepository<Tedarikci>
 	{
-
 	}
 }

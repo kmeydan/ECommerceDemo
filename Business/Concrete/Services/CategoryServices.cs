@@ -38,6 +38,11 @@ namespace Business.Concrete.Services
             return categoryDal.GetAll();
         }
 
+		public List<Kategori> IdyeGoreKategoriGetir(int id)
+		{
+            return categoryDal.GetEx(x => x.KategoriID == id).ToList();
+		}
+
 		public void Update(Kategori entity)
         {
             categoryDal.Update(entity);

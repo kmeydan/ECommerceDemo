@@ -115,18 +115,21 @@
     <Compile Include="Abstract\IDal\ClassIDal\ICategoryDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\IMusteriDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ISatısDal.cs" />
+    <Compile Include="Abstract\IDal\ClassIDal\ITedarikciDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\IUrunDal.cs" />
     <Compile Include="Abstract\IDal\IRepository.cs" />
     <Compile Include="Concrete\Dal\BaseRepository.cs" />
     <Compile Include="Concrete\Dal\ClassDal\CategoryDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\MusteriDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\SatısDal.cs" />
+    <Compile Include="Concrete\Dal\ClassDal\TedarikciDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\UrunDal.cs" />
     <Compile Include="EfNorthwindContext.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Nwind\Kategori.cs" />
     <Compile Include="Entities\Nwind\Musteri.cs" />
     <Compile Include="Entities\Nwind\Satis.cs" />
+    <Compile Include="Entities\Nwind\Tedarikci.cs" />
     <Compile Include="Entities\Nwind\Urunler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

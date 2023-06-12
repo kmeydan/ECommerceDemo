@@ -9,7 +9,6 @@ namespace Business.Abstract.IServices
 {
 	public interface IUrunlerServices:IServices<Urunler>
 	{
-        Urunler GetProductByName(string productName);
-
+		List<Urunler> KategoriyeGoreUrunler(int id);
     }
 }

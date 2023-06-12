@@ -116,10 +116,12 @@
     <Compile Include="Abstract\BaseServices\IServices.cs" />
     <Compile Include="Abstract\IServices\IMusteriServices.cs" />
     <Compile Include="Abstract\IServices\ISatısServices.cs" />
+    <Compile Include="Abstract\IServices\ITedarikciServices.cs" />
     <Compile Include="Abstract\IServices\IUrunlerServices.cs" />
     <Compile Include="Concrete\Services\CategoryServices.cs" />
     <Compile Include="Concrete\Services\MusteriServices.cs" />
     <Compile Include="Concrete\Services\SatısServices.cs" />
+    <Compile Include="Concrete\Services\TedarikciServices.cs" />
     <Compile Include="Concrete\Services\UrunlerServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

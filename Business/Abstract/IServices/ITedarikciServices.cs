@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract.IServices
 {
-    public interface ICategoryServices:IServices<Kategori>
-    {
-        List<Kategori> IdyeGoreKategoriGetir(int id);
-        
+	public interface ITedarikciServices:IServices<Tedarikci>
+	{
 
-    }
+	}
 }

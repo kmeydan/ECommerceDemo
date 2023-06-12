@@ -1,6 +1,7 @@
 ﻿using Business.Abstract.IServices;
 using DataAccess.Entities.Nwind;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels;
+using ECommerceWebUI.Models.ViewModels.HomeViewModels.ListModel;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Controllers
 {
+	
 	public class HomeController : Controller
 	{
 		private readonly ICategoryServices categoryServices;
@@ -35,13 +37,13 @@ namespace ECommerce.Controllers
 			return View();
 		}
 		[HttpGet]
-		[Route("/{productName}")]
-		public IActionResult ProductDetail(string productName)
+		[Route("/Detay")]
+		public IActionResult ProductDetail(int id)
 		{
-			var result=urunlerServices.GetProductByName(productName);
+			var result=urunlerServices.Get(id);
 			if (result==null)
 			{
-				ModelState.AddModelError("", $"{productName}' ismine sahip ürün stokta kalmamıştır.");
+				ModelState.AddModelError("", $"{id}' id ' ye sahip ürün stokta kalmamıştır.");
 				return View();
 			}
 			var model = new ProductDetailViewModel
@@ -56,9 +58,20 @@ namespace ECommerce.Controllers
 		}
 		[HttpGet]
 		[Route("/Urunler")]
-		public IActionResult Products()
+		public IActionResult Products(int p=1,int c=0,int ps=20)
 		{
-			return View();
+			var result = urunlerServices.KategoriyeGoreUrunler(c);
+			var pagesize = ps;
+
+			var model = new UrunlerListViewModel
+			{
+				Urunlers = result.Skip((p - 1) * pagesize).Take(pagesize).ToList(),
+				PageSize = pagesize,
+				PageCount = (int)Math.Ceiling(result.Count / (double)pagesize),
+				CurrentCategory=c,
+				CurrentPage=p
+			};
+			return View(model);
 		}
 		[HttpGet]
 		[Route("/Iletisim")]

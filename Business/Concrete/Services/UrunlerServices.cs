@@ -4,6 +4,7 @@ using DataAccess.Entities.Nwind;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,13 +39,15 @@ namespace Business.Concrete.Services
 			return urunDal.GetAll();
 		}
 
-        public void Update(Urunler entity)
+		public List<Urunler> KategoriyeGoreUrunler(int id)
+		{
+			return urunDal.GetEx(x=>x.KategoriID==id || id==0).ToList();
+		}
+
+		public void Update(Urunler entity)
 		{
 			urunDal.Update(entity);
 		}
-        public Urunler GetProductByName(string productName)
-        {
-			return urunDal.GetProductByName(productName.ToLower());
-        }
+        
     }
 }
