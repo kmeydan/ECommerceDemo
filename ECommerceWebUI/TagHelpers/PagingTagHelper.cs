@@ -19,12 +19,15 @@ namespace ECommerceWebUI.TagHelpers
 		public int CurrentPage { get; set; }
 
 
+
 		public override void Process(TagHelperContext context, TagHelperOutput output)
 		{
-			if (PageSize>=19)
+			
+			if (PageSize<19)
 			{
 				StringBuilder str = new StringBuilder();
-				output.TagName = "ul class='pagination justify-content-center";
+				output.TagName = "ul";
+				output.Attributes.SetAttribute("class", "pagination justify-content-center");
 				str.AppendFormat("<li class='page-item'><a class='page-link' href='/Urunler?p={0}&c={1}'>Önceki</a></li>", CurrentPage - 1, CurrentCategory);
 
 				for (int i = 1; i < PageCount; i++)

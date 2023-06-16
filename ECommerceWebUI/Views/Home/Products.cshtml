@@ -1,8 +1,4 @@
 ﻿@model UrunlerListViewModel
-
-
-
-
 @{
 	ViewData["Title"] = "Products";
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +7,28 @@
 <!-- Shop Start -->
 <div class="container-fluid">
 	<div class="row px-xl-5">
-		@await Component.InvokeAsync("ProductsFilter")
+		<div class="col-lg-3 col-md-4">
+			<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filtreleme</span></h5>
+			<div class="bg-light p-4 mb-30">
+				<form>
+					<h6>Fiyat (TL)</h6>
+					<input id="range_1" type="text" name="range_1" value="">
+				</form>
+			</div>
+
+			<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Kategoriler</span></h5>
+			<div class="bg-light p-4 mb-30">
+				<form>
+					@foreach (var item in Model.Kategoriler)
+					{
+						<div class="d-flex align-items-center justify-content-between mb-3">
+							<a class="dropdown-item" asp-action="Products" asp-controller="Home" asp-route-c="@item.KategoriID">@item.KategoriAdi</a>
+						</div>
+					}
+
+				</form>
+			</div>
+		</div>
 		<!-- Shop Product Start -->
 		<div class="col-lg-9 col-md-8">
 			<div class="row pb-3">
@@ -23,20 +40,20 @@
 						</div>
 						<div class="ml-2">
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Önerilen Sıralama</button>
+								<button type="button" class="btn btn-sm btn-light dropdown-toggle" id="onerilenSiralama" data-toggle="dropdown">Önerilen Sıralama</button>
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">Yeni Ürünler</a>
-									<a class="dropdown-item" href="#">Ucuzdan Pahalıya</a>
-									<a class="dropdown-item" href="#">Pahalıdan Ucuza</a>
-									<a class="dropdown-item" href="#">Çok Satanlar</a>
+									<a class="dropdown-item" href="#" id="yeniurunler">Yeni Ürünler</a>
+									<a class="dropdown-item" href="#" id="ucuzdanpahali">Ucuzdan Pahalıya</a>
+									<a class="dropdown-item" href="#" id="pahalidanucuz">Pahalıdan Ucuza</a>
+									<a class="dropdown-item" href="#" id="coksatanlar">Çok Satanlar</a>
 								</div>
 							</div>
 							<div class="btn-group ml-2">
-								<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gösterim(20)</button>
+								<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" id="gosterim">Gösterim(20)</button>
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="">40</a>
-									<a class="dropdown-item" href="">60</a>
-									<a class="dropdown-item" href="">80</a>
+									<span class="dropdown-item" id="g40" href="">40</span>
+									<span class="dropdown-item" href="" id="g60">60</span>
+									<span class="dropdown-item" href="" id="g80">80</span>
 								</div>
 							</div>
 						</div>
@@ -87,3 +104,85 @@
 	</div>
 </div>
 <!-- Shop End -->
+@section Scripts{
+	<!-- Ion Slider -->
+	<script src="~/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+	<!-- Bootstrap slider -->
+	<script src="~/plugins/bootstrap-slider/bootstrap-slider.min.js"></script>
+	<script>
+
+		$(function () {
+			$("#g40").click(function () {
+				var rakam = $(this).text();
+				var gosterimMetni = "Gösterim(" + rakam + ")";
+				$("#gosterim").text(gosterimMetni);
+			})
+
+
+
+		})
+		$(function () {
+			$("#g60").click(function () {
+				var rakam = $(this).text();
+				var gosterimMetni = "Gösterim(" + rakam + ")";
+				$("#gosterim").text(gosterimMetni);
+			})
+
+
+
+		})
+		$(function () {
+			$("#g80").click(function () {
+				var rakam = $(this).text();
+				var gosterimMetni = "Gösterim(" + rakam + ")";
+				$("#gosterim").text(gosterimMetni);
+			})
+
+
+
+		})
+
+		$(function () {
+			$("#yeniurunler").click(function () {
+				var newtext = $(this).text();
+				$("#onerilenSiralama").text(newtext);
+			})
+		})
+		$(function () {
+			$("#ucuzdanpahali").click(function () {
+				var newtext = $(this).text();
+				$("#onerilenSiralama").text(newtext);
+			})
+		})
+		$(function () {
+			$("#pahalidanucuz").click(function () {
+				var newtext = $(this).text();
+				$("#onerilenSiralama").text(newtext);
+			})
+		})
+		$(function () {
+			$("#coksatanlar").click(function () {
+				var newtext = $(this).text();
+				$("#onerilenSiralama").text(newtext);
+			})
+		})
+		$(function () {
+			/* ION SLIDER */
+			$('#range_1').ionRangeSlider({
+				min: @Model.UrunlerMinPrice,
+				max: @Model.UrunlerMaksPrice,
+				from: @Model.UrunlerMinPrice,
+				to: 4000,
+				type: 'double',
+				step: 1,
+				prefix: ' TL',
+				prettify: false,
+				hasGrid: true
+			})
+
+		})
+
+	</script>
+
+	}
+

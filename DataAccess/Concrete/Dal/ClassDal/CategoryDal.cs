@@ -11,8 +11,11 @@ namespace DataAccess.Concrete.Repository.ClassRepository
 {
     public class CategoryDal : BaseRepository<Kategori>, ICategoryDal
     {
-        public CategoryDal(EfNorthwindContext dbcontext) : base(dbcontext)
+		public CategoryDal(EfNorthwindContext dbcontext) : base(dbcontext)
         {
+
         }
-    }
+
+		
+	}
 }

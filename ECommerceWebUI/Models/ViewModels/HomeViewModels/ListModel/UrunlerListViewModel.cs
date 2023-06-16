@@ -7,6 +7,9 @@ namespace ECommerceWebUI.Models.ViewModels.HomeViewModels.ListModel
     public class UrunlerListViewModel
     {
         public List<Urunler> Urunlers{ get; set; }
+		public List<Kategori> Kategoriler { get; set; }
+		public int UrunlerMaksPrice { get; set; }
+		public int UrunlerMinPrice { get; set; }
 
 		public int PageSize { get; set; }
 		public int PageCount { get; set; }

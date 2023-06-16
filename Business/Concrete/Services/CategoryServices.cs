@@ -47,5 +47,7 @@ namespace Business.Concrete.Services
         {
             categoryDal.Update(entity);
         }
-    }
+
+		
+	}
 }
