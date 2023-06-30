@@ -23,7 +23,7 @@ namespace ECommerceWebUI.TagHelpers
 		public override void Process(TagHelperContext context, TagHelperOutput output)
 		{
 			
-			if (PageSize<19)
+			if (PageCount>1)
 			{
 				StringBuilder str = new StringBuilder();
 				output.TagName = "ul";

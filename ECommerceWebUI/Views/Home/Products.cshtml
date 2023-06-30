@@ -1,4 +1,5 @@
-﻿@model UrunlerListViewModel
+﻿@using Microsoft.AspNetCore.Http;
+@model UrunlerListViewModel
 @{
 	ViewData["Title"] = "Products";
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,22 +12,17 @@
 			<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filtreleme</span></h5>
 			<div class="bg-light p-4 mb-30">
 				<form>
-					<h6>Fiyat (TL)</h6>
+					<h6 id="asd">Fiyat (TL)</h6>
 					<input id="range_1" type="text" name="range_1" value="">
 				</form>
 			</div>
 
 			<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Kategoriler</span></h5>
 			<div class="bg-light p-4 mb-30">
-				<form>
-					@foreach (var item in Model.Kategoriler)
-					{
-						<div class="d-flex align-items-center justify-content-between mb-3">
-							<a class="dropdown-item" asp-action="Products" asp-controller="Home" asp-route-c="@item.KategoriID">@item.KategoriAdi</a>
-						</div>
-					}
+				<div id="category">
+					@await Component.InvokeAsync("Category")
+				</div>
 
-				</form>
 			</div>
 		</div>
 		<!-- Shop Product Start -->
@@ -39,29 +35,13 @@
 							<button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
 						</div>
 						<div class="ml-2">
-							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-light dropdown-toggle" id="onerilenSiralama" data-toggle="dropdown">Önerilen Sıralama</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#" id="yeniurunler">Yeni Ürünler</a>
-									<a class="dropdown-item" href="#" id="ucuzdanpahali">Ucuzdan Pahalıya</a>
-									<a class="dropdown-item" href="#" id="pahalidanucuz">Pahalıdan Ucuza</a>
-									<a class="dropdown-item" href="#" id="coksatanlar">Çok Satanlar</a>
-								</div>
-							</div>
-							<div class="btn-group ml-2">
-								<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" id="gosterim">Gösterim(20)</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<span class="dropdown-item" id="g40" href="">40</span>
-									<span class="dropdown-item" href="" id="g60">60</span>
-									<span class="dropdown-item" href="" id="g80">80</span>
-								</div>
-							</div>
+							@await Component.InvokeAsync("GosterimSiralama")
 						</div>
 					</div>
 				</div>
 				@foreach (var item in Model.Urunlers)
 				{
-					<div class="col-lg-3 col-md-6 col-sm-6 pb-1">
+					<div id="filterProduct" class="col-lg-3 col-md-6 col-sm-6 pb-1">
 						<div class="product-item bg-light mb-4">
 							<div class="product-img position-relative overflow-hidden">
 								<img class="img-fluid w-100" src="img/product-1.jpg" alt="">
@@ -110,6 +90,7 @@
 	<!-- Bootstrap slider -->
 	<script src="~/plugins/bootstrap-slider/bootstrap-slider.min.js"></script>
 	<script>
+
 
 		$(function () {
 			$("#g40").click(function () {
@@ -181,6 +162,32 @@
 			})
 
 		})
+		$(function () {
+
+			$("#asd").click(function () {
+				//var min = parseInt($(".irs-min").text());
+				//var min = parseInt($(".irs-max").text());
+				$.ajax(
+					{
+						url: '/Home/ProductsFilter', // İsteğin gönderileceği controller ve action'ın adresi
+						type: 'GET', // İstek yöntemi (POST veya GET)
+						data: { min: 9, max: 50 }, // İstek verileri (isteğe bağlı)
+						success: function (response) {
+							// İstek başarılı olduğunda yapılacak işlemler
+
+							console.log(response);
+						},
+						error: function (xhr, status, error) {
+							// İstek başarısız olduğunda yapılacak işlemler
+							console.error(error); // Hata mesajını konsola yazdırabilirsiniz
+						}
+					});
+
+			})
+		})
+
+
+
 
 	</script>
 

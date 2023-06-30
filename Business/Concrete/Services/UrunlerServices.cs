@@ -29,6 +29,11 @@ namespace Business.Concrete.Services
 			urunDal.Delete(entity);
 		}
 
+		public List<Urunler> FiyataGoreUrunler(int min, int max)
+		{
+			return urunDal.GetEx(x => x.BirimFiyati >= min && x.BirimFiyati<=max).ToList();
+		}
+
 		public Urunler Get(int id)
 		{
 			return urunDal.Get(id);

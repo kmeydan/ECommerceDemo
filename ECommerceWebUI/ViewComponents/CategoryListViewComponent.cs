@@ -21,9 +21,6 @@ namespace ECommerceWebUI.ViewComponents
             var model = new IndexCategoryListModel
             {
                 Kategori = categoryServices.GetAll(),
-                
-                
-                
             };
             return View(model);
         }

@@ -1,9 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Abstract.IServices;
+using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceDemo.Controllers
 {
 	public class AdminController : Controller
 	{
+		private readonly ICategoryServices categoryServices;
+		private readonly IUrunlerServices urunlerServices;
+		private readonly IMusteriServices musteriServices;
+		private readonly ISatısServices satısServices;
+		private readonly ITedarikciServices tedarikciServices;
+
+		public AdminController(ICategoryServices categoryServices, IUrunlerServices urunlerServices, IMusteriServices musteriServices, ISatısServices satısServices, ITedarikciServices tedarikciServices)
+		{
+			this.categoryServices = categoryServices;
+			this.urunlerServices = urunlerServices;
+			this.musteriServices = musteriServices;
+			this.satısServices = satısServices;
+			this.tedarikciServices = tedarikciServices;
+		}
+
 		public IActionResult Index()
 		{
 			return View();
@@ -11,9 +28,15 @@ namespace ECommerceDemo.Controllers
 		//Katalog
 		[Route("/Admin/Product/List")]
 		[HttpGet]
-		public IActionResult ProductList()
+		public IActionResult ProductList(int id)
 		{
-			return View();
+			var model = new ProductListViewModel
+			{
+				Kategoriler = categoryServices.GetAll(),
+				Urunler= urunlerServices.KategoriyeGoreUrunler(id),
+
+			};
+			return View(model);
 		}
 		[Route("/Admin/Product/Category")]
 		[HttpGet]

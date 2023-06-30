@@ -10,5 +10,6 @@ namespace Business.Abstract.IServices
 	public interface IUrunlerServices:IServices<Urunler>
 	{
 		List<Urunler> KategoriyeGoreUrunler(int id);
+		List<Urunler> FiyataGoreUrunler(int min,int max);
     }
 }

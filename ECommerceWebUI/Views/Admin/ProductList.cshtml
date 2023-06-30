@@ -1,8 +1,10 @@
-﻿
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
+@model ProductListViewModel
 @{
-    ViewData["Title"] = "ProductList";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "ProductList";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
 
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -52,7 +54,7 @@
 						</div>
 						<!-- /.input group -->
 					</div>
-					
+
 					<!-- /.form group -->
 				</div>
 				<div class="col-lg-4">
@@ -60,13 +62,15 @@
 					<div class="form-group">
 						<div class="form-group">
 							<label>Kategori</label>
+
 							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>option 2</option>
-								<option>option 3</option>
-								<option>option 4</option>
-								<option>option 5</option>
+								@foreach (var item in Model.Kategoriler)
+								{
+									<option value="@item.KategoriID">@item.KategoriAdi</option>
+
+								}
 							</select>
+
 						</div>
 						<!-- /.input group -->
 					</div>
@@ -116,8 +120,6 @@
 
 			<!-- /.card -->
 		</div><!-- /.row -->
-
-
 	</section>
 	<!-- Search Customer -->
 	<!-- Main content -->
@@ -138,16 +140,16 @@
 								Ürün İsmi
 							</th>
 							<th style="width: 14%">
-								Ürün Barkodu
+								Birim Fiyatı
 							</th>
 							<th style="width: 10%">
 								Aktif
 							</th>
 							<th style="width:14%">
-								Son Güncellenme
+								Stok Düzeyi
 							</th>
 							<th class="width:14%">
-								Oluşturulma Tarihi
+								Birimdeki Miktar
 							</th>
 							<th class="width: 15%">
 								Düzenle
@@ -155,42 +157,54 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<img src="~\defaultimage\ürün-görseli-hazırlanıyor.jpg" height="50px" width="50px"/>
-							</td>
-							<td>
-								<a>
-									Elma
-									
-								</a>
-							</td>
-							<td>
-								<a>
-									8680321331231
-								</a>
-							</td>
-							<td>
-								<i class="icon fas fa-check text-success"></i>
-							</td>
-							<td>
-								<a>
-									22/05/23 12:32:21
-								</a>
-							</td>
-							<td>
-								<a>
-									22/05/23 12:32:21
-								</a>
-							</td>
-							<td>
-								<a class="btn btn-info btn-sm" href="#">
-									<i class="fas fa-pencil-alt">
-									</i>
-									Düzenle
-								</a>
-							</td>
-						</tr>
+						@foreach (var urun in Model.Urunler)
+						{
+							<tr>
+								<td>
+									@if (urun.UrunID != null)
+									{
+										<img src="~/img/user.jpg" height="50px" width="50px" />
+
+									}
+								</td>
+								<td>
+									<a>
+										@urun.UrunAdi
+									</a>
+								</td>
+								<td>
+									<a>
+										@urun.BirimFiyati
+									</a>
+								</td>
+								<td>
+									@if (urun.Sonlandi == false)
+									{
+										<i class="icon fas fa-check text-success"></i>
+
+									}
+								</td>
+								<td>
+									<a>
+										@urun.HedefStokDuzeyi
+									</a>
+								</td>
+								<td>
+									<a>
+										@urun.BirimdekiMiktar
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-info btn-sm" href="#">
+										<i class="fas fa-pencil-alt">
+										</i>
+										Düzenle
+									</a>
+								</td>
+
+
+							</tr>
+						}
 					</tbody>
 
 				</table>
@@ -203,4 +217,14 @@
 	</section>
 	<!-- /.content -->
 </div>
+
+@section Scripts{
+	<script>
+		$(function () {
+			$.get()
+
+		})
+	</script>
+
+}
 

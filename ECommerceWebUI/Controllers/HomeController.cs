@@ -6,6 +6,7 @@ using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,8 +29,13 @@ namespace ECommerce.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			var model = new UrunlerListViewModel
+			{
+				Kategoriler = categoryServices.GetAll()
+			};
+			return View(model);
 		}
+		
 		[HttpGet]
 		[Route("/Sepet")]
 		public IActionResult ShoppingCart()
@@ -58,9 +64,9 @@ namespace ECommerce.Controllers
 		}
 		[HttpGet]
 		[Route("/Urunler")]
-		public IActionResult Products(int p = 1, int c = 0, int ps = 20)
+		public IActionResult Products(int p = 1, int c = 0, int ps = 20 , int df=0)
 		{
-			var result = urunlerServices.KategoriyeGoreUrunler(c);
+			var result = urunlerServices.KategoriyeGoreUrunler(c).ToList();
 			var pagesize = ps;
 
 			var model = new UrunlerListViewModel
@@ -75,6 +81,35 @@ namespace ECommerce.Controllers
 				CurrentPage = p
 			};
 			return View(model);
+		}
+		[HttpGet]
+		public IActionResult ProductsFilter(int min, int max)
+		{
+			var model = new UrunlerListViewModel
+			{
+				Urunlers = urunlerServices.FiyataGoreUrunler(min, max)
+			};
+
+			return Json(model);
+		}
+		[HttpGet]
+		public IActionResult JsonUrunGetir(int c = 0, int ps = 20, int p = 1)
+		{
+			var result = urunlerServices.KategoriyeGoreUrunler(c);
+			var pagesize = ps;
+			var model = new UrunlerListViewModel
+			{
+				UrunlerMaksPrice = Convert.ToInt32(result.Max(x => x.BirimFiyati)),
+				UrunlerMinPrice = Convert.ToInt32(result.Min(x => x.BirimFiyati)),
+				Kategoriler = categoryServices.GetAll(),
+				Urunlers = result.Skip((p - 1) * pagesize).Take(pagesize).ToList(),
+				PageSize = pagesize,
+				PageCount = (int)Math.Ceiling(result.Count / (double)pagesize),
+				CurrentCategory = c,
+				CurrentPage = p
+			};
+			var json = JsonConvert.SerializeObject(model);
+			return Json(json);
 		}
 		[HttpGet]
 		[Route("/Iletisim")]

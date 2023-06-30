@@ -1,0 +1,27 @@
+﻿@model GosterimSiralamaModel
+
+@{
+
+}
+
+<div class="btn-group">
+	<button type="button" class="btn btn-sm btn-light dropdown-toggle" id="onerilenSiralama" data-toggle="dropdown">@Model.SiralamaIsmi</button>
+	<div class="dropdown-menu dropdown-menu-right">
+		<a class="dropdown-item" asp-action="Products" asp-controller="Home" asp-route-c="@Model.Kategori" asp-route-df="0" id="yeniurunler">Önerilen Sıralama</a>
+		<a class="dropdown-item" asp-action="Products" asp-controller="Home" asp-route-c="@Model.Kategori" asp-route-df="1" id="yeniurunler">Yeni Ürünler</a>
+		<a class="dropdown-item" asp-action="Products" asp-controller="Home" asp-route-c="@Model.Kategori" asp-route-df="2" id="ucuzdanpahali">Ucuzdan Pahalıya</a>
+		<a class="dropdown-item" asp-action="Products" asp-controller="Home" asp-route-c="@Model.Kategori" asp-route-df="3" id="pahalidanucuz">Pahalıdan Ucuza</a>
+		<a class="dropdown-item" asp-action="Products" asp-controller="Home" asp-route-c="@Model.Kategori" asp-route-df="4" id="coksatanlar">Çok Satanlar</a>
+	</div>
+</div>
+<div class="btn-group ml-2">
+	<button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" id="gosterim">Gösterim(@Model.UrunSayisi)</button>
+
+
+	<div class="dropdown-menu dropdown-menu-right">
+		<a asp-controller="Home" asp-action="Products" asp-route-ps="20" asp-route-c="@Model.Kategori" class="dropdown-item" id="g40">20</a>
+		<a asp-controller="Home" asp-action="Products" asp-route-ps="40" asp-route-c="@Model.Kategori" class="dropdown-item" id="g60">40</a>
+		<a asp-controller="Home" asp-action="Products" asp-route-ps="60" asp-route-c="@Model.Kategori" class="dropdown-item" id="g80">60</a>
+	</div>
+</div>
+

@@ -1,0 +1,21 @@
+﻿@model CategoryListViewModel
+@{
+}
+
+
+@foreach (var item in Model.Kategori)
+{
+	var css = "dropdown-item";
+
+	if (Model.SelectCategory == item.KategoriID)
+	{
+		css += "active";
+	}
+	<div class="d-flex align-items-center justify-content-center mb-3">
+		<a class="@css" asp-action="Products" asp-controller="Home"
+	   asp-route-c="@item.KategoriID">@item.KategoriAdi</a>
+	</div>
+
+
+
+}
