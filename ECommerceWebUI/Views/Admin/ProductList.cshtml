@@ -1,5 +1,5 @@
-﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
-@model ProductListViewModel
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
+@model AdminProductListViewModel
 @{
 	ViewData["Title"] = "ProductList";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -30,96 +30,101 @@
 	<section class="content">
 
 		<!-- Default box -->
-
-		<div class="card">
-			<div class="card-header">
-				<h3 class="card-title">Ürün Ara</h3>
-			</div>
-			<div class="card-body row">
-				<div class="col-lg-4">
-					<!-- Date dd/mm/yyyy -->
-					<div class="form-group">
-						<label>Ürün İsmi</label>
-						<div class="input-group">
-							<input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
-						</div>
-						<!-- /.input group -->
-					</div>
-					<!-- /.form group -->
-					<!-- phone mask -->
-					<div class="form-group">
-						<label>Ürün Barkodu</label>
-						<div class="input-group">
-							<input type="text" class="form-control">
-						</div>
-						<!-- /.input group -->
-					</div>
-
-					<!-- /.form group -->
+		<form asp-action="ProductList" asp-controller="Admin" method="post">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Ürün Ara</h3>
 				</div>
-				<div class="col-lg-4">
-					<!-- Category-->
-					<div class="form-group">
+				<div class="card-body row">
+					<div class="col-lg-4">
+						<!-- Date dd/mm/yyyy -->
 						<div class="form-group">
-							<label>Kategori</label>
-
-							<select class="form-control">
-								@foreach (var item in Model.Kategoriler)
-								{
-									<option value="@item.KategoriID">@item.KategoriAdi</option>
-
-								}
-							</select>
-
+							<label>Ürün İsmi</label>
+							<div class="input-group">
+								<input type="text" class="form-control" asp-for="UrunAdi">
+							</div>
+							<!-- /.input group -->
 						</div>
-						<!-- /.input group -->
-					</div>
-					<!-- Category -->
-					<!-- /.form group -->
-					<!-- Görselli/Görselsiz-->
-					<div class="form-group">
+						<!-- /.form group -->
+						<!-- phone mask -->
 						<div class="form-group">
-							<label>Ürün Resmi</label>
-							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>Görselli Ürünler</option>
-								<option>Görselsiz Ürünler</option>
-							</select>
+							<label>Ürün Barkodu</label>
+							<div class="input-group">
+								<input type="text" class="form-control" asp-for="UrunBarkod">
+							</div>
+							<!-- /.input group -->
 						</div>
-						<!-- /.input group -->
-					</div>
-					<!-- /.form group -->
 
-				</div>
-				<div class="col-lg-4">
-					<!-- Yayınlandı-->
-					<div class="form-group">
+						<!-- /.form group -->
+					</div>
+					<div class="col-lg-4">
+						<!-- Category-->
 						<div class="form-group">
-							<label>Yayınlanma Durumu</label>
-							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>Aktif Ürünler</option>
-								<option>Pasif Ürünler</option>
-							</select>
+							<div class="form-group">
+								<label>Kategori</label>
+
+								<select class="form-control">
+									<option>Seçiniz</option>
+									@foreach (var item in Model.Kategoriler)
+									{
+										<option value="@item.Value" name="kategori">@item.Text</option>
+
+									}
+								</select>
+
+							</div>
+							<!-- /.input group -->
 						</div>
-						<!-- /.input group -->
+						<!-- Category -->
+						<!-- /.form group -->
+						<!-- Görselli/Görselsiz-->
+						<div class="form-group">
+							<div class="form-group">
+								<label>Ürün Resmi</label>
+								<select class="form-control">
+									@foreach (var gorsel in Model.UrunGorseli)
+									{
+										<option>@gorsel</option>
+									}
+								</select>
+							</div>
+							<!-- /.input group -->
+						</div>
+						<!-- /.form group -->
+
 					</div>
-					<!-- Yayınlandı -->
-					<!-- /.form group -->
+					<div class="col-lg-4">
+						<!-- Yayınlandı-->
+						<div class="form-group">
+							<div class="form-group">
+								<label>Yayınlanma Durumu</label>
+								<select class="form-control">
+									@foreach (var yayin in Model.YayınlanmaDurumu)
+									{
+										<option>@yayin</option>
+
+									}
+								</select>
+							</div>
+							<!-- /.input group -->
+						</div>
+						<!-- Yayınlandı -->
+						<!-- /.form group -->
+
+					</div>
+					<!-- /.card-body -->
+					<div class="col-lg-12">
+						<a class="btn btn-info btn-sm col-12" href="#">
+							<i class="fas fa-search">
+							</i> Arama
+						</a>
+					</div>
 
 				</div>
-				<!-- /.card-body -->
-				<div class="col-lg-12">
-					<a class="btn btn-info btn-sm col-12" href="#">
-						<i class="fas fa-search">
-						</i> Arama
-					</a>
-				</div>
 
-			</div>
-
-			<!-- /.card -->
-		</div><!-- /.row -->
+				<!-- /.card -->
+			</div><!-- /.row -->
+		</form>
 	</section>
 	<!-- Search Customer -->
 	<!-- Main content -->
@@ -217,14 +222,4 @@
 	</section>
 	<!-- /.content -->
 </div>
-
-@section Scripts{
-	<script>
-		$(function () {
-			$.get()
-
-		})
-	</script>
-
-}
 

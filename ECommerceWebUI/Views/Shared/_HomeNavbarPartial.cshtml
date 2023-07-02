@@ -1,4 +1,4 @@
-﻿@model UrunlerListViewModel
+﻿
 
 <!-- Topbar Start -->
 <div class="container-fluid">
@@ -43,7 +43,7 @@
 					<a class="dropdown-item" href="#">Çıkış Yap</a>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -58,13 +58,14 @@
 			</a>
 			<nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
 				<div class="navbar-nav w-100">
-					
+
 					@foreach (var kategori in Model.Kategoriler)
 					{
 						<a asp-action="Products" asp-controller="Home" asp-route-c="@kategori.KategoriID" class="nav-item nav-link">@kategori.KategoriAdi</a>
 
+
 					}
-				
+
 				</div>
 			</nav>
 		</div>

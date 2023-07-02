@@ -1,6 +1,8 @@
 ﻿using Business.Abstract.IServices;
-using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
+using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ECommerceDemo.Controllers
 {
@@ -30,11 +32,23 @@ namespace ECommerceDemo.Controllers
 		[HttpGet]
 		public IActionResult ProductList(int id)
 		{
-			var model = new ProductListViewModel
+			var model = new AdminProductListViewModel
 			{
-				Kategoriler = categoryServices.GetAll(),
-				Urunler= urunlerServices.KategoriyeGoreUrunler(id),
-
+				Kategoriler = categoryServices.GetAll().Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString() }).ToList(),				
+				Urunler = urunlerServices.GetAll(),
+				YayınlanmaDurumu=new List<string> { "Seçiniz","Aktif Ürünler","Pasif Ürünler"},
+				UrunGorseli= new List<string> { "Seçiniz","Görselli Ürünler","Görselsiz Ürünler"}
+			};
+			return View(model);
+		}
+		[Route("/Admin/Product/List")]
+		[HttpPost]
+		public IActionResult ProductList(AdminProductListViewModel model)
+		{
+			var response = new AdminProductListViewModel
+			{
+				Kategoriler = categoryServices.GetAll().Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString() }).ToList(),
+				Urunler = urunlerServices.GetAll()
 			};
 			return View(model);
 		}
