@@ -1,7 +1,8 @@
-﻿
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
+@model MarkaListViewModel
 @{
-    ViewData["Title"] = "Brands";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Brands";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="content-wrapper">
@@ -31,36 +32,35 @@
 
 		<div class="card">
 			<div class="card-header">
-				<h3 class="card-title">Marka Ara</h3>
+				<h3 class="card-title">Arama</h3>
 			</div>
-			<div class="card-body row">
-				<div class="col-lg-4">
-					<!-- Category-->
-					<div class="form-group">
-						<div class="form-group">
-							<label>Marka</label>
-							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>option 2</option>
-								<option>option 3</option>
-								<option>option 4</option>
-								<option>option 5</option>
-							</select>
-						</div>
-						<!-- /.input group -->
-					</div>
-					<!-- Category -->
-					<!-- /.form group -->
-				</div>
-				<!-- /.card-body -->
-				<div class="col-lg-12">
-					<a class="btn btn-info btn-sm col-12" href="#">
-						<i class="fas fa-search">
-						</i> Arama
-					</a>
-				</div>
+			<form asp-action="Brands" asp-controller="Admin" method="post">
 
-			</div>
+				<div class="card-body row">
+					<div class="col-lg-4">
+						<!-- Category-->
+						<div class="form-group">
+							<div class="form-group">
+								<label>Marka İsmi</label>
+								<div class="input-group">
+									<input type="text" class="form-control" name="brandName">
+								</div>
+							</div>
+							<!-- /.input group -->
+						</div>
+						<!-- Category -->
+						<!-- /.form group -->
+					</div>
+					<!-- /.card-body -->
+					<div class="col-lg-12">
+						<button class="btn btn-info btn-sm col-12" href="#">
+							<i class="fas fa-search">
+							</i> Arama
+						</button>
+					</div>
+
+				</div>
+			</form>
 
 			<!-- /.card -->
 		</div><!-- /.row -->
@@ -79,14 +79,20 @@
 				<table class="table table-striped projects">
 					<thead>
 						<tr>
-							<th style="width: 55%">
-								Adı
+							<th style="width: 30%">
+								Şirket Adı
 							</th>
 							<th style="width: 15%">
-								Yayınlandı
+								Telefon Numarası
+							</th>
+							<th style="width: 15%">
+								Bölge
 							</th>
 							<th style="width: 20%">
-								Oluşturulma Tarihi
+								Şehir
+							</th>
+							<th style="width: 10%">
+								Ülke
 							</th>
 							<th>
 								Düzenle
@@ -94,27 +100,37 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								Test Kategorisi
-							</td>
-							<td>
-								<i class="icon fas fa-check text-success"></i>
-							</td>
-							<td>
-								<a>
-									12.12.23 12:12:32
-								</a>
-							</td>
-							<td>
-								<a class="btn btn-info btn-sm" href="#">
-									<i class="fas fa-pencil-alt">
-									</i>
-									Düzenle
-								</a>
-							</td>
+						@foreach (var marka in Model.Marka)
+						{
 
-						</tr>
+							<tr>
+								<td>
+									@marka.SirketAdi
+
+								</td>
+								<td>
+									@marka.Telefon
+								</td>
+								<td>
+									@marka.Bolge
+								</td>
+
+								<td>
+									@marka.Sehir
+								</td>
+								<td>
+									@marka.Ulke
+								</td>
+								<td>
+									<a class="btn btn-info btn-sm" href="#">
+										<i class="fas fa-pencil-alt">
+										</i>
+										Düzenle
+									</a>
+								</td>
+
+							</tr>
+						}
 					</tbody>
 
 				</table>

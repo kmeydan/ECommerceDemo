@@ -1,5 +1,8 @@
 ﻿using Business.Abstract.IServices;
+using DataAccess.Concrete.Dal.ClassDal;
+using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
+using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,29 +44,74 @@ namespace ECommerceDemo.Controllers
 			};
 			return View(model);
 		}
+
+		//Buraya girip kontrol edilicek
 		[Route("/Admin/Product/List")]
 		[HttpPost]
 		public IActionResult ProductList(AdminProductListViewModel model)
 		{
-			var response = new AdminProductListViewModel
-			{
-				Kategoriler = categoryServices.GetAll().Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString() }).ToList(),
-				Urunler = urunlerServices.GetAll()
-			};
-			return View(model);
+
+			return View();
 		}
 		[Route("/Admin/Product/Category")]
 		[HttpGet]
 		public IActionResult Category()
 		{
-			return View();
+			var model = new CategoryListViewModel
+			{
+				 Kategori= categoryServices.GetAll()
+			};
+			return View(model);
+		}
+		[Route("/Admin/Product/Category")]
+		[HttpPost]
+		public IActionResult Category(string name)
+		{
+			if (name==null)
+			{
+				var standart = new CategoryListViewModel
+				{
+
+					Kategori = categoryServices.GetAll()
+				};
+				return View(standart);
+			}
+			var model = new CategoryListViewModel
+			{
+				
+				Kategori = categoryServices.GetAll().Where(x => x.KategoriAdi.ToLower().Contains(name.ToLower())).ToList()
+			};
+			return View(model);
 		}
 
 		[Route("/Admin/Product/Brands")]
 		[HttpGet]
 		public IActionResult Brands()
 		{
-			return View();
+			var model = new MarkaListViewModel
+			{
+				Marka = tedarikciServices.GetAll()
+			};
+			return View(model);
+		}
+
+		[Route("/Admin/Product/Brands")]
+		[HttpPost]
+		public IActionResult Brands(string brandName)
+		{
+			if (brandName == null)
+			{
+				var marka = new MarkaListViewModel
+				{
+					Marka = tedarikciServices.GetAll()
+				};
+				return View(marka);
+			}
+			var model = new MarkaListViewModel
+			{
+				Marka = tedarikciServices.GetAll().Where(x=>x.SirketAdi.ToLower().Contains(brandName.ToLower())).ToList()
+			};
+			return View(model);
 		}
 
 
@@ -74,7 +122,11 @@ namespace ECommerceDemo.Controllers
 		[HttpGet]
 		public IActionResult OrderList()
 		{
-			return View();
+			var model = new OrderListViewModel
+			{
+				Siparisler = satısServices.GetAll()
+			};
+			return View(model);
 		}
 		[Route("/Admin/ReturnRequest/List")]
 		[HttpGet]

@@ -15,11 +15,12 @@ namespace DataAccess.Entities.Nwind
         public string UrunAdi { get; set; }
         public int TedarikciID { get; set; }
         public int KategoriID { get; set; }
-        public string BirimdekiMiktar { get; set; }
+        public string Barkod { get; set; }
         public decimal BirimFiyati { get; set; }
         public short HedefStokDuzeyi { get; set; }
         public short YeniSatis { get; set; }
         public short EnAzYenidenSatisMikatari { get; set; }
+        public string GorselUrl { get; set; }
         public bool Sonlandi { get; set; }
     }
 }

@@ -18,5 +18,7 @@ namespace DataAccess.Concrete.Dal.ClassDal
         public UrunDal(EfNorthwindContext _dbcontext) : base(_dbcontext)
         {
         }
+
+        
 	}
 }

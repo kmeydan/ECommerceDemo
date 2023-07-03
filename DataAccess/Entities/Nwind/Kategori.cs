@@ -15,5 +15,7 @@ namespace DataAccess.Entities.Nwind
         public string KategoriAdi { get; set; }
         public string Tanimi{ get; set; }
         public string ResimUrl{ get; set; }
+        public bool Aktif { get; set; }
+        public DateTime OlusturulmaTarihi { get; set; }
     }
 }

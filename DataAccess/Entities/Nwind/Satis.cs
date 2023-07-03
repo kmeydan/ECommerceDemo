@@ -12,7 +12,7 @@ namespace DataAccess.Entities.Nwind
     {
         [Key]
         public int SatisID { get; set; }
-        public int MusteriID { get; set; }
+        public string MusteriID { get; set; }
         public int PersonelID { get; set; }
         public DateTime SatisTarihi { get; set; }
         public DateTime OdemeTarihi { get; set; }

@@ -50,7 +50,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModels\AdminViewModels\ListModel\" />
     <Folder Include="wwwroot\DefaultImage\" />
   </ItemGroup>
 

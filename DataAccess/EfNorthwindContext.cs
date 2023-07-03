@@ -19,7 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Tedarikci> Tedarikciler { get; set; }
         public DbSet<Kategori> Kategoriler { get; set; }
         public DbSet<Musteri> Musteriler { get; set; }
-        public DbSet<Satis> Satıslar { get; set; }
+        public DbSet<Satis> Satislar { get; set; }
         public DbSet<Urunler> Urunler{ get; set; }
         
 

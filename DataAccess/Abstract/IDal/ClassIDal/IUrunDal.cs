@@ -11,6 +11,5 @@ namespace DataAccess.Abstract.IDal.ClassIDal
 {
 	public interface IUrunDal:IRepository<Urunler>
 	{
-
 	}
 }

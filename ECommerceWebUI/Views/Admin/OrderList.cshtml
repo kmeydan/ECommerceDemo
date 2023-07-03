@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
+@model OrderListViewModel
+@{
 	ViewData["Title"] = "OrderList";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -141,40 +143,44 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								123
-							</td>
-							<td>
-								<a>
-									Ahmet Demir
-								</a>
-							</td>
-							<td>
-								<a>
-									Kargolandı
-								</a>
-							</td>
-							<td>
-								<i class="icon fas fa-check text-success"></i>
-							</td>
-							<td>
-								<a>
-									22/05/23 12:32:21
-								</a>
-							</td>
-							<td>
-								<a>
-									22/05/23 12:32:21
-								</a>
-							</td>
-							<td>
-								<a class="btn btn-info btn-sm" href="#">
-									<i class="fa fa-eye"></i>
-									 Göster
-								</a>
-							</td>
-						</tr>
+						@foreach (var sipariş in Model.Siparisler)
+						{
+							<tr>
+								<td>
+									@sipariş.SatisID
+								</td>
+								<td>
+									<a>
+										@sipariş.MusteriID
+									</a>
+								</td>
+								<td>
+									<a>
+										@sipariş.SevkAdi
+									</a>
+								</td>
+								<td>
+									<i class="icon fas fa-check text-success"></i>
+								</td>
+								<td>
+									<a>
+										22/05/23 12:32:21
+									</a>
+								</td>
+								<td>
+									<a>
+										22/05/23 12:32:21
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-info btn-sm" href="#">
+										<i class="fa fa-eye"></i>
+										Göster
+									</a>
+								</td>
+							</tr>
+
+						}
 					</tbody>
 
 				</table>
