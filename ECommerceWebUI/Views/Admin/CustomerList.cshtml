@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
+@model CustomerListViewModel
+@{
 	ViewData["Title"] = "List";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -83,7 +85,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-laptop"></i></span>
 							</div>
-							<input type="text" class="form-control"">
+							<input type="text" class="form-control" ">
 						</div>
 						<!-- /.input group -->
 					</div>
@@ -123,66 +125,64 @@
 							<th style="width: 20%">
 								E-posta
 							</th>
-							<th style="width: 12%">
+							<th style="width: 20%">
 								Adı
 							</th>
-							<th style="width: 14%">
+							<th style="width: 15%">
 								Telefon
 							</th>
-							<th style="width: 8%">
-								Aktif
-							</th>
-							<th style="width:15%">
-								Son Aktivite
-							</th>
-							<th class="width:15%">
+							<th style="width: 30%">
 								Oluşturulma Tarihi
 							</th>
-							<th class="width: 15%">
+							<th>
 								Düzenle
 							</th>
 						</tr>
 					</thead>
 					<tbody>
+						@foreach (var item in Model.Customers)
+						{
 						<tr>
 							<td>
 								#
 							</td>
 							<td>
 								<a>
-									deneme123@hotmail.com
+									@if (item.EPosta!=null)
+									{
+									@item.EPosta
+									}
 								</a>
 							</td>
 							<td>
 								<a>
-									Ahmet Demir
+									@item.MusteriAdi
 								</a>
 							</td>
 							<td>
 								<a>
-									1233 123 12 12
+									@item.Telefon
 								</a>
 							</td>
 							<td>
-								<i class="icon fas fa-check text-success"></i>
-							</td>
-							<td>
-								<a>
-									22/05/23 12:32:21
-								</a>
-							</td>
-							<td>
-								<a>
-									22/05/23 12:32:21
-								</a>
+								@if (@item.OlusturulmaTarihi!=null)
+								{
+									<a>
+										@item.OlusturulmaTarihi
+									</a>
+								}
+								
+
 							</td>
 							<td>
 								<a class="btn btn-info btn-sm" href="#">
 									<i class="fa fa-eye"></i>
-									  Göster
+									Göster
 								</a>
 							</td>
 						</tr>
+
+						}
 
 					</tbody>
 
@@ -198,40 +198,40 @@
 </div>
 
 @section Scripts{
-	<!-- InputMask -->
-	<!-- jQuery -->
-	<!-- Select2 -->
-	<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<!-- jQuery -->
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
 
-	<!-- InputMask -->
-	<script src="../../plugins/moment/moment.min.js"></script>
-	<script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
 
 
-	<script>
-		$(function () {
-			//Initialize Select2 Elements
-			$('.select2').select2()
+<script>
+	$(function () {
+		//Initialize Select2 Elements
+		$('.select2').select2()
 
-			//Initialize Select2 Elements
-			$('.select2bs4').select2({
-				theme: 'bootstrap4'
-			})
-
-			//Datemask dd/mm/yyyy
-			$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-			//Datemask2 mm/dd/yyyy
-			$('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-			//Money Euro
-			$('[data-mask]').inputmask()
-
-			
-
+		//Initialize Select2 Elements
+		$('.select2bs4').select2({
+			theme: 'bootstrap4'
 		})
-		
 
-		
-	</script>
+		//Datemask dd/mm/yyyy
+		$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+		//Datemask2 mm/dd/yyyy
+		$('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+		//Money Euro
+		$('[data-mask]').inputmask()
+
+
+
+	})
+
+
+
+</script>
 
 }
 

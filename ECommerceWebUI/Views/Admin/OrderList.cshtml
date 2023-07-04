@@ -122,11 +122,11 @@
 							<th style="width: 15%">
 								Sipariş Numarası
 							</th>
-							<th style="width: 15%">
+							<th style="width: 13%">
 								Müşteri Adı
 							</th>
 							<th style="width: 14%">
-								Sipariş Durumu
+								Sevk Adı
 							</th>
 							<th style="width: 10%">
 								Ödeme
@@ -145,32 +145,30 @@
 					<tbody>
 						@foreach (var sipariş in Model.Siparisler)
 						{
+
 							<tr>
 								<td>
 									@sipariş.SatisID
 								</td>
 								<td>
-									<a>
-										@sipariş.MusteriID
-									</a>
+									@sipariş.MusteriID
+
 								</td>
 								<td>
-									<a>
-										@sipariş.SevkAdi
-									</a>
+									@sipariş.SevkAdi
 								</td>
 								<td>
+									@sipariş.OdemeTarihi
 									<i class="icon fas fa-check text-success"></i>
 								</td>
 								<td>
-									<a>
-										22/05/23 12:32:21
-									</a>
+									@sipariş.SevkTarihi
 								</td>
 								<td>
-									<a>
-										22/05/23 12:32:21
-									</a>
+									@sipariş.SatisTarihi
+								</td>
+								<td>
+									@sipariş.SevkBolgesi
 								</td>
 								<td>
 									<a class="btn btn-info btn-sm" href="#">
@@ -204,7 +202,7 @@
 
 			//Date and time picker
 			$('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-			
+
 			//Date picker
 			$('#reservationdates').datetimepicker({
 				format: 'L'

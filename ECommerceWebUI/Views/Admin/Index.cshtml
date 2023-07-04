@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
+@model AdminIndexViewModel
+@{
 	ViewData["Title"] = "Index";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -25,7 +27,7 @@
 					<!-- small box -->
 					<div class="small-box bg-info">
 						<div class="inner">
-							<h3>4</h3>
+							<h3>@Model.OrderCount</h3>
 
 							<p>Yeni Siparişler</p>
 						</div>
@@ -40,7 +42,7 @@
 					<!-- small box -->
 					<div class="small-box bg-success">
 						<div class="inner">
-							<h3>1034</h3>
+							<h3>@Model.ProductsCount</h3>
 
 							<p>Ürün Sayısı</p>
 						</div>
@@ -55,7 +57,7 @@
 					<!-- small box -->
 					<div class="small-box bg-warning">
 						<div class="inner">
-							<h3>12</h3>
+							<h3>@Model.CustomerCount</h3>
 
 							<p>Kullanıcılar</p>
 						</div>
@@ -70,9 +72,9 @@
 					<!-- small box -->
 					<div class="small-box bg-danger">
 						<div class="inner">
-							<h3>65</h3>
+							<h3>@Model.OrderAll</h3>
 
-							<p>Sipariş İptalleri</p>
+							<p>Tüm Siparişler</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-pie-graph"></i>

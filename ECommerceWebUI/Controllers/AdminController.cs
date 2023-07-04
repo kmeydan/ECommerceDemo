@@ -4,6 +4,7 @@ using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,7 +29,14 @@ namespace ECommerceDemo.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			var model = new AdminIndexViewModel
+			{
+				CustomerCount = musteriServices.GetAll().Count(),
+				OrderCount = satısServices.GetAll().Where(x => x.SatisTarihi > DateTime.Today).Count(),
+				ProductsCount = urunlerServices.GetAll().Count(),
+				OrderAll = satısServices.GetAll().Count()
+			};
+			return View(model);
 		}
 		//Katalog
 		[Route("/Admin/Product/List")]
@@ -146,7 +154,11 @@ namespace ECommerceDemo.Controllers
 		[HttpGet]
 		public IActionResult CustomerList()
 		{
-			return View();
+			var model = new CustomerListViewModel
+			{
+				Customers = musteriServices.GetAll()
+			};
+			return View(model);
 		}
 		//End - Customer
 	}
