@@ -5,8 +5,11 @@ using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Web.Helpers;
 
 namespace ECommerceDemo.Controllers
 {
@@ -34,10 +37,22 @@ namespace ECommerceDemo.Controllers
 				CustomerCount = musteriServices.GetAll().Count(),
 				OrderCount = satısServices.GetAll().Where(x => x.SatisTarihi > DateTime.Today).Count(),
 				ProductsCount = urunlerServices.GetAll().Count(),
-				OrderAll = satısServices.GetAll().Count()
+				OrderAll = satısServices.GetAll().Count(),
+				SonSiparis = satısServices.GetAll().OrderByDescending(x=>x.SatisTarihi).Select(x => new AdminIndexSonSiparis
+				{
+					Musteri = x.MusteriID,
+					SiparisDurumu = x.SiparisDurumID,
+					SiparisId = x.SatisID,
+					SiparisTarihi = x.SatisTarihi
+				}).Take(5).ToList(),
+				//SiparisToplamları = satısServices.GetAll().Select(x=>new SiparisToplamları
+				//{
+				//	GunlukSiparisTutarı=x.
+				//})
 			};
 			return View(model);
 		}
+		
 		//Katalog
 		[Route("/Admin/Product/List")]
 		[HttpGet]
@@ -45,10 +60,10 @@ namespace ECommerceDemo.Controllers
 		{
 			var model = new AdminProductListViewModel
 			{
-				Kategoriler = categoryServices.GetAll().Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString() }).ToList(),				
+				Kategoriler = categoryServices.GetAll().Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString() }).ToList(),
 				Urunler = urunlerServices.GetAll(),
-				YayınlanmaDurumu=new List<string> { "Seçiniz","Aktif Ürünler","Pasif Ürünler"},
-				UrunGorseli= new List<string> { "Seçiniz","Görselli Ürünler","Görselsiz Ürünler"}
+				YayınlanmaDurumu = new List<string> { "Seçiniz", "Aktif Ürünler", "Pasif Ürünler" },
+				UrunGorseli = new List<string> { "Seçiniz", "Görselli Ürünler", "Görselsiz Ürünler" }
 			};
 			return View(model);
 		}
@@ -67,7 +82,7 @@ namespace ECommerceDemo.Controllers
 		{
 			var model = new CategoryListViewModel
 			{
-				 Kategori= categoryServices.GetAll()
+				Kategori = categoryServices.GetAll()
 			};
 			return View(model);
 		}
@@ -75,7 +90,7 @@ namespace ECommerceDemo.Controllers
 		[HttpPost]
 		public IActionResult Category(string name)
 		{
-			if (name==null)
+			if (name == null)
 			{
 				var standart = new CategoryListViewModel
 				{
@@ -86,7 +101,7 @@ namespace ECommerceDemo.Controllers
 			}
 			var model = new CategoryListViewModel
 			{
-				
+
 				Kategori = categoryServices.GetAll().Where(x => x.KategoriAdi.ToLower().Contains(name.ToLower())).ToList()
 			};
 			return View(model);
@@ -117,7 +132,7 @@ namespace ECommerceDemo.Controllers
 			}
 			var model = new MarkaListViewModel
 			{
-				Marka = tedarikciServices.GetAll().Where(x=>x.SirketAdi.ToLower().Contains(brandName.ToLower())).ToList()
+				Marka = tedarikciServices.GetAll().Where(x => x.SirketAdi.ToLower().Contains(brandName.ToLower())).ToList()
 			};
 			return View(model);
 		}

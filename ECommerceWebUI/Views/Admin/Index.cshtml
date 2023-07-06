@@ -189,14 +189,16 @@
 									</tr>
 								</thead>
 								<tbody style="font-size:15px">
+									@foreach (var item in Model.SonSiparis)
+									{
 									<tr>
-										<td>11111</td>
-										<td>Hazırlanıyor</td>
+										<td>@item.SiparisId</td>
+										<td>@item.SiparisDurumu</td>
 										<td>
-											adsada@hotmail.com
+											@item.Musteri
 										</td>
 										<td>
-											02/02/2023 12:12:32
+											@item.SiparisTarihi
 										</td>
 										<td>
 											<a class="btn btn-info btn-sm" href="#">
@@ -205,70 +207,9 @@
 											</a>
 										</td>
 									</tr>
-									<tr>
-										<td>11111</td>
-										<td>Hazırlanıyor</td>
-										<td>
-											adsada@hotmail.com
-										</td>
-										<td>
-											02/02/2023 12:12:32
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>11111</td>
-										<td>Hazırlanıyor</td>
-										<td>
-											adsada@hotmail.com
-										</td>
-										<td>
-											02/02/2023 12:12:32
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>11111</td>
-										<td>Hazırlanıyor</td>
-										<td>
-											adsada@hotmail.com
-										</td>
-										<td>
-											02/02/2023 12:12:32
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>11111</td>
-										<td>Hazırlanıyor</td>
-										<td>
-											adsada@hotmail.com
-										</td>
-										<td>
-											02/02/2023 12:12:32
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
+										
+									}
+									
 
 								</tbody>
 							</table>
@@ -735,10 +676,11 @@
 						pointStrokeColor: 'rgba(60,141,188,1)',
 						pointHighlightFill: '#fff',
 						pointHighlightStroke: 'rgba(60,141,188,1)',
-						data: [28, 48, 40, 19, 86, 27, 90]
+						data: [15,30,45,60,75,90,105]
 					}
 				]
 			}
+			
 
 			var areaChartOptions = {
 				maintainAspectRatio: false,
