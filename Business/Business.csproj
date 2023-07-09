@@ -144,6 +144,7 @@
     <Compile Include="Concrete\Services\SatısServices.cs" />
     <Compile Include="Concrete\Services\TedarikciServices.cs" />
     <Compile Include="Concrete\Services\UrunlerServices.cs" />
+    <Compile Include="DestekSınıf\SiparisServicesDestek\AdminPageDestek.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

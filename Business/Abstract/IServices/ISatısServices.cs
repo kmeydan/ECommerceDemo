@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities.Nwind;
+﻿using DataAccess.Abstract.IDal.ClassIDal;
+using DataAccess.Entities.Nwind;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Business.Abstract.IServices
 {
 	public interface ISatısServices:IServices<Satis>
 	{
+		List<AdminIndexViewModel> IndexSiparisToplamları();
 	}
 }

@@ -112,6 +112,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComplexType\AdminIndexViewModel.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ICategoryDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\IMusteriDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ISatısDal.cs" />
@@ -129,6 +130,8 @@
     <Compile Include="Entities\Nwind\Kategori.cs" />
     <Compile Include="Entities\Nwind\Musteri.cs" />
     <Compile Include="Entities\Nwind\Satis.cs" />
+    <Compile Include="Entities\Nwind\SatisDetaylari.cs" />
+    <Compile Include="Entities\Nwind\SiparisDurumu.cs" />
     <Compile Include="Entities\Nwind\Tedarikci.cs" />
     <Compile Include="Entities\Nwind\Urunler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,7 +141,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ComplexType\" />
     <Folder Include="Entities\BaseClasses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

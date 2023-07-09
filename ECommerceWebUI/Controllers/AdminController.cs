@@ -1,4 +1,5 @@
 ﻿using Business.Abstract.IServices;
+using Business.DestekSınıf.SiparisServicesDestek;
 using DataAccess.Concrete.Dal.ClassDal;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
@@ -32,23 +33,26 @@ namespace ECommerceDemo.Controllers
 
 		public IActionResult Index()
 		{
+			var adminhesaplama = new AdminPageDestek();
+
 			var model = new AdminIndexViewModel
 			{
 				CustomerCount = musteriServices.GetAll().Count(),
 				OrderCount = satısServices.GetAll().Where(x => x.SatisTarihi > DateTime.Today).Count(),
 				ProductsCount = urunlerServices.GetAll().Count(),
 				OrderAll = satısServices.GetAll().Count(),
-				SonSiparis = satısServices.GetAll().OrderByDescending(x=>x.SatisTarihi).Select(x => new AdminIndexSonSiparis
+
+				SonSiparis = satısServices.GetAll().OrderByDescending(x => x.SatisTarihi).Select(x => new AdminIndexSonSiparis
 				{
 					Musteri = x.MusteriID,
 					SiparisDurumu = x.SiparisDurumID,
 					SiparisId = x.SatisID,
 					SiparisTarihi = x.SatisTarihi
 				}).Take(5).ToList(),
-				//SiparisToplamları = satısServices.GetAll().Select(x=>new SiparisToplamları
-				//{
-				//	GunlukSiparisTutarı=x.
-				//})
+				//Sipariş Toplamları
+				
+				
+				
 			};
 			return View(model);
 		}

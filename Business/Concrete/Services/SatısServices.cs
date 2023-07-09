@@ -38,6 +38,11 @@ namespace Business.Concrete.Services
 			return satısDal.GetAll();
 		}
 
+		public List<AdminIndexViewModel> IndexSiparisToplamları()
+		{
+			return satısDal.IndexSiparisToplamları();
+		}
+
 		public void Update(Satis entity)
 		{
 			satısDal.Update(entity);

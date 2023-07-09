@@ -10,5 +10,6 @@ namespace DataAccess.Abstract.IDal.ClassIDal
 {
 	public interface ISatısDal:IRepository<Satis>
 	{
+		List<AdminIndexViewModel> IndexSiparisToplamları();
 	}
 }

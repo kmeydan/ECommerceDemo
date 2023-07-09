@@ -21,7 +21,9 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Musteri> Musteriler { get; set; }
         public DbSet<Satis> Satislar { get; set; }
         public DbSet<Urunler> Urunler{ get; set; }
-        
+        public DbSet<SiparisDurumu> SiparisDurumu { get; set; }
+        public DbSet<SatisDetaylari> SatisDetaylari { get; set; }
+
 
     }
 }
