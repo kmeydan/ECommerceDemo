@@ -191,25 +191,25 @@
 								<tbody style="font-size:15px">
 									@foreach (var item in Model.SonSiparis)
 									{
-									<tr>
-										<td>@item.SiparisId</td>
-										<td>@item.SiparisDurumu</td>
-										<td>
-											@item.Musteri
-										</td>
-										<td>
-											@item.SiparisTarihi
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-										
+										<tr>
+											<td>@item.SiparisId</td>
+											<td>@item.SiparisDurumu</td>
+											<td>
+												@item.Musteri
+											</td>
+											<td>
+												@item.SiparisTarihi
+											</td>
+											<td>
+												<a class="btn btn-info btn-sm" href="#">
+													<i class="fa fa-eye"></i>
+													Göster
+												</a>
+											</td>
+										</tr>
+
 									}
-									
+
 
 								</tbody>
 							</table>
@@ -300,74 +300,83 @@
 									</tr>
 								</thead>
 								<tbody style="font-size:15px">
-									
-										
-										<tr>
-											<td>İşleniyor</td>
-											<td>5000 TL</td>
-											<td>
-												3000
-											</td>
-											<td>
-												15000 TL
-											</td>
-											<td>
-												1022131 TL
-											</td>
-										</tr>
-										
-										
-									
+
+									<tr>
+										<td>İşleniyor</td>
+										<td>
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-1)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="İşleniyor").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
+										</td>
+										<td>
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-7)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="İşleniyor").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
+										</td>
+										<td>
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-30)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="İşleniyor").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
+										</td>
+										<td>
+											@Model.SiparisToplamları.Where(x=>x.SiparisDurumu=="İşleniyor").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
+										</td>
+									</tr>
+
+
+
 									<tr>
 										<td>Hazırlanıyor</td>
-										<td>5000 TL</td>
 										<td>
-											10000 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-1)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Hazırlanıyor").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 										<td>
-											15000 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-7)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Hazırlanıyor").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 										<td>
-											1022131 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-30)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Hazırlanıyor").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
+										</td>
+										<td>
+											@Model.SiparisToplamları.Where(x=>x.SiparisDurumu=="Hazırlanıyor").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 									</tr>
 									<tr>
 										<td>İptal</td>
-										<td>5000 TL</td>
 										<td>
-											10000 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-1)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="İptal").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 										<td>
-											15000 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-7)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="İptal").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 										<td>
-											1022131 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-30)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="İptal").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
+										</td>
+										<td>
+											@Model.SiparisToplamları.Where(x=>x.SiparisDurumu=="İptal").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 									</tr>
 									<tr>
 										<td>Kargoya Verildi</td>
-										<td>5000 TL</td>
 										<td>
-											10000 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-1)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Kargoya Verildi").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 										<td>
-											15000 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-7)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Kargoya Verildi").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 										<td>
-											1022131 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-30)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Kargoya Verildi").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
+										</td>
+										<td>
+											@Model.SiparisToplamları.Where(x=>x.SiparisDurumu=="Kargoya Verildi").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 									</tr>
 									<tr>
 										<td>Teslim Edildi</td>
-										<td>5000 TL</td>
 										<td>
-											10000 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-1)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Teslim Edildi").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 										<td>
-											15000 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-7)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Teslim Edildi").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 										<td>
-											1022131 TL
+											@Model.SiparisToplamları.Where(x=>x.SiparisTarihleri>=DateTime.Now.AddDays(-30)&& x.SiparisTarihleri<DateTime.Now).Where(x=>x.SiparisDurumu=="Teslim Edildi").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
+										</td>
+										<td>
+											@Model.SiparisToplamları.Where(x=>x.SiparisDurumu=="Teslim Edildi").Select(x=>x.HesaplananTutar).Sum().ToString().TrimEnd('0') TL
 										</td>
 									</tr>
 
@@ -422,7 +431,7 @@
 											</a>
 										</td>
 									</tr>
-									
+
 
 								</tbody>
 							</table>
@@ -461,11 +470,13 @@
 									</tr>
 								</thead>
 								<tbody style="font-size:15px">
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
+									@foreach (var item in Model.MiktaraGoreCokSatanlar)
+									{
+										<tr>
+										<td>@item.UrunAdi</td>
+										<td>@item.Miktar</td>
 										<td>
-											12312313 TL
+											@item.TotalFiyat
 										</td>
 										<td>
 											<a class="btn btn-info btn-sm" href="#">
@@ -474,58 +485,9 @@
 											</a>
 										</td>
 									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
+									}
+									
+									
 								</tbody>
 							</table>
 						</div>
@@ -681,11 +643,11 @@
 						pointStrokeColor: 'rgba(60,141,188,1)',
 						pointHighlightFill: '#fff',
 						pointHighlightStroke: 'rgba(60,141,188,1)',
-						data: [15,30,45,60,75,90,105]
+						data: [15, 30, 45, 60, 75, 90, 105]
 					}
 				]
 			}
-			
+
 
 			var areaChartOptions = {
 				maintainAspectRatio: false,

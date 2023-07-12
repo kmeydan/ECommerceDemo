@@ -112,6 +112,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComplexType\AdminIndexMiktarinaGoreViewModel.cs" />
     <Compile Include="ComplexType\AdminIndexViewModel.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ICategoryDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\IMusteriDal.cs" />

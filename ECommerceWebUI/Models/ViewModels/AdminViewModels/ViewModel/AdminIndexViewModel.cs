@@ -12,9 +12,10 @@ namespace ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel
 		public int CustomerCount { get; set; }
 		public int OrderAll { get; set; }
 		public List<AdminIndexSonSiparis> SonSiparis { get; set; }
-		public List<AdminSiparisToplamları> SiparisToplamları { get; set; }
+		public List<SiparisToplamları> SiparisToplamları{ get; set; }
+		public List<MiktaraGoreCokSatanlar> MiktaraGoreCokSatanlar { get; set; }
 
-		
+
 	}
 	public class AdminIndexSonSiparis
 	{
@@ -23,29 +24,25 @@ namespace ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel
 		public string Musteri { get; set; }
 		public DateTime SiparisTarihi { get; set; }
 	}
-	public class AdminSiparisToplamları
+	public class SiparisToplamları
 	{
-		public int GunlukSiparisIsleniyor { get; set; }
-		public int HaftalıkSiparisIsleniyor { get; set; }
-		public int AylıkSiparisIsleniyor { get; set; }
-		public int TumZamanlarSiparisIsleniyor { get; set; }
-		public int GunlukSiparisHazırlanıyor { get; set; }
-		public int HaftalıkSiparisHazırlanıyor { get; set; }
-		public int AylıkSiparisHazırlanıyor { get; set; }
-		public int TumZamanlarSiparisHazırlanıyor { get; set; }
-		public int GunlukSiparisIptal { get; set; }
-		public int HaftalıkSiparisIptal { get; set; }
-		public int AylıkSiparisIptal { get; set; }
-		public int TumZamanlarSiparisIptal { get; set; }
-		public int GunlukSiparisKargolandı { get; set; }
-		public int HaftalıkSiparisKargolandı { get; set; }
-		public int AylıkSiparisKargolandı { get; set; }
-		public int TumZamanlarSiparisKargolandı { get; set; }
-		public int GunlukSiparisTeslimEdildi { get; set; }
-		public int HaftalıkSiparisTeslimEdildi { get; set; }
-		public int AylıkSiparisTeslimEdildi { get; set; }
-		public int TumZamanlarSiparisTeslimEdildi { get; set; }
-		
+		public decimal BirimFiyati { get; set; }
+		public string SiparisDurumu { get; set; }
+		public DateTime SiparisTarihleri { get; set; }
+		public int Miktar { get; set; }
+
+		public decimal HesaplananTutar
+		{
+			get { return BirimFiyati * Miktar; }
+		}
 	}
-	
+	public class MiktaraGoreCokSatanlar
+	{
+		public string UrunAdi { get; set; }
+		public string Kategori { get; set; }
+		public short Miktar  { get; set; }
+		public decimal TotalFiyat { get; set; }
+	}
+
+
 }

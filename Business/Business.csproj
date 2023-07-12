@@ -144,14 +144,15 @@
     <Compile Include="Concrete\Services\SatısServices.cs" />
     <Compile Include="Concrete\Services\TedarikciServices.cs" />
     <Compile Include="Concrete\Services\UrunlerServices.cs" />
-    <Compile Include="DestekSınıf\SiparisServicesDestek\AdminPageDestek.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DestekSınıf\SiparisServicesDestek\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{42B05952-409C-45D3-9CFA-718A6CBB75F9}</Project>

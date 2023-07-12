@@ -1,4 +1,5 @@
 ﻿using DataAccess.Abstract.IDal.ClassIDal;
+using DataAccess.ComplexType;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.Repository;
 using DataAccess.Entities.Nwind;
@@ -19,6 +20,23 @@ namespace DataAccess.Concrete.Dal.ClassDal
 		{
 			dbContext = _dbcontext;
 
+		}
+
+		public List<AdminIndexMiktarinaGoreViewModel> AdminIndexMiktarinaGoreViewModel()
+		{
+			var query = from satıs in dbContext.SatisDetaylari
+						join urun in dbContext.Urunler on satıs.UrunID equals urun.UrunID
+						join kategori in dbContext.Kategoriler on urun.KategoriID equals kategori.KategoriID
+
+						select new AdminIndexMiktarinaGoreViewModel
+						{
+							UrunAdi = urun.UrunAdi,
+							Miktar = satıs.Miktar,
+							Kategori = kategori.KategoriAdi,
+							ToplamFiyat=satıs.BirimFiyati*satıs.Miktar
+							
+						};
+			return query.ToList();
 		}
 
 		public List<AdminIndexViewModel> IndexSiparisToplamları()

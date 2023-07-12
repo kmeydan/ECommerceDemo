@@ -1,4 +1,5 @@
 ﻿using DataAccess.Abstract.Repository;
+using DataAccess.ComplexType;
 using DataAccess.Entities.Nwind;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace DataAccess.Abstract.IDal.ClassIDal
 	public interface ISatısDal:IRepository<Satis>
 	{
 		List<AdminIndexViewModel> IndexSiparisToplamları();
+		List<AdminIndexMiktarinaGoreViewModel> AdminIndexMiktarinaGoreViewModel();
 	}
 }

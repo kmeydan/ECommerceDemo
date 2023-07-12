@@ -1,5 +1,6 @@
 ﻿using Business.Abstract.IServices;
 using DataAccess.Abstract.IDal.ClassIDal;
+using DataAccess.ComplexType;
 using DataAccess.Entities.Nwind;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,11 @@ namespace Business.Concrete.Services
 		public void Add(Satis entity)
 		{
 			satısDal.Add(entity);
+		}
+
+		public List<AdminIndexMiktarinaGoreViewModel> AdminIndexMiktarinaGoreViewModel()
+		{
+			return satısDal.AdminIndexMiktarinaGoreViewModel();
 		}
 
 		public void Delete(Satis entity)
