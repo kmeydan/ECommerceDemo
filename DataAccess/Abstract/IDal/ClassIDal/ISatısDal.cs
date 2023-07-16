@@ -13,5 +13,6 @@ namespace DataAccess.Abstract.IDal.ClassIDal
 	{
 		List<AdminIndexViewModel> IndexSiparisToplamları();
 		List<AdminIndexMiktarinaGoreViewModel> AdminIndexMiktarinaGoreViewModel();
+		List<AdminIndexOdemeDurumuToplam> AdminIndexOdemeDurumuToplam();
 	}
 }

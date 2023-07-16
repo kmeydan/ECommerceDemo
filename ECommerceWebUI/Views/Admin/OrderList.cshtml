@@ -1,5 +1,5 @@
-﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
-@model OrderListViewModel
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Orders;
+@model AdminOrderIndexViewModel
 @{
 	ViewData["Title"] = "OrderList";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -25,82 +25,92 @@
 			<div class="card-header">
 				<h3 class="card-title">Sipariş Arama</h3>
 			</div>
-			<div class="card-body row">
-				<div class="col-lg-4">
-					<!-- Date -->
-					<div class="form-group">
-						<label>Başlangıç Tarihi</label>
-						<div class="input-group date" id="reservationdates" data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input" data-target="#reservationdates" />
-							<div class="input-group-append" data-target="#reservationdates" data-toggle="datetimepicker">
-								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+			<form asp-action="OrderList" asp-controller="Admin" method="post">
+				<div class="card-body row">
+					<div class="col-lg-4">
+						<!-- Date -->
+						<div class="form-group">
+							<label>Başlangıç Tarihi</label>
+							<div class="input-group date" id="reservationdates" data-target-input="nearest">
+								<input type="text" class="form-control datetimepicker-input" data-target="#reservationdates" />
+								<div class="input-group-append" data-target="#reservationdates" data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div>
+						</div>
+						<!-- Date dd/mm/yyyy -->
+						<div class="form-group">
+							<label>Bitiş Tarihi</label>
+							<div class="input-group date" id="reservationdate" data-target-input="nearest">
+								<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+								<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<!-- Date dd/mm/yyyy -->
-					<div class="form-group">
-						<label>Bitiş Tarihi</label>
-						<div class="input-group date" id="reservationdate" data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
-							<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+					<div class="col-lg-4">
+						<!--Orders-->
+						<div class="form-group">
+							<div class="form-group">
+								<label>Sipariş Durumları</label>
+								<select class="form-control">
+									@foreach (var item in Model.SiparisDurumu)
+									{
+										<option value="@item.Value">@item.Text</option>
+
+									}
+
+								</select>
 							</div>
+							<!-- /.input group -->
 						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<!--Orders-->
-					<div class="form-group">
+						<!-- Orders -->
+						<!-- /.form group -->
+						<!--Ödeme Tipi-->
 						<div class="form-group">
-							<label>Sipariş Durumları</label>
-							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>İşleniyor</option>
-								<option>Hazırlanıyor</option>
-								<option>Kargolandı</option>
-								<option>Teslim Edildi</option>
-							</select>
+							<div class="form-group">
+								<label>Ödeme Tipi</label>
+								<select class="form-control">
+									<option>Seçiniz</option>
+									<option>Kapıda Ödeme</option>
+									<option>Online Ödeme</option>
+								</select>
+							</div>
+							<!-- /.input group -->
 						</div>
-						<!-- /.input group -->
+
 					</div>
-					<!-- Orders -->
-					<!-- /.form group -->
-					<!--Ödeme Tipi-->
-					<div class="form-group">
+					<div class="col-lg-4">
+						<!-- Sipariş numarası -->
 						<div class="form-group">
-							<label>Ödeme Tipi</label>
-							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>Kapıda Ödeme</option>
-								<option>Online Ödeme</option>
-							</select>
+							<label>Sipariş Numarası</label>
+							<div class="input-group">
+								<input type="text" class="form-control">
+							</div>
+							<!-- /.input group -->
 						</div>
-						<!-- /.input group -->
+						<div class="form-group">
+							<label>Müşteri Adı</label>
+							<div class="input-group">
+								<input type="text" class="form-control">
+							</div>
+							<!-- /.input group -->
+						</div>
+
+						<!-- /.form group -->
+
+					</div>
+					<!-- /.card-body -->
+					<div class="col-lg-12">
+						<a class="btn btn-info btn-sm col-12" href="#">
+							<i class="fas fa-search">
+							</i> Arama
+						</a>
 					</div>
 
 				</div>
-				<div class="col-lg-4">
-					<!-- Sipariş numarası -->
-					<div class="form-group">
-						<label>Sipariş Numarası</label>
-						<div class="input-group">
-							<input type="text" class="form-control">
-						</div>
-						<!-- /.input group -->
-					</div>
-
-					<!-- /.form group -->
-
-				</div>
-				<!-- /.card-body -->
-				<div class="col-lg-12">
-					<a class="btn btn-info btn-sm col-12" href="#">
-						<i class="fas fa-search">
-						</i> Arama
-					</a>
-				</div>
-
-			</div>
+			</form>
 
 			<!-- /.card -->
 		</div><!-- /.row -->
@@ -143,7 +153,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach (var sipariş in Model.Siparisler)
+						@foreach (var sipariş in Model.Satislar)
 						{
 
 							<tr>
@@ -158,8 +168,10 @@
 									@sipariş.SevkAdi
 								</td>
 								<td>
-									@sipariş.OdemeTarihi
-									<i class="icon fas fa-check text-success"></i>
+									@if (sipariş.OdemeDurumuID != 1)
+									{
+										<i class="icon fas fa-check text-success"></i>
+									}
 								</td>
 								<td>
 									@sipariş.SevkTarihi

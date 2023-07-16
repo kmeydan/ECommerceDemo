@@ -12,8 +12,11 @@ namespace ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel
 		public int CustomerCount { get; set; }
 		public int OrderAll { get; set; }
 		public List<AdminIndexSonSiparis> SonSiparis { get; set; }
-		public List<SiparisToplamları> SiparisToplamları{ get; set; }
+		public List<SiparisToplamları> SiparisToplamları { get; set; }
 		public List<MiktaraGoreCokSatanlar> MiktaraGoreCokSatanlar { get; set; }
+		public List<TutarinaGoreCokSatanlar> TutarinaGoreCokSatanlar { get; set; }
+		public List<SiparisDurumunaGore> SiparisDurumunaGore { get; set; }
+		public List<PopulerAramaAnahtarKelimeleri> PopulerAramaAnahtarKelimeleri { get; set; }
 
 
 	}
@@ -39,9 +42,26 @@ namespace ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel
 	public class MiktaraGoreCokSatanlar
 	{
 		public string UrunAdi { get; set; }
-		public string Kategori { get; set; }
-		public short Miktar  { get; set; }
+		public int Miktar { get; set; }
 		public decimal TotalFiyat { get; set; }
+
+	}
+	public class TutarinaGoreCokSatanlar
+	{
+		public string UrunAdi { get; set; }
+		public int Miktar { get; set; }
+		public decimal TotalFiyat { get; set; }
+
+	}
+	public class SiparisDurumunaGore
+	{
+		public string OdemeDurumu { get; set; }
+		public decimal TotalRakam { get; set; }
+	}
+	public class PopulerAramaAnahtarKelimeleri
+	{
+		public string AnahtarKelime{ get; set; }
+		public decimal AratılanMiktar{ get; set; }
 	}
 
 

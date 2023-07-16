@@ -29,6 +29,11 @@ namespace Business.Concrete.Services
 			return satısDal.AdminIndexMiktarinaGoreViewModel();
 		}
 
+		public List<AdminIndexOdemeDurumuToplam> AdminIndexOdemeDurumuToplam()
+		{
+			return satısDal.AdminIndexOdemeDurumuToplam();
+		}
+
 		public void Delete(Satis entity)
 		{
 			satısDal.Delete(entity);

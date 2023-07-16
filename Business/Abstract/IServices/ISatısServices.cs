@@ -13,5 +13,6 @@ namespace Business.Abstract.IServices
 	{
 		List<AdminIndexViewModel> IndexSiparisToplamları();
 		List<AdminIndexMiktarinaGoreViewModel> AdminIndexMiktarinaGoreViewModel();
+		List<AdminIndexOdemeDurumuToplam> AdminIndexOdemeDurumuToplam();
 	}
 }

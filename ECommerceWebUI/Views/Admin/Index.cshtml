@@ -242,26 +242,15 @@
 									</tr>
 								</thead>
 								<tbody>
+									@foreach (var item in Model.PopulerAramaAnahtarKelimeleri)
+									{
 									<tr>
-										<td>Ahmet</td>
-										<td>123131</td>
+										<td>@item.AnahtarKelime</td>
+										<td>@item.AratılanMiktar</td>
 									</tr>
-									<tr>
-										<td>Erdem</td>
-										<td>12314</td>
-									</tr>
-									<tr>
-										<td>Mehmet</td>
-										<td>11512</td>
-									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>3232</td>
-									</tr>
-									<tr>
-										<td>Armut</td>
-										<td>123231</td>
-									</tr>
+										
+									}
+									
 								</tbody>
 							</table>
 						</div>
@@ -411,28 +400,19 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Ödeme Beklenen Siparişler</td>
-										<td>12321312 TL</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>Kargolanmayı Bekleyen Siparişler</td>
-										<td>12321312 TL</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-
-
+									@foreach (var item in Model.SiparisDurumunaGore)
+									{
+										<tr>
+											<td>@item.OdemeDurumu.ToString().TrimEnd('0')</td>
+											<td>@item.TotalRakam.ToString().TrimEnd('0') TL</td>
+											<td>
+												<a class="btn btn-info btn-sm" href="#">
+													<i class="fa fa-eye"></i>
+													Göster
+												</a>
+											</td>
+										</tr>
+									}
 								</tbody>
 							</table>
 						</div>
@@ -465,7 +445,7 @@
 									<tr>
 										<th>Ürün Adı</th>
 										<th>Toplam Miktar</th>
-										<th>Toplam Tutar(Vergi Hariç)</th>
+										<th style="width:25%">Toplam Tutar <br />(Vergi Hariç)</th>
 										<th>Göster</th>
 									</tr>
 								</thead>
@@ -473,21 +453,21 @@
 									@foreach (var item in Model.MiktaraGoreCokSatanlar)
 									{
 										<tr>
-										<td>@item.UrunAdi</td>
-										<td>@item.Miktar</td>
-										<td>
-											@item.TotalFiyat
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
+											<td>@item.UrunAdi</td>
+											<td>@item.Miktar</td>
+											<td>
+												@item.TotalFiyat
+											</td>
+											<td>
+												<a class="btn btn-info btn-sm" href="#">
+													<i class="fa fa-eye"></i>
+													Göster
+												</a>
+											</td>
+										</tr>
 									}
-									
-									
+
+
 								</tbody>
 							</table>
 						</div>
@@ -515,76 +495,27 @@
 									<tr>
 										<th>Ürün Adı</th>
 										<th>Toplam Miktar</th>
-										<th>Toplam Tutar(Vergi Hariç)</th>
+										<th style="width:25%">Toplam Tutar <br />(Vergi Hariç)</th>
 										<th>Göster</th>
 									</tr>
 								</thead>
 								<tbody style="font-size:15px">
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>Elma</td>
-										<td>1231</td>
-										<td>
-											12312313 TL
-										</td>
-										<td>
-											<a class="btn btn-info btn-sm" href="#">
-												<i class="fa fa-eye"></i>
-												Göster
-											</a>
-										</td>
-									</tr>
+									@foreach (var item in Model.TutarinaGoreCokSatanlar)
+									{
+										<tr>
+											<td>@item.UrunAdi</td>
+											<td>@item.Miktar</td>
+											<td>@item.TotalFiyat</td>
+											<td>
+												<a class="btn btn-info btn-sm" href="#">
+													<i class="fa fa-eye"></i>
+													Göster
+												</a>
+											</td>
+										</tr>
+
+									}
+
 								</tbody>
 							</table>
 						</div>

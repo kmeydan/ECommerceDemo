@@ -2,8 +2,11 @@
 using DataAccess.Concrete.Dal.ClassDal;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
+using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Orders;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,28 +18,32 @@ namespace ECommerceDemo.Controllers
 {
 	public class AdminController : Controller
 	{
+		private readonly ISiparisDurumlariServices siparisDurumlariServices;
 		private readonly ICategoryServices categoryServices;
 		private readonly IUrunlerServices urunlerServices;
 		private readonly IMusteriServices musteriServices;
 		private readonly ISatısServices satısServices;
 		private readonly ITedarikciServices tedarikciServices;
-
-		public AdminController(ICategoryServices categoryServices, IUrunlerServices urunlerServices, IMusteriServices musteriServices, ISatısServices satısServices, ITedarikciServices tedarikciServices)
+		private readonly IArananKelimeServices arananKelimeServices;
+		public AdminController(ICategoryServices categoryServices, IUrunlerServices urunlerServices, IMusteriServices musteriServices, ISatısServices satısServices, ITedarikciServices tedarikciServices, IArananKelimeServices arananKelimeServices, ISiparisDurumlariServices siparisDurumlariServices)
 		{
 			this.categoryServices = categoryServices;
 			this.urunlerServices = urunlerServices;
 			this.musteriServices = musteriServices;
 			this.satısServices = satısServices;
 			this.tedarikciServices = tedarikciServices;
+			this.arananKelimeServices = arananKelimeServices;
+			this.siparisDurumlariServices = siparisDurumlariServices;
 		}
 
+		[HttpGet]
 		public IActionResult Index()
 		{
 
 			var model = new AdminIndexViewModel
 			{
 				CustomerCount = musteriServices.GetAll().Count(),
-				OrderCount = satısServices.GetAll().Where(x => x.SatisTarihi > DateTime.Today).Count(),
+				OrderCount = satısServices.GetAll().Where(x => x.SiparisDurumID != 5 && x.SiparisDurumID != 3).Count(),
 				ProductsCount = urunlerServices.GetAll().Count(),
 				OrderAll = satısServices.GetAll().Count(),
 
@@ -55,14 +62,34 @@ namespace ECommerceDemo.Controllers
 					SiparisDurumu = x.SiparisDurumu,
 					SiparisTarihleri = x.SiparisTarihleri,
 				}).ToList(),
-				MiktaraGoreCokSatanlar = satısServices.AdminIndexMiktarinaGoreViewModel().Select(x=>new MiktaraGoreCokSatanlar
+				//Miktara Gore Cok Satanlar
+				MiktaraGoreCokSatanlar = satısServices.AdminIndexMiktarinaGoreViewModel().Select(x => new MiktaraGoreCokSatanlar
 				{
-					UrunAdi=x.UrunAdi,
-					Kategori=x.Kategori,
-					Miktar=x.Miktar,
-					TotalFiyat=x.ToplamFiyat
-					
-				}).OrderBy(x=>x.Miktar).Take(5).ToList()
+					UrunAdi = x.UrunAdi,
+					Miktar = x.Miktar,
+					TotalFiyat = x.TotalFiyat
+
+
+
+				}).OrderByDescending(x => x.Miktar).Take(5).ToList(),
+				//Tutarına Gore Cok Satanlar
+				TutarinaGoreCokSatanlar = satısServices.AdminIndexMiktarinaGoreViewModel().Select(x => new TutarinaGoreCokSatanlar
+				{
+					UrunAdi = x.UrunAdi,
+					Miktar = x.Miktar,
+					TotalFiyat = x.TotalFiyat
+				}).OrderByDescending(x => x.TotalFiyat).Take(5).ToList(),
+				//Odeme Durumu Toplam ((bunları grupla!!!) veritabanında
+				SiparisDurumunaGore = satısServices.AdminIndexOdemeDurumuToplam().Select(x => new SiparisDurumunaGore
+				{
+					TotalRakam = x.TotalTutar,
+					OdemeDurumu = x.OdemeDurumu,
+				}).ToList(),
+				PopulerAramaAnahtarKelimeleri = arananKelimeServices.GetAll().GroupBy(x => x.ArananKelimeDescription).Select(g=>new PopulerAramaAnahtarKelimeleri
+				{
+					AnahtarKelime=g.Key,
+					AratılanMiktar=g.Count()
+				}).Take(5).OrderByDescending(x=>x.AratılanMiktar).ToList()
 				
 				
 			};
@@ -83,8 +110,6 @@ namespace ECommerceDemo.Controllers
 			};
 			return View(model);
 		}
-
-		//Buraya girip kontrol edilicek
 		[Route("/Admin/Product/List")]
 		[HttpPost]
 		public IActionResult ProductList(AdminProductListViewModel model)
@@ -161,11 +186,20 @@ namespace ECommerceDemo.Controllers
 		[HttpGet]
 		public IActionResult OrderList()
 		{
-			var model = new OrderListViewModel
+			var model = new AdminOrderIndexViewModel
 			{
-				Siparisler = satısServices.GetAll()
+				SiparisDurumu = siparisDurumlariServices.GetAll().Select(x => new SelectListItem { Text = x.Description, Value = x.SiparisDurumID.ToString()}).ToList(),
+				Satislar = satısServices.GetAll().OrderByDescending(x => x.SatisTarihi).ToList()
 			};
 			return View(model);
+		}
+		[HttpPost]
+		public IActionResult OrderList(DateTime sd,DateTime ld,int sn,int sid,int ot,string ma)
+		{
+			//yapılanmayı hazırla
+
+
+			return View();
 		}
 		[Route("/Admin/ReturnRequest/List")]
 		[HttpGet]

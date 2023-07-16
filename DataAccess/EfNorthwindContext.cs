@@ -23,6 +23,9 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Urunler> Urunler{ get; set; }
         public DbSet<SiparisDurumu> SiparisDurumu { get; set; }
         public DbSet<SatisDetaylari> SatisDetaylari { get; set; }
+        public DbSet<OdemeTipi> OdemeTipi { get; set; }
+        public DbSet<OdemeDurumu> OdemeDurumu { get; set; }
+        public DbSet<ArananKelime> ArananKelime { get; set; }
 
 
     }

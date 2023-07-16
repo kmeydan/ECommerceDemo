@@ -1,0 +1,37 @@
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
+@model AdminIndexViewModel
+<!--Siparişler-->
+<li class="nav-item">
+	<a href="#" class="nav-link">
+		<i class="nav-icon fas fa-edit"></i>
+		<p>
+			Siparişler
+			<i class="fas fa-angle-left right"></i>
+			<span class="badge badge-danger right">@Model.OrderCount</span>
+		</p>
+
+	</a>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a asp-action="OrderList" asp-controller="Admin" class="nav-link">
+				<i class="nav-icon far fa-circle "></i>
+				<p>Siparişler</p>
+				<span class="badge badge-danger right mr-3">@Model.OrderCount</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a asp-action="ReturnRequestList" asp-controller="Admin" class="nav-link">
+				<i class="nav-icon far fa-circle "></i>
+				<span class="badge badge-info right">İade!</span>
+				<p>İade Talepleri</p>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a asp-action="Shipment" asp-controller="Admin" class="nav-link">
+				<i class="nav-icon far fa-circle "></i>
+				<p>Nakliyeler</p>
+			</a>
+		</li>
+	</ul>
+</li>
+<!--Siparişler-->

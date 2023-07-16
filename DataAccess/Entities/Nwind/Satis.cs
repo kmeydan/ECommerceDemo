@@ -26,5 +26,7 @@ namespace DataAccess.Entities.Nwind
         public string SevkPostaKodu { get; set; }
         public string SevkUlkesi { get; set; }
         public int SiparisDurumID { get; set; }
+        public int OdemeTipiID { get; set; }
+        public int OdemeDurumuID { get; set; }
     }
 }
