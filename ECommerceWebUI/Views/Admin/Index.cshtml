@@ -193,7 +193,33 @@
 									{
 										<tr>
 											<td>@item.SiparisId</td>
-											<td>@item.SiparisDurumu</td>
+											@switch (item.SiparisDurumu)
+											{
+												case 1:
+													<td>İşleniyor</td>
+													break;
+												case 2:
+													<td>Hazırlanıyor</td>
+													break;
+
+												case 3:
+													<td>İptal</td>
+													break;
+
+												case 4:
+													<td>Kargoya Verildi</td>
+													break;
+
+												case 5:
+													<td>Teslim Edildi</td>
+													break;
+
+
+												default:
+													<td>Hata</td>
+													break;
+
+											}
 											<td>
 												@item.Musteri
 											</td>
@@ -244,13 +270,13 @@
 								<tbody>
 									@foreach (var item in Model.PopulerAramaAnahtarKelimeleri)
 									{
-									<tr>
-										<td>@item.AnahtarKelime</td>
-										<td>@item.AratılanMiktar</td>
-									</tr>
-										
+										<tr>
+											<td>@item.AnahtarKelime</td>
+											<td>@item.AratılanMiktar</td>
+										</tr>
+
 									}
-									
+
 								</tbody>
 							</table>
 						</div>

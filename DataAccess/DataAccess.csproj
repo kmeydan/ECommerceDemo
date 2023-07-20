@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IDal\ClassIDal\IArananKelimeDal.cs" />
+    <Compile Include="Abstract\IDal\ClassIDal\IOdemeTipiDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ISiparisDurumlarıDal.cs" />
     <Compile Include="ComplexType\AdminIndexMiktarinaGoreViewModel.cs" />
     <Compile Include="ComplexType\AdminIndexOdemeDurumuToplam.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Concrete\Dal\ClassDal\ArananKelimeDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\CategoryDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\MusteriDal.cs" />
+    <Compile Include="Concrete\Dal\ClassDal\OdemeTipiDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\SatısDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\SiparisDurumlariDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\TedarikciDal.cs" />

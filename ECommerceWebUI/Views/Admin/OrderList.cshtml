@@ -32,7 +32,7 @@
 						<div class="form-group">
 							<label>Başlangıç Tarihi</label>
 							<div class="input-group date" id="reservationdates" data-target-input="nearest">
-								<input type="text" class="form-control datetimepicker-input" data-target="#reservationdates" />
+								<input type="datetime" class="form-control datetimepicker-input" name="sd" />
 								<div class="input-group-append" data-target="#reservationdates" data-toggle="datetimepicker">
 									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 								</div>
@@ -42,7 +42,7 @@
 						<div class="form-group">
 							<label>Bitiş Tarihi</label>
 							<div class="input-group date" id="reservationdate" data-target-input="nearest">
-								<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+								<input type="text" class="form-control datetimepicker-input" name="ld" />
 								<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
 									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 								</div>
@@ -57,7 +57,7 @@
 								<select class="form-control">
 									@foreach (var item in Model.SiparisDurumu)
 									{
-										<option value="@item.Value">@item.Text</option>
+										<option value="@item.Value" name="sid">@item.Text</option>
 
 									}
 
@@ -67,33 +67,10 @@
 						</div>
 						<!-- Orders -->
 						<!-- /.form group -->
-						<!--Ödeme Tipi-->
-						<div class="form-group">
-							<div class="form-group">
-								<label>Ödeme Tipi</label>
-								<select class="form-control">
-									<option>Seçiniz</option>
-									<option>Kapıda Ödeme</option>
-									<option>Online Ödeme</option>
-								</select>
-							</div>
-							<!-- /.input group -->
-						</div>
-
-					</div>
-					<div class="col-lg-4">
-						<!-- Sipariş numarası -->
-						<div class="form-group">
-							<label>Sipariş Numarası</label>
-							<div class="input-group">
-								<input type="text" class="form-control">
-							</div>
-							<!-- /.input group -->
-						</div>
 						<div class="form-group">
 							<label>Müşteri Adı</label>
 							<div class="input-group">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="ma">
 							</div>
 							<!-- /.input group -->
 						</div>
@@ -101,12 +78,24 @@
 						<!-- /.form group -->
 
 					</div>
+					<div class="col-lg-4">
+						<!-- Sipariş numarası -->
+						<div class="form-group">
+							<label>Sipariş Numarası</label>
+							<div class="input-group">
+								<input type="text" class="form-control" name="sn">
+							</div>
+							<!-- /.input group -->
+						</div>
+
+
+					</div>
 					<!-- /.card-body -->
 					<div class="col-lg-12">
-						<a class="btn btn-info btn-sm col-12" href="#">
+						<button type="submit" class="btn btn-info btn-sm col-12" asp-action="OrderList" asp-controller="Admin">
 							<i class="fas fa-search">
 							</i> Arama
-						</a>
+						</button>
 					</div>
 
 				</div>
@@ -136,16 +125,17 @@
 								Müşteri Adı
 							</th>
 							<th style="width: 14%">
-								Sevk Adı
+								Sipariş Durumu
+
 							</th>
 							<th style="width: 10%">
-								Ödeme
+								Ödeme Durumu
 							</th>
 							<th style="width:15%">
-								Son Güncellenme
+								Ödeme Tarihi
 							</th>
 							<th class="width:19%">
-								Oluşturulma Tarihi
+								Sipariş Tarihi
 							</th>
 							<th class="width: 15%">
 								Göster
@@ -162,11 +152,36 @@
 								</td>
 								<td>
 									@sipariş.MusteriID
+								</td>
 
-								</td>
-								<td>
-									@sipariş.SevkAdi
-								</td>
+								@switch (sipariş.SiparisDurumID)
+								{
+									case 1:
+										<td>İşleniyor</td>
+										break;
+									case 2:
+										<td>Hazırlanıyor</td>
+										break;
+
+									case 3:
+										<td>İptal</td>
+										break;
+
+									case 4:
+										<td>Kargoya Verildi</td>
+										break;
+
+									case 5:
+										<td>Teslim Edildi</td>
+										break;
+
+
+									default:
+										<td>Hata</td>
+										break;
+
+								}
+
 								<td>
 									@if (sipariş.OdemeDurumuID != 1)
 									{
@@ -174,13 +189,10 @@
 									}
 								</td>
 								<td>
-									@sipariş.SevkTarihi
+									@sipariş.OdemeTarihi
 								</td>
 								<td>
 									@sipariş.SatisTarihi
-								</td>
-								<td>
-									@sipariş.SevkBolgesi
 								</td>
 								<td>
 									<a class="btn btn-info btn-sm" href="#">

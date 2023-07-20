@@ -34,6 +34,8 @@ namespace ECommerce
             services.AddControllersWithViews();
             services.AddRazorPages();
             //Scoped
+            services.AddScoped<IOdemeTipiDal, OdemeTipiDal>();
+            services.AddScoped<IOdemeTipiServices, OdemeTipiServices>();
             services.AddScoped<ISiparisDurumlariServices, SiparisDurumlariServices>();
             services.AddScoped<ISiparisDurumlarýDal,SiparisDurumlariDal>();
             services.AddScoped<IArananKelimeDal, ArananKelimeDal>();

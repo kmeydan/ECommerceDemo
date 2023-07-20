@@ -1,5 +1,6 @@
 ﻿using Business.Abstract.IServices;
 using DataAccess.Concrete.Dal.ClassDal;
+using DataAccess.Entities.Nwind;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Orders;
@@ -11,13 +12,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 using System.Web.Helpers;
 
 namespace ECommerceDemo.Controllers
 {
 	public class AdminController : Controller
 	{
+		private readonly IOdemeTipiServices odemeTipiServices;
 		private readonly ISiparisDurumlariServices siparisDurumlariServices;
 		private readonly ICategoryServices categoryServices;
 		private readonly IUrunlerServices urunlerServices;
@@ -25,7 +29,7 @@ namespace ECommerceDemo.Controllers
 		private readonly ISatısServices satısServices;
 		private readonly ITedarikciServices tedarikciServices;
 		private readonly IArananKelimeServices arananKelimeServices;
-		public AdminController(ICategoryServices categoryServices, IUrunlerServices urunlerServices, IMusteriServices musteriServices, ISatısServices satısServices, ITedarikciServices tedarikciServices, IArananKelimeServices arananKelimeServices, ISiparisDurumlariServices siparisDurumlariServices)
+		public AdminController(ICategoryServices categoryServices, IUrunlerServices urunlerServices, IMusteriServices musteriServices, ISatısServices satısServices, ITedarikciServices tedarikciServices, IArananKelimeServices arananKelimeServices, ISiparisDurumlariServices siparisDurumlariServices, IOdemeTipiServices odemeTipiServices = null)
 		{
 			this.categoryServices = categoryServices;
 			this.urunlerServices = urunlerServices;
@@ -34,6 +38,7 @@ namespace ECommerceDemo.Controllers
 			this.tedarikciServices = tedarikciServices;
 			this.arananKelimeServices = arananKelimeServices;
 			this.siparisDurumlariServices = siparisDurumlariServices;
+			this.odemeTipiServices = odemeTipiServices;
 		}
 
 		[HttpGet]
@@ -85,17 +90,17 @@ namespace ECommerceDemo.Controllers
 					TotalRakam = x.TotalTutar,
 					OdemeDurumu = x.OdemeDurumu,
 				}).ToList(),
-				PopulerAramaAnahtarKelimeleri = arananKelimeServices.GetAll().GroupBy(x => x.ArananKelimeDescription).Select(g=>new PopulerAramaAnahtarKelimeleri
+				PopulerAramaAnahtarKelimeleri = arananKelimeServices.GetAll().GroupBy(x => x.ArananKelimeDescription).Select(g => new PopulerAramaAnahtarKelimeleri
 				{
-					AnahtarKelime=g.Key,
-					AratılanMiktar=g.Count()
-				}).Take(5).OrderByDescending(x=>x.AratılanMiktar).ToList()
-				
-				
+					AnahtarKelime = g.Key,
+					AratılanMiktar = g.Count()
+				}).Take(5).OrderByDescending(x => x.AratılanMiktar).ToList()
+
+
 			};
 			return View(model);
 		}
-		
+
 		//Katalog
 		[Route("/Admin/Product/List")]
 		[HttpGet]
@@ -188,18 +193,36 @@ namespace ECommerceDemo.Controllers
 		{
 			var model = new AdminOrderIndexViewModel
 			{
-				SiparisDurumu = siparisDurumlariServices.GetAll().Select(x => new SelectListItem { Text = x.Description, Value = x.SiparisDurumID.ToString()}).ToList(),
+				SiparisDurumu = siparisDurumlariServices.GetAll().Select(x => new SelectListItem { Text = x.Description, Value = x.SiparisDurumID.ToString() }).ToList(),
+				OdemeTipi = odemeTipiServices.GetAll().Select(x => new SelectListItem { Text = x.OdemeYontemi, Value = x.OdemeTipiID.ToString() }).ToList(),
 				Satislar = satısServices.GetAll().OrderByDescending(x => x.SatisTarihi).ToList()
 			};
 			return View(model);
 		}
 		[HttpPost]
-		public IActionResult OrderList(DateTime sd,DateTime ld,int sn,int sid,int ot,string ma)
-		{
-			//yapılanmayı hazırla
+		[Route("/Admin/Order/List")]
+		public IActionResult OrderList(int sn=0, DateTime? sd, DateTime? ld, int? sid,string? ma)
+		{//burdan devam
+			var model = new AdminOrderIndexViewModel();
+			if (sn != 0)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SatisID == sn).ToList();
+			}
+			else if (sid!=null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SiparisDurumID == sid).ToList();
 
+			}
+			else if (ma!=null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.MusteriID == ma).ToList();
 
-			return View();
+			}
+
+			model.SiparisDurumu = siparisDurumlariServices.GetAll().Select(x => new SelectListItem { Text = x.Description, Value = x.SiparisDurumID.ToString() }).ToList();
+			model.OdemeTipi = odemeTipiServices.GetAll().Select(x => new SelectListItem { Text = x.OdemeYontemi, Value = x.OdemeTipiID.ToString() }).ToList();
+			
+			return View(model);
 		}
 		[Route("/Admin/ReturnRequest/List")]
 		[HttpGet]
