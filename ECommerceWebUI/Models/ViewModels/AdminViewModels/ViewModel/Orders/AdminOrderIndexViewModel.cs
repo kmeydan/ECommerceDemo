@@ -15,8 +15,8 @@ namespace ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Orders
 		public List<SelectListItem> SiparisDurumu { get; set; }
 		public List<SelectListItem> OdemeTipi { get; set; }
 		public SelectListItem OdemeDurumu { get; set; }
-		public int SiparisNumarasi{ get; set; }
-		public string MusteriAdi{ get; set; }
+		public List<Satis> FiltreliSatis { get; set; }
 	}
+
 	
 }

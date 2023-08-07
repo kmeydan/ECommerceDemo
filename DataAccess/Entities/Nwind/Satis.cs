@@ -17,6 +17,7 @@ namespace DataAccess.Entities.Nwind
         public DateTime SatisTarihi { get; set; }
         public DateTime OdemeTarihi { get; set; }
         public DateTime SevkTarihi { get; set; }
+        public DateTime? TeslimatTarihi { get; set; }
         public int ShipVia { get; set; }
         public decimal NakliyeUcreti { get; set; }
         public string SevkAdi { get; set; }

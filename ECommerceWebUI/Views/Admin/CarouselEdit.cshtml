@@ -1,0 +1,114 @@
+﻿@{
+	ViewData["Title"] = "CarouselEdit";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">Carousel Yönetimi</h1>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- Search Customer -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="col-12 col-md-12">
+				<div class="card card-primary card-outline card-outline-tabs">
+					<div class="card-header p-0 border-bottom-0">
+						<ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Ayarlar</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Ürün Ekle</a>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="tab-content" id="custom-tabs-four-tabContent">
+							<div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+								<div class="card-body">
+									<div class="form-group row">
+										<label for="inputText1" class="col-sm-2 col-form-label">Carousel İsmi</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="inputText1" placeholder="Carousel İsmi">
+										</div>
+									</div>
+
+
+
+								</div>
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+								<section class="content">
+									<div class="container-fluid">
+										<div class="col-md-12">
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th style="width:5%">#</th>
+														<th style="width:40%">Ürün</th>
+														<th style="width:15%">Görüntülenme Sırası</th>
+														<th style="width:25%">Göster</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><input type="checkbox"/></td>
+														<td>45 Numara Nike Ayakkabı</td>
+														<td>-30</td>
+														<td>
+															<a class="btn btn-info btn-sm" href="#">
+																<i class="fa fa-eye"></i>
+																Göster
+															</a>
+														</td>
+														<td>
+															<a asp-action="BannerEdit" asp-controller="Admin" class="btn btn-info btn-sm">
+																<i class="fas fa-pencil-alt">
+																</i>
+																Düzenle
+															</a>
+															<a asp-action="BannerEdit" asp-controller="Admin" class="btn btn-danger btn-sm mx-1">
+																<i class="fas fa-pencil-alt">
+
+																	Sil
+															</a>
+														</td>
+														
+													</tr>
+												</tbody>
+											</table>
+
+											<!-- /.card -->
+
+
+										</div>
+
+										<!-- /.row -->
+
+									</div><!-- /.container-fluid -->
+								</section>
+							</div>
+
+						</div>
+					</div>
+					<!-- /.card -->
+				</div>
+			</div>
+
+
+			<!-- /.row -->
+
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+</div>
+

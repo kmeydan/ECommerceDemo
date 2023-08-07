@@ -8,11 +8,14 @@ using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Web.Helpers;
@@ -104,23 +107,64 @@ namespace ECommerceDemo.Controllers
 		//Katalog
 		[Route("/Admin/Product/List")]
 		[HttpGet]
-		public IActionResult ProductList(int id)
+		public IActionResult ProductList()
 		{
-			var model = new AdminProductListViewModel
-			{
-				Kategoriler = categoryServices.GetAll().Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString() }).ToList(),
-				Urunler = urunlerServices.GetAll(),
-				YayınlanmaDurumu = new List<string> { "Seçiniz", "Aktif Ürünler", "Pasif Ürünler" },
-				UrunGorseli = new List<string> { "Seçiniz", "Görselli Ürünler", "Görselsiz Ürünler" }
-			};
+			var model = new AdminProductListViewModel();
+			model.Kategoriler = categoryServices.GetAll().Select(x => new SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString()}).ToList();
+			model.YayınlanmaDurumu = new List<string> { "Seçiniz", "Aktif Ürünler", "Pasif Ürünler" };
+			model.UrunGorseli = new List<string> { "Seçiniz", "Görselli Ürünler", "Görselsiz Ürünler" };
+			model.Urunler = urunlerServices.GetAll().OrderBy(x => x.UrunAdi).ToList();
+			
 			return View(model);
 		}
-		[Route("/Admin/Product/List")]
 		[HttpPost]
-		public IActionResult ProductList(AdminProductListViewModel model)
+		[Route("/Admin/Product/List")]
+		public IActionResult ProductList(string un,string ub,int k,int yd, int ug)
 		{
+			var model = new AdminProductListViewModel();
+			model.Kategoriler = categoryServices.GetAll().Select(x => new SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString()}).ToList();
+			model.YayınlanmaDurumu = new List<string> { "Seçiniz", "Aktif Ürünler", "Pasif Ürünler" };
+			model.UrunGorseli = new List<string> { "Seçiniz", "Görselli Ürünler", "Görselsiz Ürünler" };
 
-			return View();
+			if (un!=null)
+			{
+				model.Urunler = urunlerServices.GetAll().Where(x => x.UrunAdi.ToLower() == un.ToLower() || x.UrunAdi.ToLower().StartsWith(un.ToLower().Substring(0))).ToList();
+			}
+			else if (ub!=null)
+			{
+				model.Urunler = urunlerServices.GetAll().Where(x=>x.Barkod==ub).ToList();
+			}
+			else if (k!=0)
+			{
+				model.Urunler = urunlerServices.GetAll().Where(x => x.KategoriID == k).ToList();
+			}
+			else if (yd != 0)
+			{
+				if (yd == 1)
+				{
+					model.Urunler = urunlerServices.GetAll().Where(x => x.Sonlandi == false).ToList();
+				}
+				else if (yd == 2)
+				{
+					model.Urunler = urunlerServices.GetAll().Where(x => x.Sonlandi == true).ToList();
+				}
+			}
+			else if (ug!=0)
+			{
+				if (ug==1)
+				{
+					model.Urunler = urunlerServices.GetAll().Where(x => x.GorselUrl != null).ToList();
+				}
+				else if (ug == 2)
+				{
+					model.Urunler = urunlerServices.GetAll().Where(x => x.GorselUrl == null).ToList();
+				}
+			}
+			else
+			{
+				model.Urunler = urunlerServices.GetAll().OrderBy(x => x.UrunAdi).ToList();
+			}
+			return View(model);
 		}
 		[Route("/Admin/Product/Category")]
 		[HttpGet]
@@ -189,39 +233,40 @@ namespace ECommerceDemo.Controllers
 		//Orders
 		[Route("/Admin/Order/List")]
 		[HttpGet]
-		public IActionResult OrderList()
+		public IActionResult OrderList(int? sn, DateTime? sd, DateTime? ld, int? sid, string ma)
 		{
-			var model = new AdminOrderIndexViewModel
-			{
-				SiparisDurumu = siparisDurumlariServices.GetAll().Select(x => new SelectListItem { Text = x.Description, Value = x.SiparisDurumID.ToString() }).ToList(),
-				OdemeTipi = odemeTipiServices.GetAll().Select(x => new SelectListItem { Text = x.OdemeYontemi, Value = x.OdemeTipiID.ToString() }).ToList(),
-				Satislar = satısServices.GetAll().OrderByDescending(x => x.SatisTarihi).ToList()
-			};
-			return View(model);
-		}
-		[HttpPost]
-		[Route("/Admin/Order/List")]
-		public IActionResult OrderList(int sn=0, DateTime? sd, DateTime? ld, int? sid,string? ma)
-		{//burdan devam
 			var model = new AdminOrderIndexViewModel();
-			if (sn != 0)
-			{
-				model.Satislar = satısServices.GetAll().Where(x => x.SatisID == sn).ToList();
-			}
-			else if (sid!=null)
-			{
-				model.Satislar = satısServices.GetAll().Where(x => x.SiparisDurumID == sid).ToList();
-
-			}
-			else if (ma!=null)
-			{
-				model.Satislar = satısServices.GetAll().Where(x => x.MusteriID == ma).ToList();
-
-			}
-
 			model.SiparisDurumu = siparisDurumlariServices.GetAll().Select(x => new SelectListItem { Text = x.Description, Value = x.SiparisDurumID.ToString() }).ToList();
 			model.OdemeTipi = odemeTipiServices.GetAll().Select(x => new SelectListItem { Text = x.OdemeYontemi, Value = x.OdemeTipiID.ToString() }).ToList();
-			
+			if (sn != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SatisID == sn).OrderByDescending(x => x.SatisTarihi).ToList();
+			}
+			else if (sid != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SiparisDurumID == sid).OrderByDescending(x => x.SatisTarihi).ToList();
+			}
+			else if (sd != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SatisTarihi >= sd).OrderByDescending(x => x.SatisTarihi).ToList();
+			}
+			else if (ld != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SatisTarihi <= ld).OrderByDescending(x => x.SatisTarihi).ToList();
+			}
+			else if (sd != null && ld != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SatisTarihi >= sd && sd <= ld).OrderByDescending(x => x.SatisTarihi).ToList();
+			}
+			else if (ma != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.MusteriID.ToLower() == ma.ToLower() || x.MusteriID.ToLower().StartsWith(ma.ToLower().Substring(0))).ToList();
+			}
+			else
+			{
+				model.Satislar = satısServices.GetAll().OrderByDescending(x => x.SatisTarihi).ToList();
+			}
+
 			return View(model);
 		}
 		[Route("/Admin/ReturnRequest/List")]
@@ -232,9 +277,60 @@ namespace ECommerceDemo.Controllers
 		}
 		[Route("/Admin/Order/ShipmentList")]
 		[HttpGet]
-		public IActionResult Shipment()
+		public IActionResult Shipment(int? td, DateTime? sd, DateTime? ld, string ma, int? sn)
 		{
-			return View();
+
+			var model = new ShipmentViewModel();
+			model.TeslimatDurumu = new List<string> { "Seçiniz", "Teslim Edilmedi", "Teslim Edildi" };
+
+			if (sn != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SatisID == sn).OrderByDescending(x => x.SevkTarihi).ToList();
+			}
+			else if (sd != null && ld != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SevkTarihi >= sd && x.SevkTarihi <= ld).OrderByDescending(x => x.SevkTarihi).ToList();
+
+			}
+
+			else if (sd != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SevkTarihi >= sd).OrderByDescending(x => x.SevkTarihi).ToList();
+
+			}
+			else if (ld != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.SevkTarihi <= ld).OrderByDescending(x => x.SevkTarihi).ToList();
+
+			}
+
+			else if (ma != null)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.MusteriID.ToLower() == ma.ToLower() || x.MusteriID.ToLower()
+				.StartsWith(ma.ToLower().Substring(0))).OrderByDescending(x => x.SatisTarihi).ToList();
+
+			}
+			else if (td == 1)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.TeslimatTarihi == null).OrderByDescending(x => x.SevkTarihi).ToList();
+
+			}
+			else if (td == 2)
+			{
+				model.Satislar = satısServices.GetAll().Where(x => x.TeslimatTarihi != null).OrderByDescending(x => x.SevkTarihi).ToList();
+
+			}
+			else
+			{
+				model.Satislar = satısServices.GetAll().OrderByDescending(x => x.SatisTarihi).ToList();
+
+			}
+
+
+
+
+
+			return View(model);
 		}
 
 		//Customer
@@ -244,10 +340,75 @@ namespace ECommerceDemo.Controllers
 		{
 			var model = new CustomerListViewModel
 			{
-				Customers = musteriServices.GetAll()
+				Customers = musteriServices.GetAll().OrderByDescending(x => x.OlusturulmaTarihi).ToList()
 			};
 			return View(model);
 		}
+		[Route("/Admin/Customer/List")]
+		[HttpPost]
+		public IActionResult CustomerList(DateTime? startdate,string email,string no,string name)
+		{
+			var model = new CustomerListViewModel();
+			if (startdate != null)
+			{
+				model.Customers = musteriServices.GetAll().Where(x => x.OlusturulmaTarihi >= startdate).ToList();
+			}
+			else if (email != null)
+			{
+				model.Customers = musteriServices.GetAll()
+					.Where(x => x.EPosta == email).ToList();
+			}
+			else if (name != null)
+			{
+				model.Customers = musteriServices.GetAll()
+					.Where(x => x.MusteriAdi == name || x.MusteriAdi.StartsWith(name.ToLower().Substring(0))).ToList();
+				
+			}
+			else if (no != null)
+			{
+				model.Customers = musteriServices.GetAll()
+					.Where(x => x.Telefon == no || x.Telefon.StartsWith(no.Substring(0))).ToList();
+			}
+			else
+			{
+				model.Customers = musteriServices.GetAll().OrderByDescending(x => x.OlusturulmaTarihi).ToList();
+			}
+
+			return View(model);
+		}
+
 		//End - Customer
+
+		//İçerik Yönetimi
+		//Banner Yönetimi
+		public IActionResult Banner()
+		{
+
+			return View();
+		}
+		public IActionResult BannerEdit()
+		{
+			return View();
+		}
+		public IActionResult NewBannerImg()
+		{
+			return View();
+		}
+		public IActionResult NewBanner()
+		{
+			return View();
+		}
+		//End - Banner Yonetimi
+
+		//Carousel Yönetimi
+		public IActionResult Carousel()
+		{
+			return View();
+		}
+		public IActionResult CarouselEdit()
+		{
+			return View();
+		}
+
 	}
 }

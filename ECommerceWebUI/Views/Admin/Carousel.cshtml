@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Carousel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">Carousel Yönetimi</h1>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th style="width:50%">Adı</th>
+									<th style="width:30%">Etkin Mi</th>
+									<th>Düzenle</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Kampanyalar</td>
+									<td>
+										<i class="icon fas fa-check text-success"></i>
+									</td>
+									<td>
+										<a asp-action="CarouselEdit" asp-controller="Admin" class="btn btn-info btn-sm">
+											<i class="fas fa-pencil-alt">
+											</i>
+											Düzenle
+										</a>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /.card -->
+
+
+			</div>
+
+			<!-- /.row -->
+
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+</div>
+
+

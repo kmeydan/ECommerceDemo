@@ -41,7 +41,7 @@
 						<div class="form-group">
 							<label>Ürün İsmi</label>
 							<div class="input-group">
-								<input type="text" class="form-control" asp-for="UrunAdi">
+								<input type="text" class="form-control" name="un">
 							</div>
 							<!-- /.input group -->
 						</div>
@@ -50,7 +50,7 @@
 						<div class="form-group">
 							<label>Ürün Barkodu</label>
 							<div class="input-group">
-								<input type="text" class="form-control" asp-for="UrunBarkod">
+								<input type="text" class="form-control" name="ub">
 							</div>
 							<!-- /.input group -->
 						</div>
@@ -63,11 +63,11 @@
 							<div class="form-group">
 								<label>Kategori</label>
 
-								<select class="form-control">
+								<select class="form-control" name="k">
 									<option>Seçiniz</option>
 									@foreach (var item in Model.Kategoriler)
 									{
-										<option value="@item.Value" name="kategori">@item.Text</option>
+										<option value="@item.Value">@item.Text</option>
 
 									}
 								</select>
@@ -81,10 +81,14 @@
 						<div class="form-group">
 							<div class="form-group">
 								<label>Ürün Resmi</label>
-								<select class="form-control">
+								<select class="form-control" name="ug">
+									@{
+										var x = 0;
+									}
 									@foreach (var gorsel in Model.UrunGorseli)
 									{
-										<option>@gorsel</option>
+										<option value="@x">@gorsel</option>
+										x++;
 									}
 								</select>
 							</div>
@@ -98,10 +102,14 @@
 						<div class="form-group">
 							<div class="form-group">
 								<label>Yayınlanma Durumu</label>
-								<select class="form-control">
+								<select class="form-control" name="yd">
+									@{
+										var y = 0;
+									}
 									@foreach (var yayin in Model.YayınlanmaDurumu)
 									{
-										<option>@yayin</option>
+										<option value="@y">@yayin</option>
+										y++;
 
 									}
 								</select>
@@ -114,7 +122,7 @@
 					</div>
 					<!-- /.card-body -->
 					<div class="col-lg-12">
-						<button type="submit" class="btn btn-info btn-sm col-12">
+						<button type="submit" asp-controller="Admin" asp-action="ProductList" method="post" class="btn btn-info btn-sm col-12">
 							<i class="fas fa-search">
 							</i> Arama
 						</button>

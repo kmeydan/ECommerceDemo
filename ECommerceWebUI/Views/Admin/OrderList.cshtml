@@ -25,14 +25,14 @@
 			<div class="card-header">
 				<h3 class="card-title">Sipariş Arama</h3>
 			</div>
-			<form asp-action="OrderList" asp-controller="Admin" method="post">
+			<form asp-action="OrderList" asp-controller="Admin" method="get">
 				<div class="card-body row">
 					<div class="col-lg-4">
 						<!-- Date -->
 						<div class="form-group">
 							<label>Başlangıç Tarihi</label>
 							<div class="input-group date" id="reservationdates" data-target-input="nearest">
-								<input type="datetime" class="form-control datetimepicker-input" name="sd" />
+								<input type="text" class="form-control datetimepicker-input" name="sd"/>
 								<div class="input-group-append" data-target="#reservationdates" data-toggle="datetimepicker">
 									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 								</div>
@@ -54,10 +54,12 @@
 						<div class="form-group">
 							<div class="form-group">
 								<label>Sipariş Durumları</label>
-								<select class="form-control">
+								<select class="form-control" name="sid">
+									<option value="">Seçiniz</option>
 									@foreach (var item in Model.SiparisDurumu)
 									{
-										<option value="@item.Value" name="sid">@item.Text</option>
+										<option value="@item.Value">@item.Text</option>
+										
 
 									}
 

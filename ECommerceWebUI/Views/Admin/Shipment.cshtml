@@ -1,7 +1,8 @@
-﻿
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Orders;
+@model ShipmentViewModel
 @{
-    ViewData["Title"] = "Shipment";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Shipment";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="content-wrapper">
@@ -24,88 +25,82 @@
 			<div class="card-header">
 				<h3 class="card-title">Nakliye Ara</h3>
 			</div>
-			<div class="card-body row">
-				<div class="col-lg-4">
-					
-					<!-- Date -->
-					<div class="form-group">
-						<label>Başlangıç Tarihi</label>
-						<div class="input-group date" id="reservationdates" data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input" data-target="#reservationdates" />
-							<div class="input-group-append" data-target="#reservationdates" data-toggle="datetimepicker">
-								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+			<form asp-action="Shipment" asp-controller="Admin" method="get">
+
+				<div class="card-body row">
+					<div class="col-lg-4">
+
+						<!-- Date -->
+						<div class="form-group">
+							<label>Başlangıç Tarihi</label>
+							<div class="input-group date" id="reservationdates" data-target-input="nearest">
+								<input type="text" class="form-control datetimepicker-input" name="sd" data-target="#reservationdates" />
+								<div class="input-group-append" data-target="#reservationdates" data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div>
+						</div>
+						<!-- Date dd/mm/yyyy -->
+						<div class="form-group">
+							<label>Bitiş Tarihi</label>
+							<div class="input-group date" id="reservationdate" data-target-input="nearest">
+								<input type="text" class="form-control datetimepicker-input" name="ld" data-target="#reservationdate" />
+								<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<!-- Date dd/mm/yyyy -->
-					<div class="form-group">
-						<label>Bitiş Tarihi</label>
-						<div class="input-group date" id="reservationdate" data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
-							<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+					<div class="col-lg-4">
+						<!-- Teslimat-->
+						<div class="form-group">
+							<div class="form-group">
+								<label>Teslimat Durumu</label>
+								<select class="form-control" name="td">
+									@{
+										var x = 0;
+
+									}
+									@foreach (var item in Model.TeslimatDurumu)
+									{
+										<option value="@x">@item</option>
+										x++;
+									}
+								</select>
 							</div>
+							<div class="form-group">
+								<label>Müsteri Adı</label>
+								<input type="text" class="form-control datetimepicker-input" name="ma" data-target="#reservationdate" />
+
+							</div>
+							<!-- /.input group -->
 						</div>
+						<!-- Teslimat -->
+						<!-- /.form group -->
 					</div>
-				</div>
-				<div class="col-lg-4">
-					<!-- Category-->
-					<div class="form-group">
+					<div class="col-lg-4">
+						<!-- Siparis Numarası-->
 						<div class="form-group">
-							<label>Şehir</label>
-							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>S şehri</option>
-								<option>Y şehri</option>
-								<option>A şehri</option>
-								<option>T şehri</option>
-							</select>
+							<div class="form-group">
+								<label>Siparis Numarası</label>
+								<input type="text" class="form-control datetimepicker-input" name="sn" data-target="#reservationdate" />
+
+							</div>
+							<!-- /.input group -->
 						</div>
-						<!-- /.input group -->
+						<!-- Siparis Numarası -->
+
 					</div>
-					<!-- Category -->
-					<!-- /.form group -->
-					<!-- Görselli/Görselsiz-->
-					<div class="form-group">
-						<div class="form-group">
-							<label>Mahalle</label>
-							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>X Mahallesi</option>
-								<option>Y Mahallesi</option>
-							</select>
-						</div>
-						<!-- /.input group -->
+					<!-- /.card-body -->
+					<div class="col-lg-12">
+						<button type="submit" asp-action="Shipment" asp-controller="Admin" class="btn btn-info btn-sm col-12">
+							<i class="fas fa-search">
+							</i> Arama
+						</button>
 					</div>
-					<!-- /.form group -->
 
 				</div>
-				<div class="col-lg-4">
-					<!-- Teslimat-->
-					<div class="form-group">
-						<div class="form-group">
-							<label>Teslimat Durumu</label>
-							<select class="form-control">
-								<option>Seçiniz</option>
-								<option>Teslim Edildi</option>
-								<option>Teslim Edilmedi</option>
-							</select>
-						</div>
-						<!-- /.input group -->
-					</div>
-					<!-- Yayınlandı -->
-					<!-- /.form group -->
-
-				</div>
-				<!-- /.card-body -->
-				<div class="col-lg-12">
-					<a class="btn btn-info btn-sm col-12" href="#">
-						<i class="fas fa-search">
-						</i> Arama
-					</a>
-				</div>
-
-			</div>
+			</form>
 
 			<!-- /.card -->
 		</div><!-- /.row -->
@@ -118,67 +113,64 @@
 		<!-- Default box -->
 		<div class="card">
 			<div class="card-header">
-				<h3 class="card-title">Ürünler</h3>
+				<h3 class="card-title">Nakliye</h3>
 			</div>
 			<div class="card-body p-0">
 				<table class="table table-striped projects">
 					<thead>
 						<tr>
 							<th style="width: 15%">
-								Nakliye Numarası
+								Sipariş Numarası
 							</th>
-							<th style="width: 35%">
+							<th style="width: 25%">
 								Müşteri
-							</th>
-							<th style="width: 10%">
-								Sipariş
 							</th>
 							<th style="width: 15%">
 								Sevk Tarihi
 							</th>
-							<th style="width:15%">
+							<th style="width:20%">
 								Teslim Tarihi
 							</th>
-							<th class="width:14%">
+							<th style="width:15%">
+								Teslim Durumu
+							</th>
+							<th>
 								Göster
 							</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<a>
-									1212313
-								</a>
-							</td>
-							<td>
-								<a>
-									Test Müşterisi
-								</a>
-							</td>
-							<td>
-								<a>
-									213123
-								</a>
-							</td>
-							
-							<td>
-								<a>
-									29/05/23 10:32:21
-								</a>
-							</td>
-							<td>
-								<a>
-									22/05/23 12:32:21
-								</a>
-							</td>
-							<td>
-								<a class="btn btn-info btn-sm" href="#">
-									<i class="fa fa-eye"></i>
-									Göster
-								</a>
-							</td>
-						</tr>
+						@foreach (var item in Model.Satislar)
+						{
+							<tr>
+								<td>
+									@item.SatisID
+								</td>
+								<td>
+									@item.MusteriID
+								</td>
+								<td>
+									@item.SevkTarihi
+								</td>
+								<td>
+									@item.TeslimatTarihi
+								</td>
+								<td>
+									@if (@item.TeslimatTarihi != null)
+									{
+										<i class="icon fas fa-check text-success"></i>
+									}
+								</td>
+
+								<td>
+									<a class="btn btn-info btn-sm" href="#">
+										<i class="fa fa-eye"></i>
+										Göster
+									</a>
+								</td>
+							</tr>
+
+						}
 					</tbody>
 
 				</table>
@@ -193,25 +185,25 @@
 </div>
 
 @section Scripts{
-		<script>
-			$(function () {
-				//Date picker
-				$('#reservationdate').datetimepicker({
-					format: 'L'
-				});
+	<script>
+		$(function () {
+			//Date picker
+			$('#reservationdate').datetimepicker({
+				format: 'L'
+			});
 
-				//Date and time picker
-				$('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+			//Date and time picker
+			$('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
 
-				//Date picker
-				$('#reservationdates').datetimepicker({
-					format: 'L'
-				});
+			//Date picker
+			$('#reservationdates').datetimepicker({
+				format: 'L'
+			});
 
-				//Date and time picker
-				$('#reservationdatetimes').datetimepicker({ icons: { time: 'far fa-clock' } });
+			//Date and time picker
+			$('#reservationdatetimes').datetimepicker({ icons: { time: 'far fa-clock' } });
 
-			})
-		</script>
+		})
+	</script>
 
 }

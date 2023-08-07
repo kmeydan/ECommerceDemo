@@ -1,0 +1,88 @@
+﻿@{
+	ViewData["Title"] = "BannerEdit";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">Banner Yönetimi</h1>
+				</div><!-- /.col -->
+				<div class="col-sm-6">
+					<ul class="breadcrumb float-sm-right">
+						<a asp-action="NewBannerImg" asp-controller="Admin" class="btn btn-success btn-sm">
+							<i class="fa fa-plus-square"></i>
+							Yeni Ekle
+						</a>
+
+					</ul>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- Search Customer -->
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="col-12 col-lg-12">
+				<div class="card card-primary card-outline card-outline-tabs">
+					<div class="card-header p-0 border-bottom-0">
+						<ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Resimler</a>
+							</li>
+
+
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="tab-content" id="custom-tabs-four-tabContent">
+							<div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+								<div class="card">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th style="width:20%">Resim</th>
+												<th style="width:20%">Resim Boyutları</th>
+												<th style="width:30%">Etkin Mi</th>
+												<th>Düzenle</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><img class="img-fluid" src="~/img/carousel-1.jpg" /></td>
+												<td>Yükseklik : 1328px <br /> Genişlik : 500px</td>
+												<td>
+													<i class="icon fas fa-check text-success"></i>
+												</td>
+												<td>
+													<a asp-action="NewBannerImg" asp-route-id="1" asp-controller="Admin" class="btn btn-info btn-sm justify-content-center align-items-center">
+														<i class="fas fa-pencil-alt">
+														</i>
+														Düzenle
+													</a>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!-- /.card -->
+				</div>
+			</div>
+
+
+			<!-- /.row -->
+
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+</div>
+
