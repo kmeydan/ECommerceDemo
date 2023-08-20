@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
+@model BannerViewModel
+@{
 	ViewData["Title"] = "BannerEdit";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -46,26 +48,32 @@
 										<thead>
 											<tr>
 												<th style="width:20%">Resim</th>
+												<th style="width:20%">Slider Name</th>
 												<th style="width:20%">Resim Boyutları</th>
 												<th style="width:30%">Etkin Mi</th>
 												<th>Düzenle</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td><img class="img-fluid" src="~/img/carousel-1.jpg" /></td>
-												<td>Yükseklik : 1328px <br /> Genişlik : 500px</td>
-												<td>
-													<i class="icon fas fa-check text-success"></i>
-												</td>
-												<td>
-													<a asp-action="NewBannerImg" asp-route-id="1" asp-controller="Admin" class="btn btn-info btn-sm justify-content-center align-items-center">
-														<i class="fas fa-pencil-alt">
-														</i>
-														Düzenle
-													</a>
-												</td>
-											</tr>
+											@foreach (var item in Model.Banner)
+											{
+												<tr>
+													<td><img class="img-fluid" src="~/img/carousel-1.jpg" /></td>
+													<td>@item.SliderName</td>
+													<td>Yükseklik : 1328px <br /> Genişlik : 500px</td>
+													<td>
+														<i class="icon fas fa-check text-success"></i>
+													</td>
+													<td>
+														<a asp-action="BannerImgEdit" asp-route-id="1" asp-controller="Admin" class="btn btn-info btn-sm justify-content-center align-items-center">
+															<i class="fas fa-pencil-alt">
+															</i>
+															Düzenle
+														</a>
+													</td>
+												</tr>
+
+											}
 
 										</tbody>
 									</table>

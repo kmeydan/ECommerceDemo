@@ -1,8 +1,8 @@
 ﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
 @model BannerViewEdit
 @{
-	ViewData["Title"] = "NewBannerImg";
-	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "BannerImgEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="content-wrapper">
@@ -23,9 +23,13 @@
 			<div class="col-md-12">
 				<div class="card card-primary card-outline card-tabs">
 					<div class="card-header">
-						<h3 class="card-title">Görsel Ekle</h3>
+						<h3 class="card-title">Düzenle</h3>
 					</div>
 					<div class="card-body">
+						<div class="form-group">
+							<label for="inputName">Slider Name</label>
+							<input type="text" id="inputName" class="form-control" value="@Model.SliderName">
+						</div>
 						<div class="form-group">
 							<label for="inputName">Banner Url</label>
 							<input type="text" id="inputName" class="form-control" value="@Model.SliderLink">
@@ -39,15 +43,13 @@
 							<div class="input-group">
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" id="exampleInputFile">
-									<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+									<label class="custom-file-label" for="exampleInputFile">Dosya Yükle</label>
 								</div>
-								<div class="input-group-append">
-									<span class="input-group-text">Upload</span>
-								</div>
+								
 							</div>
 						</div>
 						<div class="form-check">
-							@if (Model.SliderActive==true)
+							@if (Model.SliderActive == true)
 							{
 								<input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
 								<label class="form-check-label" for="exampleCheck1">Görsel Aktif Mi?</label>
@@ -59,7 +61,8 @@
 							}
 
 						</div>
-						<button type="submit" class="btn btn-success mt-3">Ekle</button>
+						<button type="submit" class="btn btn-success mt-3">Düzenle</button>
+						<a class="btn btn-danger mt-3" asp-action="BannerEdit" asp-controller="Admin" asp-route-id="@Model.SliderPossition">İptal</a>
 					</div>
 					<!-- /.card-body -->
 				</div>
@@ -75,11 +78,11 @@
 </div>
 
 @section Scripts{
-	
+
 	<!-- bs-custom-file-input -->
 	<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-	
-	
+
+
 	<script>
 		$(function () {
 			bsCustomFileInput.init();

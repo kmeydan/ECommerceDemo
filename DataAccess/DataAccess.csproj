@@ -115,6 +115,8 @@
     <Compile Include="Abstract\IDal\ClassIDal\IArananKelimeDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\IOdemeTipiDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ISiparisDurumlarıDal.cs" />
+    <Compile Include="Abstract\IDal\ClassIDal\ISliderDal.cs" />
+    <Compile Include="Abstract\IDal\ClassIDal\ISliderPossitionDal.cs" />
     <Compile Include="ComplexType\AdminIndexMiktarinaGoreViewModel.cs" />
     <Compile Include="ComplexType\AdminIndexOdemeDurumuToplam.cs" />
     <Compile Include="ComplexType\AdminIndexPopulerArananKelimeler.cs" />
@@ -132,11 +134,16 @@
     <Compile Include="Concrete\Dal\ClassDal\OdemeTipiDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\SatısDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\SiparisDurumlariDal.cs" />
+    <Compile Include="Concrete\Dal\ClassDal\SliderDal.cs" />
+    <Compile Include="Concrete\Dal\ClassDal\SliderPossitionDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\TedarikciDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\UrunDal.cs" />
     <Compile Include="EfNorthwindContext.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Nwind\ArananKelime.cs" />
+    <Compile Include="Entities\Nwind\Carousel.cs" />
+    <Compile Include="Entities\Nwind\CarouselPossition.cs" />
+    <Compile Include="Entities\Nwind\CarouselUrun.cs" />
     <Compile Include="Entities\Nwind\Kategori.cs" />
     <Compile Include="Entities\Nwind\Musteri.cs" />
     <Compile Include="Entities\Nwind\OdemeDurumu.cs" />
@@ -144,6 +151,8 @@
     <Compile Include="Entities\Nwind\Satis.cs" />
     <Compile Include="Entities\Nwind\SatisDetaylari.cs" />
     <Compile Include="Entities\Nwind\SiparisDurumu.cs" />
+    <Compile Include="Entities\Nwind\Slider.cs" />
+    <Compile Include="Entities\Nwind\SliderPossition.cs" />
     <Compile Include="Entities\Nwind\Tedarikci.cs" />
     <Compile Include="Entities\Nwind\Urunler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

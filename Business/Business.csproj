@@ -140,6 +140,8 @@
     <Compile Include="Abstract\IServices\IOdemeTipiServices.cs" />
     <Compile Include="Abstract\IServices\ISatısServices.cs" />
     <Compile Include="Abstract\IServices\ISiparisDurumlariServices.cs" />
+    <Compile Include="Abstract\IServices\ISliderPossitionServices.cs" />
+    <Compile Include="Abstract\IServices\ISliderServices.cs" />
     <Compile Include="Abstract\IServices\ITedarikciServices.cs" />
     <Compile Include="Abstract\IServices\IUrunlerServices.cs" />
     <Compile Include="Concrete\Services\ArananKelimeServices.cs" />
@@ -148,6 +150,8 @@
     <Compile Include="Concrete\Services\OdemeTipiServices.cs" />
     <Compile Include="Concrete\Services\SatısServices.cs" />
     <Compile Include="Concrete\Services\SiparisDurumlariServices.cs" />
+    <Compile Include="Concrete\Services\SliderPossitionServices.cs" />
+    <Compile Include="Concrete\Services\SliderServices.cs" />
     <Compile Include="Concrete\Services\TedarikciServices.cs" />
     <Compile Include="Concrete\Services\UrunlerServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

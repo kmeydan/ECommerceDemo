@@ -32,7 +32,9 @@ namespace ECommerceDemo.Controllers
 		private readonly ISatısServices satısServices;
 		private readonly ITedarikciServices tedarikciServices;
 		private readonly IArananKelimeServices arananKelimeServices;
-		public AdminController(ICategoryServices categoryServices, IUrunlerServices urunlerServices, IMusteriServices musteriServices, ISatısServices satısServices, ITedarikciServices tedarikciServices, IArananKelimeServices arananKelimeServices, ISiparisDurumlariServices siparisDurumlariServices, IOdemeTipiServices odemeTipiServices = null)
+		private readonly ISliderPossitionServices sliderPossitionServices;
+		private readonly ISliderServices sliderServices;
+		public AdminController(ICategoryServices categoryServices, IUrunlerServices urunlerServices, IMusteriServices musteriServices, ISatısServices satısServices, ITedarikciServices tedarikciServices, IArananKelimeServices arananKelimeServices, ISiparisDurumlariServices siparisDurumlariServices, IOdemeTipiServices odemeTipiServices = null, ISliderPossitionServices sliderPossitionServices = null, ISliderServices sliderServices = null)
 		{
 			this.categoryServices = categoryServices;
 			this.urunlerServices = urunlerServices;
@@ -42,6 +44,8 @@ namespace ECommerceDemo.Controllers
 			this.arananKelimeServices = arananKelimeServices;
 			this.siparisDurumlariServices = siparisDurumlariServices;
 			this.odemeTipiServices = odemeTipiServices;
+			this.sliderPossitionServices = sliderPossitionServices;
+			this.sliderServices = sliderServices;
 		}
 
 		[HttpGet]
@@ -383,20 +387,46 @@ namespace ECommerceDemo.Controllers
 		//Banner Yönetimi
 		public IActionResult Banner()
 		{
+			var model = new BannerViewModel
+			{
+				BannerPossition = sliderPossitionServices.GetAll()
+			};
 
-			return View();
+			return View(model);
 		}
-		public IActionResult BannerEdit()
+		public IActionResult BannerEdit(int id)
 		{
-			return View();
+			var result=sliderServices.SliderPossitionGet(id);
+			var model = new BannerViewModel
+			{
+				Banner = result
+			};
+			return View(model);
 		}
-		public IActionResult NewBannerImg()
+		public IActionResult BannerImgEdit(int id)
 		{
-			return View();
+			var result = sliderServices.Get(id);
+			var model = new BannerViewEdit
+			{
+				SliderAlt = result.SliderAlt,
+				SliderName = result.SliderName,
+				SliderLink = result.SliderLink,
+				SliderActive = result.SliderActive,
+				SliderPossition=result.SliderPossitionID
+			};
+			return View(model);
 		}
-		public IActionResult NewBanner()
+		public IActionResult NewBannerImg(int id)
 		{
-			return View();
+			var result=sliderServices.Get(id);
+			var model = new BannerViewEdit
+			{
+				SliderAlt=result.SliderAlt,
+				SliderName=result.SliderName,
+				SliderLink=result.SliderLink,
+				SliderActive=result.SliderActive
+			};
+			return View(model);
 		}
 		//End - Banner Yonetimi
 

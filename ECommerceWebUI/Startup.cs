@@ -50,6 +50,10 @@ namespace ECommerce
             services.AddScoped<IMusteriServices, MusteriServices>();
             services.AddScoped<ISatýsServices, SatýsServices>();
             services.AddScoped<ICategoryServices, CategoryServices>();
+            services.AddScoped<ISliderDal, SliderDal>();
+            services.AddScoped<ISliderServices, SliderServices>();
+            services.AddScoped<ISliderPossitionServices, SliderPossitionServices>();
+            services.AddScoped<ISliderPossitionDal, SliderPossitionDal>();
             services.AddSession();
             services.AddDistributedMemoryCache();
             services.AddDbContext<EfNorthwindContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));

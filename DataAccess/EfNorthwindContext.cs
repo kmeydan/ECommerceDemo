@@ -26,7 +26,11 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<OdemeTipi> OdemeTipi { get; set; }
         public DbSet<OdemeDurumu> OdemeDurumu { get; set; }
         public DbSet<ArananKelime> ArananKelime { get; set; }
-
+        public DbSet<Slider> Slider { get; set; }
+        public DbSet<SliderPossition> SliderPossition { get; set; }
+        public DbSet<Carousel> Carousel { get; set; }
+        public DbSet<CarouselPossition> CarouselPossition { get; set; }
+        public DbSet<CarouselUrun> CarouselUrun { get; set; }
 
     }
 }
