@@ -13,11 +13,14 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
+using System.Threading.Tasks;
 using System.Web.Helpers;
 
 namespace ECommerceDemo.Controllers
@@ -114,31 +117,31 @@ namespace ECommerceDemo.Controllers
 		public IActionResult ProductList()
 		{
 			var model = new AdminProductListViewModel();
-			model.Kategoriler = categoryServices.GetAll().Select(x => new SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString()}).ToList();
+			model.Kategoriler = categoryServices.GetAll().Select(x => new SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString() }).ToList();
 			model.YayınlanmaDurumu = new List<string> { "Seçiniz", "Aktif Ürünler", "Pasif Ürünler" };
 			model.UrunGorseli = new List<string> { "Seçiniz", "Görselli Ürünler", "Görselsiz Ürünler" };
 			model.Urunler = urunlerServices.GetAll().OrderBy(x => x.UrunAdi).ToList();
-			
+
 			return View(model);
 		}
 		[HttpPost]
 		[Route("/Admin/Product/List")]
-		public IActionResult ProductList(string un,string ub,int k,int yd, int ug)
+		public IActionResult ProductList(string un, string ub, int k, int yd, int ug)
 		{
 			var model = new AdminProductListViewModel();
-			model.Kategoriler = categoryServices.GetAll().Select(x => new SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString()}).ToList();
+			model.Kategoriler = categoryServices.GetAll().Select(x => new SelectListItem { Text = x.KategoriAdi, Value = x.KategoriID.ToString() }).ToList();
 			model.YayınlanmaDurumu = new List<string> { "Seçiniz", "Aktif Ürünler", "Pasif Ürünler" };
 			model.UrunGorseli = new List<string> { "Seçiniz", "Görselli Ürünler", "Görselsiz Ürünler" };
 
-			if (un!=null)
+			if (un != null)
 			{
 				model.Urunler = urunlerServices.GetAll().Where(x => x.UrunAdi.ToLower() == un.ToLower() || x.UrunAdi.ToLower().StartsWith(un.ToLower().Substring(0))).ToList();
 			}
-			else if (ub!=null)
+			else if (ub != null)
 			{
-				model.Urunler = urunlerServices.GetAll().Where(x=>x.Barkod==ub).ToList();
+				model.Urunler = urunlerServices.GetAll().Where(x => x.Barkod == ub).ToList();
 			}
-			else if (k!=0)
+			else if (k != 0)
 			{
 				model.Urunler = urunlerServices.GetAll().Where(x => x.KategoriID == k).ToList();
 			}
@@ -153,9 +156,9 @@ namespace ECommerceDemo.Controllers
 					model.Urunler = urunlerServices.GetAll().Where(x => x.Sonlandi == true).ToList();
 				}
 			}
-			else if (ug!=0)
+			else if (ug != 0)
 			{
-				if (ug==1)
+				if (ug == 1)
 				{
 					model.Urunler = urunlerServices.GetAll().Where(x => x.GorselUrl != null).ToList();
 				}
@@ -350,7 +353,7 @@ namespace ECommerceDemo.Controllers
 		}
 		[Route("/Admin/Customer/List")]
 		[HttpPost]
-		public IActionResult CustomerList(DateTime? startdate,string email,string no,string name)
+		public IActionResult CustomerList(DateTime? startdate, string email, string no, string name)
 		{
 			var model = new CustomerListViewModel();
 			if (startdate != null)
@@ -366,7 +369,7 @@ namespace ECommerceDemo.Controllers
 			{
 				model.Customers = musteriServices.GetAll()
 					.Where(x => x.MusteriAdi == name || x.MusteriAdi.StartsWith(name.ToLower().Substring(0))).ToList();
-				
+
 			}
 			else if (no != null)
 			{
@@ -396,37 +399,138 @@ namespace ECommerceDemo.Controllers
 		}
 		public IActionResult BannerEdit(int id)
 		{
-			var result=sliderServices.SliderPossitionGet(id);
+			var result = sliderServices.SliderPossitionGet(id);
 			var model = new BannerViewModel
 			{
-				Banner = result
+				Banner = result,
+				PossitionID = id
 			};
 			return View(model);
 		}
 		public IActionResult BannerImgEdit(int id)
 		{
 			var result = sliderServices.Get(id);
-			var model = new BannerViewEdit
+			var model = new BannerView
 			{
+				SliderID = id,
 				SliderAlt = result.SliderAlt,
 				SliderName = result.SliderName,
 				SliderLink = result.SliderLink,
 				SliderActive = result.SliderActive,
-				SliderPossition=result.SliderPossitionID
+				SliderPossition = result.SliderPossitionID,
+				ImgName = result.SliderPhotoUrl
+
 			};
 			return View(model);
 		}
-		public IActionResult NewBannerImg(int id)
+		[HttpPost]
+		public async Task<IActionResult> BannerImgEdit(BannerView banner)
 		{
-			var result=sliderServices.Get(id);
-			var model = new BannerViewEdit
+			string imgName = string.Empty;
+			var result = sliderServices.Get(banner.SliderID);
+			if (!ModelState.IsValid)
 			{
-				SliderAlt=result.SliderAlt,
-				SliderName=result.SliderName,
-				SliderLink=result.SliderLink,
-				SliderActive=result.SliderActive
+				return View(banner);
+			}
+			if (banner == null)
+			{
+				ModelState.AddModelError("", "Model Getirilemedi");
+			}
+			if (banner.Img != null)
+			{
+
+				if (banner.Img.Length > 10485760)
+				{
+					ModelState.AddModelError("", "Resim Dosyası 10 Mbdan büyük olamaz.");
+					return View(banner);
+				}
+
+				var uzanti = Path.GetExtension(banner.Img.FileName);
+				imgName = Guid.NewGuid().ToString() + uzanti;
+				var filepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Img", imgName);
+				using (var stream = new FileStream(filepath, FileMode.Create))
+				{
+					await banner.Img.CopyToAsync(stream);
+				}
+			}
+
+
+			result.SliderActive = banner.SliderActive;
+			result.SliderAlt = banner.SliderAlt;
+			result.SliderLink = banner.SliderLink;
+			result.SliderName = banner.SliderName;
+			if (banner.Img == null){}
+			else{result.SliderPhotoUrl = imgName;}
+
+
+			sliderServices.Update(result);
+
+			return RedirectToAction("Banner");
+		}
+		public IActionResult BannerDelete(int id)
+		{
+			var model=sliderServices.Get(id);
+			sliderServices.Delete(model);
+			return RedirectToAction("Banner");
+		}
+		public IActionResult NewBannerImg(int id)//possition id
+		{
+			var model = new BannerView
+			{
+				SliderPossition = id
 			};
 			return View(model);
+		}
+		[HttpPost]
+		public async Task<IActionResult> NewBannerImg(BannerView banner)//possition id
+		{
+			string imgName = string.Empty;
+
+			if (!ModelState.IsValid)
+			{
+				return View(banner);
+			}
+			if (banner == null)
+			{
+				ModelState.AddModelError("", "Model Getirilemedi");
+			}
+			if (banner.Img == null)
+			{
+				ModelState.AddModelError("", "Lütfen Görsel Ekleyin");
+				return View(banner);
+			}
+
+			if (banner.Img != null)
+			{
+
+				if (banner.Img.Length > 10485760)
+				{
+					ModelState.AddModelError("", "Resim Dosyası 10 Mbdan büyük olamaz.");
+					return View(banner);
+				}
+
+				var uzanti = Path.GetExtension(banner.Img.FileName);
+				imgName = Guid.NewGuid().ToString() + uzanti;
+				var filepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Img", imgName);
+				using (var stream = new FileStream(filepath, FileMode.Create))
+				{
+					await banner.Img.CopyToAsync(stream);
+				}
+			}
+
+			var model = new Slider
+			{
+				SliderActive = banner.SliderActive,
+				SliderAlt = banner.SliderAlt,
+				SliderLink = banner.SliderLink,
+				SliderName = banner.SliderName,
+				SliderPhotoUrl = imgName,
+				SliderPossitionID = banner.SliderPossition,
+			};
+
+			sliderServices.Add(model);
+
+			return RedirectToAction("Banner");
 		}
 		//End - Banner Yonetimi
 
