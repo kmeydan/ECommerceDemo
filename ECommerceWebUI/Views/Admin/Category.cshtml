@@ -14,7 +14,7 @@
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ul class="breadcrumb float-sm-right">
-						<a href="#" class="btn btn-success btn-sm">
+						<a asp-action="AddCategory" asp-controller="Admin" class="btn btn-success btn-sm">
 							<i class="fa fa-plus-square"></i>
 							Yeni Ekle
 						</a>
@@ -34,6 +34,7 @@
 				<h3 class="card-title">Arama</h3>
 			</div>
 			<form asp-action="Category" asp-controller="Admin" method="post">
+				<div asp-validation-summary="All"></div>
 
 				<div class="card-body row">
 					<div class="col-lg-4">
@@ -112,7 +113,7 @@
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-info btn-sm" href="#" @item.KategoriID>
+									<a class="btn btn-info btn-sm" asp-action="UpdateCategory" asp-controller="Admin" asp-route-categoryId="@item.KategoriID">
 										<i class="fas fa-pencil-alt">
 										</i>
 										Düzenle

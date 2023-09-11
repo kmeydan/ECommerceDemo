@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities.Nwind;
+﻿using DataAccess.ComplexType.Home;
+using DataAccess.Entities.Nwind;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Business.Abstract.IServices
 	{
 		List<Urunler> KategoriyeGoreUrunler(int id);
 		List<Urunler> FiyataGoreUrunler(int min,int max);
+		List<EnCokSatanlarListViewModel> EnCokSatanlar();
     }
 }

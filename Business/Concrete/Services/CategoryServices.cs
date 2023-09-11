@@ -11,45 +11,51 @@ using System.Web.Mvc;
 
 namespace Business.Concrete.Services
 {
-    public class CategoryServices : ICategoryServices
-    {
-        private readonly ICategoryDal categoryDal;
+	public class CategoryServices : ICategoryServices
+	{
+		private readonly ICategoryDal categoryDal;
 
-        public CategoryServices(ICategoryDal categoryDal)
-        {
-            this.categoryDal = categoryDal;
-        }
+		public CategoryServices(ICategoryDal categoryDal)
+		{
+			this.categoryDal = categoryDal;
+		}
 
-        public void Add(Kategori entity)
-        {
-            categoryDal.Add(entity);
-        }
+		public void Add(Kategori entity)
+		{
+			entity.OlusturulmaTarihi = DateTime.Now;
+			categoryDal.Add(entity);
+		}
 
-        public void Delete(Kategori entity)
-        {
-            categoryDal.Delete(entity);
-        }
+		public void Delete(Kategori entity)
+		{
+			categoryDal.Delete(entity);
+		}
 
-        public Kategori Get(int id)
-        {
-            return categoryDal.Get(id);
-        }
+		public Kategori Get(int id)
+		{
+			return categoryDal.Get(id);
+		}
 
-        public List<Kategori> GetAll()
-        {
-            return categoryDal.GetAll();
-        }
+		public List<Kategori> GetAll()
+		{
+			return categoryDal.GetAll();
+		}
+
+		public List<SelectListItem> GetSelectListItem()
+		{
+			return categoryDal.GetEx(x=>x.KategoriID>0).Select(x=>new SelectListItem { Text=x.KategoriAdi,Value=x.KategoriID.ToString()}).ToList();
+		}
 
 		public List<Kategori> IdyeGoreKategoriGetir(int id)
 		{
-            return categoryDal.GetEx(x => x.KategoriID == id).ToList();
+			return categoryDal.GetEx(x => x.KategoriID == id).ToList();
 		}
 
 		public void Update(Kategori entity)
-        {
-            categoryDal.Update(entity);
-        }
+		{
+			categoryDal.Update(entity);
+		}
 
-		
+
 	}
 }

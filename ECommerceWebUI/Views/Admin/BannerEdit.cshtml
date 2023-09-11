@@ -46,9 +46,9 @@
 									<table class="table table-bordered">
 										<thead>
 											<tr>
-												<th style="width:20%">Resim</th>
+												<th style="width:20%">Küçük Resim</th>
 												<th style="width:20%">Slider Name</th>
-												<th style="width:20%">Resim Boyutları</th>
+												<th style="width:20%">Slider Açıklamaları</th>
 												<th style="width:20%">Etkin Mi</th>
 												<th>Düzenle</th>
 											</tr>
@@ -59,10 +59,10 @@
 
 												<tr>
 													<td>
-														<img class="img-fluid" src="~/img/@item.SliderPhotoUrl">
+														<img class="img-fluid" style="width:30%" src="~/img/@item.SliderPhotoUrl">
 													</td>
 													<td>@item.SliderName</td>
-													<td>Yükseklik : 1328px <br /> Genişlik : 500px</td>
+													<td>@item.SliderAlt</td>
 													<td>
 														@if (item.SliderActive == true)
 														{

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract.IServices;
 using DataAccess.Abstract.IDal.ClassIDal;
+using DataAccess.ComplexType.Home;
 using DataAccess.Entities.Nwind;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,11 @@ namespace Business.Concrete.Services
 		public void Delete(Urunler entity)
 		{
 			urunDal.Delete(entity);
+		}
+
+		public List<EnCokSatanlarListViewModel> EnCokSatanlar()
+		{
+			return urunDal.EnCokSatanlar();
 		}
 
 		public List<Urunler> FiyataGoreUrunler(int min, int max)

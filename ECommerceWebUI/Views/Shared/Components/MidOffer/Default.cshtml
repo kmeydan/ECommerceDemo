@@ -1,0 +1,46 @@
+﻿@model HomeBannerOfferViewModel
+
+@{
+	Layout = null;
+}
+
+<div class="container-fluid pt-5 pb-3">
+	<div class="row px-xl-5">
+		@foreach (var item in Model.MidOffer1)
+		{
+			@if (item.SliderActive)
+			{
+					   <div class="col-md-6">
+							<div class="product-offer mb-30" style="height: 300px;">
+								<img class="img-fluid" src="img/@item.SliderPhotoUrl" alt="">
+								<div class="offer-text">
+									<h6 class="text-white text-uppercase">@item.SliderName</h6>
+									<h3 class="text-white mb-3">@item.SliderAlt</h3>
+									<a href="@item.SliderLink" class="btn btn-primary">Şimdi Alışveriş</a>
+								</div>
+							</div>
+						</div>  
+			}
+			break;
+
+		}
+		@foreach (var item in Model.MidOffer2)
+		{
+			@if (item.SliderActive)
+			{
+					   <div class="col-md-6">
+							<div class="product-offer mb-30" style="height: 300px;">
+								<img class="img-fluid" src="img/@item.SliderPhotoUrl" alt="">
+								<div class="offer-text">
+									<h6 class="text-white text-uppercase">@item.SliderName</h6>
+									<h3 class="text-white mb-3">@item.SliderAlt</h3>
+									<a href="@item.SliderLink" class="btn btn-primary">Şimdi Alışveriş</a>
+								</div>
+							</div>
+						</div>  
+			}
+			break;
+
+		}
+	</div>
+</div>

@@ -31,11 +31,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Extensions.Microsoft.DependencyInjection, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.Extensions.Microsoft.DependencyInjection.3.1.0\lib\netstandard2.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.0.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore, Version=3.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.EntityFrameworkCore.3.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
@@ -64,6 +73,9 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=3.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyModel.2.0.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Logging, Version=3.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.3.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
     </Reference>
@@ -75,6 +87,9 @@
     </Reference>
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -117,16 +132,17 @@
     <Compile Include="Abstract\IDal\ClassIDal\ISiparisDurumlarıDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ISliderDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ISliderPossitionDal.cs" />
-    <Compile Include="ComplexType\AdminIndexMiktarinaGoreViewModel.cs" />
-    <Compile Include="ComplexType\AdminIndexOdemeDurumuToplam.cs" />
-    <Compile Include="ComplexType\AdminIndexPopulerArananKelimeler.cs" />
-    <Compile Include="ComplexType\AdminIndexViewModel.cs" />
+    <Compile Include="ComplexType\Admin\AdminIndexMiktarinaGoreViewModel.cs" />
+    <Compile Include="ComplexType\Admin\AdminIndexOdemeDurumuToplam.cs" />
+    <Compile Include="ComplexType\Admin\AdminIndexPopulerArananKelimeler.cs" />
+    <Compile Include="ComplexType\Admin\AdminIndexViewModel.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ICategoryDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\IMusteriDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ISatısDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\ITedarikciDal.cs" />
     <Compile Include="Abstract\IDal\ClassIDal\IUrunDal.cs" />
     <Compile Include="Abstract\IDal\IRepository.cs" />
+    <Compile Include="ComplexType\Home\EnCokSatanlarListViewModel.cs" />
     <Compile Include="Concrete\Dal\BaseRepository.cs" />
     <Compile Include="Concrete\Dal\ClassDal\ArananKelimeDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\CategoryDal.cs" />

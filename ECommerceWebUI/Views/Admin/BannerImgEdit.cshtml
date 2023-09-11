@@ -50,8 +50,19 @@
 									</div>
 									<br />
 								}
+								@if (Model.SliderPossition == 1)
+								{
+									<label for="exampleInputFile">Görsel Yükle (1175px x 430px)</label>
+								}
+								else if (Model.SliderPossition == 2 || Model.SliderPossition == 3)
+								{
+									<label for="exampleInputFile">Görsel Yükle (572px x 200px)</label>
+								}
+								else if(Model.SliderPossition==4 || Model.SliderPossition==5)
+								{
+									<label for="exampleInputFile">Görsel Yükle (873px x 300px)</label>
 
-								<label for="exampleInputFile">Görsel Yükle</label>
+								}
 								<div class="input-group">
 									<div class="custom-file">
 										<input type="file" class="custom-file-input" id="exampleInputFile" asp-for="@Model.Img">
@@ -84,7 +95,7 @@
 @section Scripts{
 	<!-- bs-custom-file-input -->
 	<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-	
+
 	<script>
 		$(function () {
 			bsCustomFileInput.init();

@@ -3,7 +3,9 @@ using DataAccess.Concrete.Dal.ClassDal;
 using DataAccess.Entities.Nwind;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel;
+using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Catalog;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Orders;
+using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Product;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -94,7 +96,6 @@ namespace ECommerceDemo.Controllers
 					Miktar = x.Miktar,
 					TotalFiyat = x.TotalFiyat
 				}).OrderByDescending(x => x.TotalFiyat).Take(5).ToList(),
-				//Odeme Durumu Toplam ((bunları grupla!!!) veritabanında
 				SiparisDurumunaGore = satısServices.AdminIndexOdemeDurumuToplam().Select(x => new SiparisDurumunaGore
 				{
 					TotalRakam = x.TotalTutar,
@@ -173,6 +174,15 @@ namespace ECommerceDemo.Controllers
 			}
 			return View(model);
 		}
+		public IActionResult AddProduct()
+		{
+			var result = categoryServices.GetAll();
+			var model=new ProductViewModel
+			{
+				
+			}
+			return View();
+		}
 		[Route("/Admin/Product/Category")]
 		[HttpGet]
 		public IActionResult Category()
@@ -202,6 +212,135 @@ namespace ECommerceDemo.Controllers
 				Kategori = categoryServices.GetAll().Where(x => x.KategoriAdi.ToLower().Contains(name.ToLower())).ToList()
 			};
 			return View(model);
+		}
+		public IActionResult AddCategory()
+		{
+			return View(new CategoryViewModel());
+		}
+		[HttpPost]
+		public async Task<IActionResult> AddCategory(CategoryViewModel model)
+		{
+			string imgName = string.Empty;
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+			if (model == null)
+			{
+				ModelState.AddModelError("", "Model Getirilemedi");
+			}
+			if (model.GorselFile != null)
+			{
+
+				if (model.GorselFile.Length > 10485760)
+				{
+					ModelState.AddModelError("", "Resim Dosyası 10 Mbdan büyük olamaz.");
+					return View(model);
+				}
+
+				var uzanti = Path.GetExtension(model.GorselFile.FileName);
+				imgName = Guid.NewGuid().ToString() + uzanti;
+				var filepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Img\\Category", imgName);
+				using (var stream = new FileStream(filepath, FileMode.Create))
+				{
+					await model.GorselFile.CopyToAsync(stream);
+				}
+			}
+
+			var change = new Kategori()
+			{
+				Aktif = model.Aktif,
+				KategoriAdi = model.KategoriAdi,
+				ResimUrl = imgName,
+				Tanimi = model.Tanimi,
+
+
+			};
+
+			categoryServices.Add(change);
+
+			return RedirectToAction("Category");
+
+		}
+
+		public IActionResult UpdateCategory(int categoryId)
+		{
+
+			var result = categoryServices.Get(categoryId);
+
+			var model = new CategoryViewModel
+			{
+				KategoriID = result.KategoriID,
+				Aktif = result.Aktif,
+				KategoriAdi = result.KategoriAdi,
+				GorselUrl = result.ResimUrl,
+				Tanimi = result.Tanimi
+			};
+
+			return View(model);
+		}
+		[HttpPost]
+		public async Task<IActionResult> UpdateCategory(CategoryViewModel model)
+		{
+			string imgName = string.Empty;
+			var result = categoryServices.Get(model.KategoriID);
+			if (!ModelState.IsValid)
+			{
+				return View("Category");
+			}
+			if (model == null)
+			{
+				ModelState.AddModelError("", "Model Getirilemedi");
+			}
+			if (model.GorselFile != null)
+			{
+
+				if (model.GorselFile.Length > 10485760)
+				{
+					ModelState.AddModelError("", "Resim Dosyası 10 Mbdan büyük olamaz.");
+					return View("Category");
+				}
+
+				var uzanti = Path.GetExtension(model.GorselFile.FileName);
+				imgName = Guid.NewGuid().ToString() + uzanti;
+				var filepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Img\\Category", imgName);
+				using (var stream = new FileStream(filepath, FileMode.Create))
+				{
+					await model.GorselFile.CopyToAsync(stream);
+				}
+				result.ResimUrl= imgName;
+			}
+
+
+			result.Aktif = model.Aktif;
+			result.KategoriAdi = model.KategoriAdi;
+			result.Tanimi = model.Tanimi;
+			
+
+
+			categoryServices.Update(result);
+			ViewBag.Basarılı = "Başarılı bir şekilde güncellendi";
+			return RedirectToAction("Category");
+
+		}
+		public IActionResult DeleteCategory(int categoryId)
+		{
+			if (categoryId == null)
+			{
+				ModelState.AddModelError("", "CategoryId mevcut değil");
+				return RedirectToAction("Category");
+
+			}
+			else
+			{
+				var result = categoryServices.Get(categoryId);
+				if (result != null)
+				{
+					categoryServices.Delete(result);
+					return RedirectToAction("Category");
+				}
+			}
+			return RedirectToAction("Category");
 		}
 
 		[Route("/Admin/Product/Brands")]
@@ -459,8 +598,8 @@ namespace ECommerceDemo.Controllers
 			result.SliderAlt = banner.SliderAlt;
 			result.SliderLink = banner.SliderLink;
 			result.SliderName = banner.SliderName;
-			if (banner.Img == null){}
-			else{result.SliderPhotoUrl = imgName;}
+			if (banner.Img == null) { }
+			else { result.SliderPhotoUrl = imgName; }
 
 
 			sliderServices.Update(result);
@@ -469,7 +608,7 @@ namespace ECommerceDemo.Controllers
 		}
 		public IActionResult BannerDelete(int id)
 		{
-			var model=sliderServices.Get(id);
+			var model = sliderServices.Get(id);
 			sliderServices.Delete(model);
 			return RedirectToAction("Banner");
 		}

@@ -51,6 +51,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\DefaultImage\" />
+    <Folder Include="wwwroot\img\Category\" />
   </ItemGroup>
 
   <ItemGroup>

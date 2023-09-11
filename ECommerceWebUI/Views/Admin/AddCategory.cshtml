@@ -1,0 +1,83 @@
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Catalog;
+@model CategoryViewModel
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper" style="min-height: 498.4px;">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">Kategori Yönetimi</h1>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- Search Customer -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="col-md-12">
+				<div class="card card-primary card-outline card-tabs">
+					<div class="card-header">
+						<h3 class="card-title">Kategori Ekle</h3>
+					</div>
+					<div class="card-body">
+						<form enctype="multipart/form-data" method="post" asp-action="AddCategory" asp-controller="Admin">
+							<div class="validation-summary-valid" data-valmsg-summary="true">
+								<ul>
+									<li style="display:none"></li>
+								</ul>
+							</div>
+							<div class="form-group">
+								<label asp-for="@Model.KategoriAdi">Category Name</label>
+								<input type="text" asp-for="@Model.KategoriAdi" class="form-control">
+							</div>
+							<div class="form-group">
+								<label asp-for="@Model.Tanimi">Category Description</label>
+								<input type="text" class="form-control" asp-for="@Model.Tanimi">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputFile">Kategori Görseli (100px x 100px)</label>
+								<div class="input-group">
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" asp-for="@Model.GorselFile">
+										<label class="custom-file-label" asp-for="@Model.GorselFile">...</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" asp-for="@Model.Aktif">
+								<label class="form-check-label" asp-for="@Model.Aktif">Aktif Mi?</label>
+							</div>
+							<button type="submit" class="btn btn-success mt-3" method="post" asp-action="AddCategory">Ekle</button>
+
+							<a class="btn btn-danger mt-3" href="/Admin/Product/Category">İptal</a>
+						</form>
+
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+
+
+			<!-- /.row -->
+
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+</div>
+@section Scripts{
+	<!-- bs-custom-file-input -->
+	<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+	<script>
+		$(function () {
+			bsCustomFileInput.init();
+		});
+	</script>
+}

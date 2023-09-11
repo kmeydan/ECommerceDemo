@@ -22,5 +22,6 @@ namespace DataAccess.Entities.Nwind
         public short EnAzYenidenSatisMikatari { get; set; }
         public string GorselUrl { get; set; }
         public bool Sonlandi { get; set; }
+        public decimal? EskiSatisFiyati { get; set; }
     }
 }

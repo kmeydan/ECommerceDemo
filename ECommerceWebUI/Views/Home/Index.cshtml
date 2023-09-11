@@ -3,12 +3,7 @@
 	Layout = "_Layout";
 }
 <body>
-	@if (Html.Partial("_HomeTopCarouselPartial") != null)
-	{
-		@Html.Partial("_HomeTopCarouselPartial")
-
-	}
-
+	@await Component.InvokeAsync("Slider")
 	<!-- Featured Start -->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5 pb-3">
@@ -38,23 +33,16 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<!-- Featured End -->
-		@await Component.InvokeAsync("CategoryList")
-
-		<!-- BestSelling Products Start -->
-		@await Component.InvokeAsync("BestSellingProducts")
-		<!-- Products End -->
-	</div>
-
+	<!-- Featured End -->
+	@await Component.InvokeAsync("CategoryList")
+	<!-- BestSelling Products Start -->
+	@await Component.InvokeAsync("BestSellingProducts")
+	<!-- Products End -->
 	<!-- Offer Start -->
-	@Html.Partial("_HomeOfferBannerPartial")
+	@await Component.InvokeAsync("MidOffer")
 	<!-- Offer End -->
-	<div class="container">
-
 	<!-- Products Start -->
 	@Html.Partial("_HomeBottomProductsPartial")
 	<!-- Products End -->
-	</div>
 
 </body>

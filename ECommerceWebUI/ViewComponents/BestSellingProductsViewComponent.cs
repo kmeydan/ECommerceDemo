@@ -2,6 +2,7 @@
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
+using System.Linq;
 
 namespace ECommerceWebUI.ViewComponents
 {
@@ -16,9 +17,11 @@ namespace ECommerceWebUI.ViewComponents
 
 		public ViewViewComponentResult Invoke()
 		{
+
+
 			var model = new IndexBestSellerProductsListModel
 			{
-				Urunler = urunlerServices.GetAll()
+				Urunler = urunlerServices.EnCokSatanlar().Take(12).ToList()
 			};
 			
 			return View(model);
