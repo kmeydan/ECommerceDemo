@@ -51,6 +51,11 @@ namespace Business.Concrete.Services
 			return urunDal.GetAll();
 		}
 
+		public Urunler IsmeGoreUrunSorgu(string name)
+		{
+			return urunDal.GetEx(x => x.UrunAdi == name).FirstOrDefault();
+		}
+
 		public List<Urunler> KategoriyeGoreUrunler(int id)
 		{
 			return urunDal.GetEx(x=>x.KategoriID==id || id==0).ToList();

@@ -13,5 +13,6 @@ namespace Business.Abstract.IServices
 		List<Urunler> KategoriyeGoreUrunler(int id);
 		List<Urunler> FiyataGoreUrunler(int min,int max);
 		List<EnCokSatanlarListViewModel> EnCokSatanlar();
+		Urunler IsmeGoreUrunSorgu(string name);
     }
 }

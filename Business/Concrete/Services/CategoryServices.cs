@@ -41,11 +41,6 @@ namespace Business.Concrete.Services
 			return categoryDal.GetAll();
 		}
 
-		public List<SelectListItem> GetSelectListItem()
-		{
-			return categoryDal.GetEx(x=>x.KategoriID>0).Select(x=>new SelectListItem { Text=x.KategoriAdi,Value=x.KategoriID.ToString()}).ToList();
-		}
-
 		public List<Kategori> IdyeGoreKategoriGetir(int id)
 		{
 			return categoryDal.GetEx(x => x.KategoriID == id).ToList();

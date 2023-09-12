@@ -11,7 +11,6 @@ namespace Business.Abstract.IServices
     public interface ICategoryServices:IServices<Kategori>
     {
         List<Kategori> IdyeGoreKategoriGetir(int id);
-        List<SelectListItem> GetSelectListItem();
         
 
     }

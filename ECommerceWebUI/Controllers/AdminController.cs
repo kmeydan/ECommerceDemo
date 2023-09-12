@@ -174,14 +174,75 @@ namespace ECommerceDemo.Controllers
 			}
 			return View(model);
 		}
+		[HttpGet]
+		[Route("/Admin/Product/AddProduct")]
 		public IActionResult AddProduct()
 		{
-			var result = categoryServices.GetAll();
-			var model=new ProductViewModel
+			var model = new ProductViewModel
 			{
-				
+				Kategori = categoryServices.GetAll(),
+				Tedarikci = tedarikciServices.GetAll(),
+
+
+			};
+			return View(model);
+		}
+		[HttpPost]
+		[Route("/Admin/Product/AddProduct")]
+		public async Task<IActionResult> AddProduct(ProductViewModel productModel)
+		{
+			var imgName = string.Empty;
+			if (!ModelState.IsValid)
+			{
+				return View();
 			}
-			return View();
+			if (productModel == null)
+			{
+				ModelState.AddModelError("", "Model Getirilemedi.");
+				return View("AddProduct");
+			}
+			if (productModel.Gorsel != null)
+			{
+
+				if (productModel.Gorsel.Length > 10485760)
+				{
+					ModelState.AddModelError("", "Resim Dosyası 10 Mbdan büyük olamaz.");
+					return View("Category");
+				}
+
+				var uzanti = Path.GetExtension(productModel.Gorsel.FileName);
+				imgName = Guid.NewGuid().ToString() + uzanti;
+				var filepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Img\\Product", imgName);
+				using (var stream = new FileStream(filepath, FileMode.Create))
+				{
+					await productModel.Gorsel.CopyToAsync(stream);
+				}
+
+			}
+			var model = new Urunler
+			{
+				UrunAdi = productModel.UrunAdi,
+				Barkod = productModel.Barkod,
+				BirimFiyati = productModel.BirimFiyati,
+				GorselUrl = imgName,
+				HedefStokDuzeyi = (short)((productModel.HedefStokDuzeyi==0) ? 10:productModel.HedefStokDuzeyi),
+				Sonlandi= productModel.Sonlandi,
+				KategoriID= Convert.ToInt32(productModel.Kategori),
+				TedarikciID=Convert.ToInt32(productModel.Tedarikci),
+			};
+			urunlerServices.Add(model);
+			var result = urunlerServices.IsmeGoreUrunSorgu(productModel.UrunAdi);
+			if (result!=null)
+			{
+				ViewBag.Kayit = "KayıtBaşarılı";
+			}
+			else
+			{
+				ViewBag.Kayit = "KayıtBaşarısız";
+			}
+
+			return Redirect("ProductList");
+
 		}
 		[Route("/Admin/Product/Category")]
 		[HttpGet]
@@ -308,14 +369,14 @@ namespace ECommerceDemo.Controllers
 				{
 					await model.GorselFile.CopyToAsync(stream);
 				}
-				result.ResimUrl= imgName;
+				result.ResimUrl = imgName;
 			}
 
 
 			result.Aktif = model.Aktif;
 			result.KategoriAdi = model.KategoriAdi;
 			result.Tanimi = model.Tanimi;
-			
+
 
 
 			categoryServices.Update(result);
