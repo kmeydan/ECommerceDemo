@@ -25,7 +25,6 @@ namespace Business.Concrete.Services
 			entity.OlusturulmaTarihi = DateTime.Now;
 			categoryDal.Add(entity);
 		}
-
 		public void Delete(Kategori entity)
 		{
 			categoryDal.Delete(entity);

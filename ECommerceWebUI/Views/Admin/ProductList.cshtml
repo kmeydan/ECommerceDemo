@@ -5,7 +5,12 @@
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
+@{
+	if (ViewBag.Kayit!=null)
+	{
+		<h1>@ViewBag.Kayit</h1>
+	}
+}
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -174,9 +179,9 @@
 						{
 							<tr>
 								<td>
-									@if (urun.GorselUrl == null)
+									@if (urun.GorselUrl != null)
 									{
-										<img src="~/img/user.jpg" height="50px" width="50px" />
+										<img src="~/img/Product/@urun.GorselUrl" height="50px" width="50px" />
 
 									}
 								</td>
@@ -191,7 +196,7 @@
 									</a>
 								</td>
 								<td>
-									@if (urun.Sonlandi == false)
+									@if (urun.Sonlandi == true)
 									{
 										<i class="icon fas fa-check text-success"></i>
 

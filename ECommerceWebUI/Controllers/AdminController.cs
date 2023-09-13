@@ -181,7 +181,7 @@ namespace ECommerceDemo.Controllers
 			var model = new ProductViewModel
 			{
 				Kategori = categoryServices.GetAll(),
-				Tedarikci = tedarikciServices.GetAll(),
+				Tedarikci = tedarikciServices.GetAll()
 
 
 			};
@@ -194,12 +194,14 @@ namespace ECommerceDemo.Controllers
 			var imgName = string.Empty;
 			if (!ModelState.IsValid)
 			{
-				return View();
+				ModelState.AddModelError("", "Validasyon Hatası");
+				return RedirectToAction("ProductList");
 			}
 			if (productModel == null)
 			{
 				ModelState.AddModelError("", "Model Getirilemedi.");
-				return View("AddProduct");
+				return RedirectToAction("ProductList");
+
 			}
 			if (productModel.Gorsel != null)
 			{
@@ -207,7 +209,8 @@ namespace ECommerceDemo.Controllers
 				if (productModel.Gorsel.Length > 10485760)
 				{
 					ModelState.AddModelError("", "Resim Dosyası 10 Mbdan büyük olamaz.");
-					return View("Category");
+					return View();
+
 				}
 
 				var uzanti = Path.GetExtension(productModel.Gorsel.FileName);
@@ -227,8 +230,8 @@ namespace ECommerceDemo.Controllers
 				GorselUrl = imgName,
 				HedefStokDuzeyi = (short)((productModel.HedefStokDuzeyi==0) ? 10:productModel.HedefStokDuzeyi),
 				Sonlandi= productModel.Sonlandi,
-				KategoriID= Convert.ToInt32(productModel.Kategori),
-				TedarikciID=Convert.ToInt32(productModel.Tedarikci),
+				KategoriID= productModel.SelectCategory,
+				TedarikciID=productModel.SelectCategory,
 			};
 			urunlerServices.Add(model);
 			var result = urunlerServices.IsmeGoreUrunSorgu(productModel.UrunAdi);
@@ -241,7 +244,7 @@ namespace ECommerceDemo.Controllers
 				ViewBag.Kayit = "KayıtBaşarısız";
 			}
 
-			return Redirect("ProductList");
+			return RedirectToAction("ProductList");
 
 		}
 		[Route("/Admin/Product/Category")]

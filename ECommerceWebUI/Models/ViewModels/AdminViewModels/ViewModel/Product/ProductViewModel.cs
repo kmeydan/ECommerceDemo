@@ -11,12 +11,17 @@ namespace ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Product
 	{
 		public int UrunID { get; set; }
 		[Required(ErrorMessage ="İsim Alanı Zorunludur")]
-		[MaxLength(100,ErrorMessage ="En Fazla 100 Karakter Girebilirsin!")]
+		[MaxLength(40,ErrorMessage ="En Fazla 40 Karakter Girebilirsin!")]
 		public string UrunAdi { get; set; }
 		public List<Tedarikci> Tedarikci { get; set; }
 		public List<Kategori> Kategori { get; set; }
+		[Required(ErrorMessage = "Boş Geçilemez")]
+		public int SelectTedarikci { get; set; }
+		[Required(ErrorMessage = "Boş Geçilemez")]
+		public int SelectCategory { get; set; }
+		[MaxLength(20,ErrorMessage ="En fazla 20 karakter girebilirsin")]
 		public string Barkod { get; set; }
-		[Required]
+		[Required(ErrorMessage = "Boş Geçilemez")]
 		public decimal BirimFiyati { get; set; }
 		public short HedefStokDuzeyi { get; set; }
 		public short YeniSatis { get; set; }

@@ -34,9 +34,9 @@
 							</div>
 							<div class="form-group">
 								<div class="form-group">
-									<label>Kategori</label>
 
-									<select class="form-control">
+									<label>Kategori</label>
+									<select class="form-control" asp-for="SelectCategory">
 										<option>Seçiniz</option>
 										@foreach (var item in Model.Kategori)
 										{
@@ -51,7 +51,7 @@
 							<div class="form-group">
 								<div class="form-group">
 									<label asp-for="Tedarikci">Tedarikci</label>
-									<select class="form-control">
+									<select class="form-control" asp-for="SelectTedarikci">
 										<option>Seçiniz</option>
 										@foreach (var item in Model.Tedarikci)
 										{
