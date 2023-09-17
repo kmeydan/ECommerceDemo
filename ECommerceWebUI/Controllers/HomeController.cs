@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace ECommerce.Controllers
 {
@@ -109,7 +110,7 @@ namespace ECommerce.Controllers
 				CurrentPage = p
 			};
 			var json = JsonConvert.SerializeObject(model);
-			return Json(json);
+			return Json(model);
 		}
 		[HttpGet]
 		[Route("/Iletisim")]
@@ -117,5 +118,7 @@ namespace ECommerce.Controllers
 		{
 			return View();
 		}
+		
+
 	}
 }

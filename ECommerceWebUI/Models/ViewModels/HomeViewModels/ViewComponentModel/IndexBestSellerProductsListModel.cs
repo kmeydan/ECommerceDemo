@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel
 {
-	public class IndexBestSellerProductsListModel
+	public class IndexBestSellerProductsListModel 
 	{
-		public List<EnCokSatanlarListViewModel> Urunler{ get; set; }
+		public List<Urunler> Urunler{ get; set; }
 	}
 	
 }

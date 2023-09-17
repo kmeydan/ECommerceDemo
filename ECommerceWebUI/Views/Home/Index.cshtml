@@ -36,13 +36,13 @@
 	<!-- Featured End -->
 	@await Component.InvokeAsync("CategoryList")
 	<!-- BestSelling Products Start -->
-	@await Component.InvokeAsync("BestSellingProducts")
+	@await Component.InvokeAsync("NewestProducts")
 	<!-- Products End -->
 	<!-- Offer Start -->
 	@await Component.InvokeAsync("MidOffer")
 	<!-- Offer End -->
 	<!-- Products Start -->
-	@Html.Partial("_HomeBottomProductsPartial")
+	@await Component.InvokeAsync("BottomProducts")
 	<!-- Products End -->
 
 </body>

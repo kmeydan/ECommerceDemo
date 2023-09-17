@@ -6,24 +6,21 @@ using System.Linq;
 
 namespace ECommerceWebUI.ViewComponents
 {
-	public class BestSellingProductsViewComponent:ViewComponent
+	public class BottomProductsViewComponent:ViewComponent
 	{
 		private readonly IUrunlerServices urunlerServices;
 
-		public BestSellingProductsViewComponent(IUrunlerServices urunlerServices)
+		public BottomProductsViewComponent(IUrunlerServices urunlerServices)
 		{
 			this.urunlerServices = urunlerServices;
 		}
 
 		public ViewViewComponentResult Invoke()
 		{
-
-
 			var model = new IndexBestSellerProductsListModel
 			{
-				Urunler = urunlerServices.EnCokSatanlar().Take(12).ToList()
+				Urunler=urunlerServices.GetAll().OrderByDescending(x=>x.UrunID).Take(12).ToList(),
 			};
-			
 			return View(model);
 		}
 	}
