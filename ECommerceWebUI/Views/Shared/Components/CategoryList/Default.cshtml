@@ -12,9 +12,19 @@
 				<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
 					<a class="text-decoration-none" asp-action="Products" asp-route-c="@kategori.KategoriID">
 						<div class="cat-item d-flex align-items-center mb-4">
-							<div class="overflow-hidden" style="width: 100px; height: 100px;">
-								<img class="img-fluid" src="img/category/@kategori.ResimUrl" alt="">
-							</div>
+							@if (kategori.ResimUrl == null)
+							{
+								<div class="overflow-hidden">
+									<img class="img-fluid" style="width: 100px; height: 100px;" src="img/gorsel.png" alt="">
+								</div>
+							}
+							else
+							{
+								<div class="overflow-hidden">
+									<img class="img-fluid" style="width: 100px; height: 100px;" src="img/category/@kategori.ResimUrl" alt="">
+								</div>
+							}
+
 							<div class="flex-fill pl-3">
 								<h6>@kategori.KategoriAdi</h6>
 								<small class="text-body">123</small>

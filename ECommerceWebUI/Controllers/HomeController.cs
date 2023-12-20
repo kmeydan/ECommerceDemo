@@ -45,13 +45,13 @@ namespace ECommerce.Controllers
 		}
 		[HttpGet]
 		[Route("/Detay")]
-		public IActionResult ProductDetail(int id)
+		public IActionResult ProductDetail(int id=0)
 		{
 			var result = urunlerServices.Get(id);
 			if (result == null)
 			{
 				ModelState.AddModelError("", $"{id}' id ' ye sahip ürün stokta kalmamıştır.");
-				return View();
+				return RedirectToAction("Index");
 			}
 			var model = new ProductDetailViewModel
 			{
@@ -65,19 +65,18 @@ namespace ECommerce.Controllers
 		}
 		[HttpGet]
 		[Route("/Urunler")]
-		public IActionResult Products(int p = 1, int c = 0, int ps = 20 , int df=0)
+		public IActionResult Products(int p = 1, int c = 0, int ps = 60 , int df=0)
 		{
 			var result = urunlerServices.KategoriyeGoreUrunler(c).ToList();
-			var pagesize = ps;
 
 			var model = new UrunlerListViewModel
 			{
 				UrunlerMaksPrice = Convert.ToInt32(result.Max(x => x.BirimFiyati)),
 				UrunlerMinPrice = Convert.ToInt32(result.Min(x => x.BirimFiyati)),
 				Kategoriler = categoryServices.GetAll(),
-				Urunlers = result.Skip((p - 1) * pagesize).Take(pagesize).ToList(),
-				PageSize = pagesize,
-				PageCount = (int)Math.Ceiling(result.Count / (double)pagesize),
+				Urunlers = result.Skip((p - 1) * ps).Take(ps).ToList(),
+				PageSize = ps,
+				PageCount = (int)Math.Ceiling(result.Count / (double)ps),
 				CurrentCategory = c,
 				CurrentPage = p
 			};

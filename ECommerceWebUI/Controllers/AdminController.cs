@@ -7,6 +7,7 @@ using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Catalog;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Orders;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Product;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewComponentModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,10 +24,10 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 
 namespace ECommerceDemo.Controllers
 {
+	
 	public class AdminController : Controller
 	{
 		private readonly IOdemeTipiServices odemeTipiServices;

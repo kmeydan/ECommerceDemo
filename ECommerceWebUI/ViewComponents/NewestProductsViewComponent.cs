@@ -21,7 +21,7 @@ namespace ECommerceWebUI.ViewComponents
 
 			var model = new IndexBestSellerProductsListModel
 			{
-				Urunler = urunlerServices.GetAll().Where(x=>x.Sonlandi==true).OrderByDescending(x=>x.UrunID).ToList(),
+				Urunler = urunlerServices.GetAll().Where(x=>x.Sonlandi==true).OrderByDescending(x=>x.UrunID).Take(12).ToList(),
 			};
 			
 			return View(model);

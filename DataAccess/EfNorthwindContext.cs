@@ -32,5 +32,5 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<CarouselPossition> CarouselPossition { get; set; }
         public DbSet<CarouselUrun> CarouselUrun { get; set; }
 
-    }
+	}
 }

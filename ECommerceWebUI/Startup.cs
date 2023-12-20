@@ -5,6 +5,7 @@ using DataAccess.Abstract.Repository.ClassRepository;
 using DataAccess.Concrete.Dal.ClassDal;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.Repository.ClassRepository;
+using DataAccess.Entities.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,9 +58,12 @@ namespace ECommerce
             services.AddScoped<ISliderServices, SliderServices>();
             services.AddScoped<ISliderPossitionServices, SliderPossitionServices>();
             services.AddScoped<ISliderPossitionDal, SliderPossitionDal>();
-            services.AddSession();
-            services.AddDistributedMemoryCache();
             services.AddDbContext<EfNorthwindContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+
+
+
+
+
 
 
 
@@ -75,7 +82,6 @@ namespace ECommerce
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-			app.UseSession();
 
 			app.UseHttpsRedirection();
             app.UseStaticFiles();
