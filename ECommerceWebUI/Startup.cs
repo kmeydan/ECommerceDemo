@@ -20,6 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using ECommerceWebUI.Helpers;
+using Microsoft.Extensions.Options;
 
 namespace ECommerce
 {
@@ -37,6 +40,9 @@ namespace ECommerce
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
+            //AutoMapper
+            services.AddAutoMapper(x=>x.AddProfile<AutoMapperProfiles>());
+
             //Scoped
             services.AddScoped<IOdemeTipiDal, OdemeTipiDal>();
             services.AddScoped<IOdemeTipiServices, OdemeTipiServices>();
@@ -59,15 +65,34 @@ namespace ECommerce
             services.AddScoped<ISliderPossitionServices, SliderPossitionServices>();
             services.AddScoped<ISliderPossitionDal, SliderPossitionDal>();
             services.AddDbContext<EfNorthwindContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+            services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("identityConnection")));
+            services.AddIdentity<AppUser, AppRole>(opt =>
+            {
+                //Password
+                opt.Password.RequiredLength = 8;
+                opt.Password.RequireUppercase = true;
 
+                //Lockout
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                opt.Lockout.MaxFailedAccessAttempts = 5;
+                opt.Lockout.AllowedForNewUsers = true;
 
+            }).AddEntityFrameworkStores<AppDbContext>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/Home/Login";
 
+			});
 
-
-
-
-
-        }
+            //cors
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("AngularApp",
+                    builder => builder.WithOrigins("http://localhost:4200"));
+            });
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -85,7 +110,8 @@ namespace ECommerce
 
 			app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCors("AngularApp");
+            app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
 

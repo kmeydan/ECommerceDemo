@@ -16,7 +16,7 @@ namespace Business.Concrete.Services
 	{
 		private readonly IUrunDal urunDal;
 
-		public UrunlerServices(IUrunDal urunDal)
+        public UrunlerServices(IUrunDal urunDal)
 		{
 			this.urunDal = urunDal;
 		}

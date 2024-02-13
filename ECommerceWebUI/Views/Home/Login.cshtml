@@ -1,0 +1,55 @@
+﻿@model LoginViewModel
+@{
+	ViewData["Title"] = "Login";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="d-flex">
+	<div class="container-fluid">
+		<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Hoşgeldiniz Giriş Yap</span></h5>
+		<form asp-action="Login" method="post">
+			<div class="row px-xl-6 justify-content-center align-items-center">
+				<div class="col-lg-3">
+					<div class="col-lg-12">
+						<div class="bg-light p-30 mb-5">
+							<div class="row">
+								<div class="form-group col-md-12">
+									<label asp-for="Eposta" >E Posta</label>
+									<input class="form-control" type="text" asp-for="Eposta" placeholder="blabla@gmail.com">
+									<span asp-validation-for="Eposta"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label asp-for="Password">Şifre</label>
+									<input class="form-control" type="password" asp-for="Password" placeholder="********">
+									<span asp-validation-for="Password"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" asp-for="RememberMe">
+										<label class="custom-control-label" asp-for="RememberMe">Beni Hatırla</label>
+										<span asp-validation-for="RememberMe"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<button class="btn btn-block btn-primary font-weight-bold py-3" asp-action="Login" asp-controller="Home">Giriş Yap</button>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div class="col-md-12 form-group">
+				<a asp-action="Register" asp-controller="Home" class="btn btn-block btn-primary font-weight-bold py-3">Kayıt Ol</a>
+			</div>
+		</div>
+	</div>
+</div>
+

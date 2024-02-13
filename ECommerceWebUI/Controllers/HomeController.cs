@@ -1,8 +1,10 @@
 ﻿using Business.Abstract.IServices;
+using DataAccess.Entities.Identity;
 using DataAccess.Entities.Nwind;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ListModel;
 using ECommerceWebUI.Models.ViewModels.HomeViewModels.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
@@ -22,10 +24,16 @@ namespace ECommerce.Controllers
 		private readonly ICategoryServices categoryServices;
 		private readonly IUrunlerServices urunlerServices;
 
-		public HomeController(ICategoryServices categoryServices, IUrunlerServices urunlerServices)
+		//Account
+		private readonly SignInManager<AppUser> _signInManager;
+		private readonly UserManager<AppUser> _userManager;
+
+		public HomeController(ICategoryServices categoryServices, IUrunlerServices urunlerServices, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
 		{
 			this.categoryServices = categoryServices;
 			this.urunlerServices = urunlerServices;
+			_userManager = userManager;
+			_signInManager = signInManager;
 		}
 
 		public IActionResult Index()
@@ -110,6 +118,79 @@ namespace ECommerce.Controllers
 			};
 			var json = JsonConvert.SerializeObject(model);
 			return Json(model);
+		}
+		public IActionResult Login()
+		{
+			return View(new LoginViewModel());
+		}
+		[HttpPost]
+		public async Task<IActionResult> Login(LoginViewModel model)
+		{
+			var user= await _userManager.FindByEmailAsync(model.Eposta);
+			if (user == null)
+			{
+				ModelState.AddModelError("", "Kullanıcı Bulunamadı");
+				return View();
+			}
+			var result=await _signInManager.PasswordSignInAsync(user,model.Password, model.RememberMe,false);
+			if (result.Succeeded)
+			{
+				return RedirectToAction("Index", "Admin");
+			}
+			else
+			{
+				ModelState.AddModelError("", "Parola Hatalı");
+				return View();
+			}
+		}
+		public IActionResult Register()
+		{
+			return View(new RegisterViewModel());
+		}
+		[HttpPost]
+		public async Task<IActionResult> Register(RegisterViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View();
+			}
+			var resultEmail= await _userManager.FindByEmailAsync(model.Email);
+			var resultUserName = await _userManager.FindByNameAsync(model.Name);
+			if (resultUserName != null)
+			{
+				ModelState.AddModelError("", "Kullanıcı Adı Zaten Kullanılıyor");
+				return View();
+			}else if (resultEmail != null)
+			{
+				ModelState.AddModelError("", "E-Mail Zaten Kullanılıyor");
+				return View();
+			}
+			
+			
+			
+			var user = new AppUser()
+			{
+				Email = model.Email,
+				PhoneNumber = model.PhoneNumber,
+				UserName = model.Name,
+
+			};
+			var userResult=await _userManager.CreateAsync(user, model.Password);
+			if (userResult.Succeeded)
+			{
+				ViewBag.KayitDurumu = "Başarılı";
+			}
+			else
+			{
+				ViewBag.KayitDurumu = "Başarısız";
+			}
+			return View();
+		}
+		[HttpGet]
+		public async Task<IActionResult> Logout()
+		{
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Index","Home");
 		}
 		[HttpGet]
 		[Route("/Iletisim")]

@@ -43,11 +43,19 @@
 		</div>
 		<div class="col-lg-3 col-6 text-right">
 			<div class="dropdown">
-				<button class="btn btn-sm btn-light" data-toggle="dropdown"><i class="fa fa-user"></i>Kerem Demir</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Hesabım</a>
-					<a class="dropdown-item" href="#">Çıkış Yap</a>
-				</div>
+				@if (User.Identity.IsAuthenticated)
+				{
+					<button class="btn btn-sm btn-light" data-toggle="dropdown"><i class="fa fa-user mx-2"></i>@User.Identity.Name</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Hesabım</a>
+						<a class="dropdown-item" asp-action="Logout" asp-controller="Home">Çıkış Yap</a>
+					</div>
+				}
+				else
+				{
+					<a asp-action="Login" asp-controller="Home"  class="btn btn-sm btn-light"><i class="fa fa-user mx-2"></i> Giriş Yapınız | Kayıt Ol</a>
+				}
+
 			</div>
 
 		</div>

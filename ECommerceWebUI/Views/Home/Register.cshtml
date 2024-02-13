@@ -1,0 +1,57 @@
+﻿@model RegisterViewModel
+@{
+	ViewData["Title"] = "Register";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+	<div class="row px-xl-5 justify-content-center">
+		<div class="col-lg-5">
+			@ViewBag.KayitDurumu
+			<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Kayıt Ol</span></h5>
+			<form asp-action="Register" method="post" asp-controller="Home">
+				<div asp-validation-summary="All"> </div>
+				<div class="bg-light p-30 mb-5">
+					<div class="row">
+						<div class="col-md-6 form-group">
+							<label asp-for="Name">Kullanıcı Adı</label>
+							<input class="form-control" asp-for="Name" type="text" placeholder="Ahmet">
+						</div>
+						
+						<div class="col-md-6 form-group">
+							<label asp-for="Email">E-mail Adresi</label>
+							<input asp-for="Email" class="form-control" type="text" placeholder="blabla@email.com">
+						</div>
+						<div class="col-md-6 form-group">
+							<label asp-for="Password">Şifre <bold style="color:red">*</bold></label>
+							<input asp-for="Password" class="form-control" type="password" placeholder="***">
+						</div>
+						<div class="col-md-6 form-group">
+							<label asp-for="RePassword">Şifre Tekrarı <bold style="color:red">*</bold></label>
+							<input asp-for="RePassword" class="form-control" type="password" placeholder="***">
+						</div>
+						<div class="col-md-6 form-group">
+							<label asp-for="PhoneNumber">Telefon Numarası</label>
+							<input asp-for="PhoneNumber" class="form-control" type="text" placeholder="0530 ....">
+						</div>
+						
+						<div class="col-md-12 form-group">
+							<div class="custom-control custom-checkbox">
+								<input asp-for="GizlilikSozlesmesi" type="checkbox" class="custom-control-input">
+								<label asp-for="GizlilikSozlesmesi" class="custom-control-label">Gizlilik Sözleşmesini Kabul Ediyorum</label>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="custom-control custom-checkbox">
+								<input asp-for="KVKK" type="checkbox" class="custom-control-input" >
+								<label asp-for="KVKK" class="custom-control-label">Üyelik ve KVKK Rıza Beyanını okudum,onaylıyorum.</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-block btn-primary font-weight-bold py-3">Kayıt Ol</button>
+			</form>
+		</div>
+	</div>
+</div>
+

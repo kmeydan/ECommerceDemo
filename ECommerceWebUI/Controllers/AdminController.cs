@@ -1,4 +1,5 @@
-﻿using Business.Abstract.IServices;
+﻿using Business;
+using Business.Abstract.IServices;
 using DataAccess.Concrete.Dal.ClassDal;
 using DataAccess.Entities.Nwind;
 using ECommerceWebUI.Models.ViewModels.AdminViewModels.ListModel;
@@ -13,12 +14,14 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -27,7 +30,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceDemo.Controllers
 {
-	
+	[Authorize]
 	public class AdminController : Controller
 	{
 		private readonly IOdemeTipiServices odemeTipiServices;

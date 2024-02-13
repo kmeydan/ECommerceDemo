@@ -283,9 +283,6 @@
     <Compile Include="Concrete\Dal\ClassDal\TedarikciDal.cs" />
     <Compile Include="Concrete\Dal\ClassDal\UrunDal.cs" />
     <Compile Include="EfNorthwindContext.cs" />
-    <Compile Include="Entities\Identity\AppDbContext.cs" />
-    <Compile Include="Entities\Identity\AppRole.cs" />
-    <Compile Include="Entities\Identity\AppUser.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Nwind\ArananKelime.cs" />
     <Compile Include="Entities\Nwind\Carousel.cs" />
