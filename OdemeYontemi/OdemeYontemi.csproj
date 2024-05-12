@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="iyzipay-dotnet\build.cmd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="iyzipay-dotnet\.github\workflows\dotnet_master.yml" />
+    <None Include="iyzipay-dotnet\.github\workflows\dotnet_pull_request.yml" />
+    <None Include="iyzipay-dotnet\.git\config" />
+    <None Include="iyzipay-dotnet\.git\description" />
+    <None Include="iyzipay-dotnet\.git\FETCH_HEAD" />
+    <None Include="iyzipay-dotnet\.git\HEAD" />
+    <None Include="iyzipay-dotnet\.git\hooks\applypatch-msg.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\commit-msg.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\fsmonitor-watchman.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\post-update.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\pre-applypatch.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\pre-commit.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\pre-merge-commit.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\pre-push.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\pre-rebase.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\pre-receive.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\prepare-commit-msg.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\push-to-checkout.sample" />
+    <None Include="iyzipay-dotnet\.git\hooks\update.sample" />
+    <None Include="iyzipay-dotnet\.git\index" />
+    <None Include="iyzipay-dotnet\.git\info\exclude" />
+    <None Include="iyzipay-dotnet\.git\logs\HEAD" />
+    <None Include="iyzipay-dotnet\.git\logs\refs\heads\master" />
+    <None Include="iyzipay-dotnet\.git\logs\refs\remotes\origin\HEAD" />
+    <None Include="iyzipay-dotnet\.git\objects\pack\pack-bb4a9d5cac86bb88246e5a8fd10cf948fe9a7d3b.idx" />
+    <None Include="iyzipay-dotnet\.git\objects\pack\pack-bb4a9d5cac86bb88246e5a8fd10cf948fe9a7d3b.pack" />
+    <None Include="iyzipay-dotnet\.git\packed-refs" />
+    <None Include="iyzipay-dotnet\.git\refs\heads\master" />
+    <None Include="iyzipay-dotnet\.git\refs\remotes\origin\HEAD" />
+    <None Include="iyzipay-dotnet\Iyzipay.Samples\Iyzipay.Samples.csproj" />
+    <None Include="iyzipay-dotnet\Iyzipay.Tests\Iyzipay.Tests.csproj" />
+    <None Include="iyzipay-dotnet\Iyzipay\Iyzipay.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Iyzipay" Version="2.1.61" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="iyzipay-dotnet\.git\objects\info\" />
+    <Folder Include="iyzipay-dotnet\.git\refs\tags\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,102 @@
+﻿@using ECommerceWebUI.Models.ViewModels.CardViewModel
+@model MusteriAdressViewModel
+@{
+	ViewData["Title"] = "TeslimatAdresi";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="d-flex justify-content-between container">
+	<div class="">
+		<h3 class="mx-5 mb-3">Teslimat Adresi</h3>
+	</div>
+	<div>
+		<a class="btn btn-warning toastsDefaultWarning rounded-pill">
+			<i class="fa-solid fa-square-plus"></i>Teslimat Adresi Ekle
+		</a>
+	</div>
+	
+</div>
+
+<div class="container">
+	@if (Model.Adress!=null)
+	{
+		<div class="row">
+			<div class="col-lg-4 table-responsive mb-5">
+				<div class="col-12">
+					<h5 class="card-header">Adres Başlık</h5>
+					<div class="card-body">
+						<h5 class="card-title">E-Posta</h5>
+						<p class="card-text"> @Model.EPosta</p>
+						<h5 class="card-title">Telefon</h5>
+						<p class="card-text">@Model.Telefon</p>
+						<h5 class="card-title">Ülke</h5>
+						<p class="card-text">@Model.Ulke</p>
+						<h5 class="card-title">Şehir</h5>
+						<p class="card-text">@Model.Sehir</p>
+						<h5 class="card-title">Adres</h5>
+						<p class="card-text">@Model.Adress</p>
+					</div>
+					<div class="card-footer text-bg-primary">
+						<input type="radio" checked />
+						Seçili Adres
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 table-responsive mb-5">
+				<div class="col-12">
+					<h5 class="card-header">Fatura Başlık</h5>
+					<div class="card-body">
+						<h5 class="card-title">E-Posta</h5>
+						<p class="card-text"> @Model.EPosta</p>
+						<h5 class="card-title">Telefon</h5>
+						<p class="card-text">@Model.Telefon</p>
+						<h5 class="card-title">Ülke</h5>
+						<p class="card-text">@Model.Ulke</p>
+						<h5 class="card-title">Şehir</h5>
+						<p class="card-text">@Model.Sehir</p>
+						<h5 class="card-title">Adres</h5>
+						<p class="card-text">@Model.Adress</p>
+					</div>
+					<div class="card-footer text-bg-primary">
+						<input type="radio" checked />
+						Seçili Fatura
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<form class="mb-30" action="">
+					<div class="input-group">
+						<input type="text" class="form-control border-0 p-4" placeholder="Kupon Kodu Giriniz">
+						<div class="input-group-append">
+							<button class="btn btn-primary">Kupon Kullan</button>
+						</div>
+					</div>
+				</form>
+				@{
+					var kargoUcreti = 25;
+					var genelToplam = kargoUcreti + Model.CardModel.Card.Total;
+				}
+				<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Sepetiniz</span></h5>
+				<div class="bg-light p-30 mb-5">
+					<div class="border-bottom pb-2">
+						<div class="d-flex justify-content-between mb-3">
+							<h6>Ara-Toplam</h6>
+							<h6>@Model.CardModel.Card.Total.ToString("c")</h6>
+						</div>
+						<div class="d-flex justify-content-between">
+							<h6 class="font-weight-medium">Kargo</h6>
+							<h6 class="font-weight-medium">@kargoUcreti.ToString("c")</h6>
+						</div>
+					</div>
+					<div class="pt-2">
+						<div class="d-flex justify-content-between mt-2">
+							<h5>Toplam</h5>
+							<h5>@genelToplam.ToString("c")</h5>
+						</div>
+						<a asp-action="TeslimatAdresi" asp-controller="Card" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Siparişi Tamamla</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+	
+</div>

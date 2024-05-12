@@ -1,0 +1,94 @@
+﻿@model SatısListViewModel
+@{
+	ViewData["Title"] = "Orders";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mx-3">
+	<div class="container">
+		<h1 class="my-3">Siparişler</h1>
+
+	</div>
+	<div class="container d-flex justify-content-between">
+		<div class="col-6 col-sm-3">
+			<div class="card">
+				<div class="card-body p-0" style="display: block;">
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item active">
+							<a asp-controller="Home" asp-action="Account" class="nav-link">
+								<i class="fas fa-inbox"></i> Hesap Ayarları
+							</a>
+						</li>
+						<li class="nav-item">
+							<a asp-controller="Home" asp-action="Orders" class="nav-link">
+								<i class="far fa-file-alt"></i> Siparişler
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-filter"></i> Adresler
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="far fa-envelope"></i> Mesajlar
+								<span class="badge bg-danger float-right">65</span>
+
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- /.card-body -->
+			</div>
+		</div>
+		<div class="col-6 col-sm-9">
+			<div class="contact-form bg-light p-30">
+                <div class="card card-solid">
+                    <div class="card-body pb-0">
+                        <div class="row">
+                            @foreach (var satis in Model.Satislar)
+                            {
+                                <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch flex-column">
+                                    <div class="card bg-light d-flex flex-fill">
+                                        <div class="card-header text-muted border-bottom-0">
+                                            @satis.TeslimatTarihi
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h2 class="lead"><b>@satis.MusteriID</b></h2>
+                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
+                                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-5 text-center">
+                                                    <img src="../../dist/img/user2-160x160.jpg" alt="user-avatar" class="img-circle img-fluid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="text-right">
+                                                <a href="#" class="btn btn-sm bg-teal">
+                                                    <i class="fas fa-comments"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-user"></i> View Profile
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                                                     
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    
+                </div>
+			</div>
+		</div>
+	</div>
+
+</div>
+

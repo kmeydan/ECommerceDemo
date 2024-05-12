@@ -1,0 +1,139 @@
+﻿@using ECommerceWebUI.Models.ViewModels.AdminViewModels.ViewModel.Product
+@model ProductViewModel
+@{
+	ViewData["Title"] = "EditProduct";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper" style="min-height: 498.4px;">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">Ürün Yönetimi</h1>
+
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- Search Customer -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="col-md-12">
+				<div class="card card-primary card-outline card-tabs">
+					<div class="card-header">
+						<h3 class="card-title">Ürün Düzenle</h3>
+					</div>
+					<div class="card-body">
+						<form enctype="multipart/form-data" method="post" asp-action="EditProduct" asp-controller="Admin">
+							<div asp-validation-summary="All"></div>
+							<div class="form-group">
+								<label asp-for="@Model.UrunAdi">Ürün Adı</label>
+								<input type="hidden" asp-for="@Model.UrunID"/>
+								<input type="text" asp-for="@Model.UrunAdi" class="form-control" placeholder="@Model.UrunAdi">
+								<span class="text-danger text-bold" asp-validation-for="UrunAdi"></span>
+							</div>
+							<div class="form-group">
+								<div class="form-group">
+
+									<label>Kategori</label>
+									<select class="form-control" asp-for="SelectCategory">
+										<option>Seçiniz</option>
+										@foreach (var item in Model.Kategori)
+										{
+											<option value="@item.KategoriID">@item.KategoriAdi</option>
+
+										}
+									</select>
+
+								</div>
+								<!-- /.input group -->
+							</div>
+							<div class="form-group">
+								<div class="form-group">
+									<label asp-for="Tedarikci">Tedarikci</label>
+									<select class="form-control" asp-for="SelectTedarikci">
+										<option>Seçiniz</option>
+										@foreach (var item in Model.Tedarikci)
+										{
+											<option value="@item.TedarikciID">@item.MusteriUnvani</option>
+
+										}
+									</select>
+									<span class="text-danger text-bold" asp-validation-for="Tedarikci"></span>
+
+
+								</div>
+								<!-- /.input group -->
+							</div>
+							<div class="form-group">
+								<label asp-for="@Model.Barkod">Barkod</label>
+								<input type="text" asp-for="@Model.Barkod" class="form-control">
+								<span class="text-danger text-bold" asp-validation-for="Barkod"></span>
+
+							</div>
+							<div class="form-group">
+								<label asp-for="@Model.BirimFiyati">Product Price</label>
+								<input type="text" asp-for="@Model.BirimFiyati" class="form-control">
+								<span class="text-danger text-bold" asp-validation-for="BirimFiyati"></span>
+
+							</div>
+							<div class="form-group">
+								<label asp-for="@Model.EnAzYenidenSatisMikatari">Maksimum Sipariş Adedi (Default = 10)</label>
+								<input type="number" asp-for="@Model.EnAzYenidenSatisMikatari" class="form-control">
+								<span class="text-danger text-bold" asp-validation-for="EnAzYenidenSatisMikatari"></span>
+
+							</div>
+							<div class="form-group">
+								<label for="exampleInputFile">Ürün Görseli (414px x 414px)</label>
+								<div class="input-group mb-3">
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" asp-for="@Model.Gorsel">
+										<label class="custom-file-label" asp-for="@Model.Gorsel">...</label>
+										<span class="text-danger text-bold" asp-validation-for="Gorsel"></span>
+
+									</div>
+								</div>
+								<span>Mevcut Görsel</span>
+								<div style="width:300px;"><img class="img-fluid" src="/img/product/@Model.GorselUrl"/></div>
+							</div>
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" asp-for="@Model.Sonlandi">
+								<label class="form-check-label" asp-for="@Model.Sonlandi">Aktif Mi?</label>
+								<span class="text-danger text-bold" asp-validation-for="Sonlandi"></span>
+
+							</div>
+							<button type="submit" class="btn btn-success mt-3" method="post" asp-action="EditProduct" asp-controller="Admin">Kaydet</button>
+
+							<a class="btn btn-danger mt-3" href="/Admin/Product/List">İptal</a>
+						</form>
+
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+
+
+			<!-- /.row -->
+
+		</div><!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+</div>
+@section Scripts {
+	<!-- bs-custom-file-input -->
+	<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+	<script>
+		$(function () {
+			bsCustomFileInput.init();
+		});
+	</script>
+	
+}
+
+

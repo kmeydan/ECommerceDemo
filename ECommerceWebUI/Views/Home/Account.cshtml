@@ -1,0 +1,72 @@
+﻿@model AccountViewModel
+@{
+	ViewData["Title"] = "Account";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mx-3">
+	<div class="container">
+		<h1 class="my-3">Hesabım</h1>
+
+	</div>
+	<div class="container d-flex justify-content-between">
+		<div class="col-6 col-sm-3">
+			<div class="card">
+				<div class="card-body p-0" style="display: block;">
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item active">
+							<a asp-controller="Home" asp-action="Account" class="nav-link">
+								<i class="fas fa-inbox"></i> Hesap Ayarları
+							</a>
+						</li>
+						<li class="nav-item">
+							<a asp-controller="Home" asp-action="Orders" class="nav-link">
+								<i class="far fa-file-alt"></i> Siparişler
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-filter"></i> Adresler
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="far fa-envelope"></i> Mesajlar
+								<span class="badge bg-danger float-right">65</span>
+
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- /.card-body -->
+			</div>
+		</div>
+		<div class="col-6 col-sm-9">
+			<form asp-action="AccountUpdate" asp-controller="Home" method="post">
+				<div class="contact-form bg-light p-30">
+					<h3 class="my-4 position-relative">İletişim Bilgileriniz</h3>
+					<div class="control-group my-2">
+						<h5 class="help-block">İsim ve Soyisim:</h5>
+						<input type="text" class="form-control" value="@Model.MusteriAdi" asp-for="@Model.MusteriAdi" required="required">
+						<input type="hidden" asp-for="@Model.MusteriID">
+					</div>
+					<div class="control-group my-2">
+						<h5 class="help-block">E Posta Adresi:</h5>
+						<input type="email" class="form-control" value="@Model.EPosta" asp-for="@Model.EPosta" required="required">
+					</div>
+					<div class="control-group my-2">
+						<h5 class="help-block">Telefon Numarası:</h5>
+						<input type="text" class="form-control" value="@Model.Telefon" asp-for="@Model.Telefon" required="required">
+					</div>
+					<div class="my-3">
+						<button class="btn btn-primary py-2 px-4" type="submit">
+							Kaydet
+						</button>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+
+</div>
